@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TimeChecker.Data;
-using TimeChecker.Models;
+using TimeChecker.DAL.Data;
+using TimeChecker.DAL.Models;
 
 namespace TimeChecker.Controllers
 {
