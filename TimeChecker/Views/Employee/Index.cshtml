@@ -1,11 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 
-
-<form asp-action ="CreateEdit">
+<form asp-action="CreateEdit">
     <button type="submit" class="btn btn-primary"> + Create Employee  </button>
 </form>
 
@@ -24,8 +19,10 @@
     </thead>
 
     <tbody>
-        @{ 
-            foreach(Employee employee in ViewBag.Employees)
+
+        
+        @{
+            foreach (var employee in ViewBag.Employees)
             {
                 <tr>
                     <td>
@@ -50,11 +47,11 @@
                 </tr>
 
             }
-        
+
         }
 
     </tbody>
 
 </table>
-    
+
 
