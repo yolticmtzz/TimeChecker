@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Canvas>
-            <Button x:Name="CheckInOut" Content="CheckInOut" Canvas.Left="303" Canvas.Top="61" Height="120" Width="194" BorderThickness="1,1,1,1" Click="CheckInOut_Click"/>
-        </Canvas>
-
+        
     </Grid>
 </Window>
