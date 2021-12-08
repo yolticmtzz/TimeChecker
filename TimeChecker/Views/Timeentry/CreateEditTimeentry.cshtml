@@ -1,0 +1,63 @@
+﻿@model TimeChecker.DAL.Models.Timeentry
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "Timeentry";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h5>Create or Edit Timeentry </h5>
+    </div>
+
+    <form asp-action="CreateEditTimeentry" method="post">
+        <div class="card-body">
+            <div class="row">
+                <div class="col form-group">
+                    <input hidden asp-for="ID" placeholder="ID" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <input asp-for="Type" placeholder="Type" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <input asp-for="Date" placeholder="Date" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <input asp-for="Time" placeholder="Time" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <input asp-for="Comment" placeholder="Comment" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <input asp-for="User" placeholder="User" class="form-control" />
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary"> Speichern </button>
+        </div>
+    </form>
+
+</div>

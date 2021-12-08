@@ -1,0 +1,141 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+
+*@
+@{
+
+    ViewData["Title"] = "Timeentry";
+
+}
+
+<style>
+    .navbar2{
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    body {
+        background-color: moccasin;
+    }
+
+</style>
+
+
+<div class="navbar">
+        <form asp-action="CreateEdit">
+            <button type="submit" class="btn btn-primary"> + Create Timestamps  </button>
+        </form>
+
+        <div>
+            <form asp-action="Index">
+                <button type="submit" class="btn btn-primary"> Get Timestamps  </button>
+            </form>
+        </div>
+</div>
+
+
+
+
+<hr />
+
+<table class="table table-dark table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Comment</th>
+            <th>User</th>
+            <th>Bearbeiten</th>
+            <th>Löschen</th>
+        </tr>
+    <thead>
+
+
+
+    <tbody>
+
+
+        @{
+            foreach (var timeentry in ViewBag.Timeentry)
+            {
+                <tr>
+                    <td class="align-middle">
+                        @timeentry.ID
+                    </td>
+                    <td class="align-middle">
+                        @timeentry.Type
+                    </td>
+                    <td class="align-middle">
+                        @timeentry.Date
+                    </td>
+                    <td class="align-middle">
+                        @timeentry.Time
+                    </td>
+                    <td class="align-middle">
+                        @timeentry.Comment
+                    </td>
+                    <td class="align-middle">
+                        @timeentry.User
+                    </td>
+                    <td class="align-middle">
+                        <form asp-action="CreateEdit" asp-route-id="@timeentry.ID">
+                            <button type="submit" class="btn btn-warning">Bearbeiten</button>
+                        </form>
+                    </td>
+                    <td class="align-middle">
+                        <form asp-action="DeleteTimeentry" asp-route-id="@timeentry.ID" >
+                            <button type="submit" class="btn btn-danger">Löschen</button>
+                        </form>
+                    </td>
+                </tr>
+
+            }
+
+        }
+
+
+    </tbody>
+
+
+</table>
+
+
+
+@*
+       <table>
+
+        <tr>
+            <td>
+                <form asp-action="CreateEdit">
+                    <button type="submit" class="btn btn-primary"> + Create Timestamps  </button>
+                </form>
+            </td>
+
+            <td>
+                <form asp-action="Index">
+                    <button type="submit" class="btn btn-primary"> Get Timestamps  </button>
+                </form>
+            </td>
+        </tr>
+
+    </table>
+
+
+*@
+
+
+
+
+
+
+
+
+
+
+
+
+

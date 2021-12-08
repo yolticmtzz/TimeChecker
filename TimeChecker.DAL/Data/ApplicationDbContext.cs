@@ -12,6 +12,8 @@ namespace TimeChecker.DAL.Data
 
         public DbSet<Employee> Employees { get; set; }
 
+        public DbSet<Timeentry> Timeentry { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

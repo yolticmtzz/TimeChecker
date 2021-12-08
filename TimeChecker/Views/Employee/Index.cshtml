@@ -1,10 +1,30 @@
-﻿
+﻿@{
+
+    ViewData["Title"] = "Employee";
+
+}
+
+
+<style>
+
+    body {
+        background-color: moccasin;
+    }
+
+    table {
+        background-color: cadetblue;
+    }
+</style>
+
+
+
 
 <form asp-action="CreateEdit">
     <button type="submit" class="btn btn-primary"> + Create Employee  </button>
 </form>
 
 <hr />
+
 
 
 <table class="table table-dark table-striped table-hover">
@@ -19,11 +39,9 @@
     </thead>
 
     <tbody>
-
-        
-        @{
-            foreach (var employee in ViewBag.Employees)
-            {
+            @{
+                foreach (var employee in ViewBag.Employees)
+                {
                 <tr>
                     <td>
                         @employee.Id
@@ -46,12 +64,13 @@
                     </td>
                 </tr>
 
+                }
+
             }
-
-        }
-
-    </tbody>
+        </tbody>
 
 </table>
+
+
 
 
