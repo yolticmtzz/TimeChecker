@@ -13,6 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+//
+using System.Data;
+using System.Data.SqlClient;
+using TimeCheckerWPF.Classes;
+
+
 namespace TimeCheckerWPF
 {
     /// <summary>
@@ -24,5 +30,50 @@ namespace TimeCheckerWPF
         {
             InitializeComponent();
         }
+
+        private void Canvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            //Connection.openConnection();
+
+            //TextBox.Text = Connection.ReadToTextBox();
+            //ListBox.ItemsSource = Connection.ReadToListBox();
+
+            //Connection.closeConnection();
+        }
+
+        private void BTextBox_Click(object sender, RoutedEventArgs e)
+        {
+
+            Connection.openConnection();
+
+            TextBox.Text = Connection.ReadToTextBox();
+
+            Connection.closeConnection();
+
+        }
+
+        private void BListBox_Click(object sender, RoutedEventArgs e)
+        {
+            Connection.openConnection();
+
+            ListBox.ItemsSource = Connection.ReadToListBox();
+
+            Connection.closeConnection();
+
+        }
     }
 }
+
+
+//DbClass.sql = "use TimeChecker SELECT [ID], [Type], [Date], [Time], [user], [User] FROM Timeentry;";
+//DbClass.cmd.CommandType = CommandType.Text;
+//DbClass.cmd.CommandText = DbClass.sql;
+
+//DbClass.da = new SqlDataAdapter(DbClass.cmd);
+//DbClass.dt = new DataTable();
+//DbClass.da.Fill(DbClass.dt);
+
+//ListBox.ItemsSource = DbClass.dt.DefaultView;
+//TextBox.Text = DbClass.sql;
+
+
