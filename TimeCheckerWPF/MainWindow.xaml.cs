@@ -34,7 +34,7 @@ namespace TimeCheckerWPF
 
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Page1();
+            Main.Content = new Home();
         }
 
 
@@ -45,7 +45,7 @@ namespace TimeCheckerWPF
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Page1();
+            Main.Content = new Home();
         }
     }
 }

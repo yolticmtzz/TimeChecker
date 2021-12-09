@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TimeCheckerWPF
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for Home.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Home : Page
     {
-        public Page1()
+        public Home()
         {
             InitializeComponent();
         }
