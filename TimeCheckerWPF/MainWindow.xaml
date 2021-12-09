@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeCheckerWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792" Loaded="Canvas_Loaded">
-            <TextBox x:Name="TextBox" Height="211" Canvas.Left="29" TextWrapping="Wrap" Text="TextBox" Canvas.Top="67" Width="198"/>
-            <Button x:Name="BTextBox" Content="Button" Canvas.Left="75" Canvas.Top="10" Width="92" Height="37" Click="BTextBox_Click"/>
-            <Button x:Name="BListBox" Content="Button" Canvas.Left="475" Canvas.Top="10" Width="87" Height="37" Click="BListBox_Click"/>
-        </Canvas>
-        <DataGrid x:Name="MyDataGrid" HorizontalAlignment="Left" Height="299" Margin="289,64,0,0" VerticalAlignment="Top" Width="443" IsSynchronizedWithCurrentItem="True"/>
+        Title="MainWindow" Height="450" Width="450">
+
+    <Grid Loaded="Grid_Loaded">
+        <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button Content="Home" MinWidth="100" Click="Button_Click1" FontSize="24" FontWeight="Bold" FontFamily="Berlin Sans FB" Background="#FFCDA246"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button x:Name="Show" Content="Show" MinWidth="100" Click="Button_Show" HorizontalAlignment="Right" FontSize="24" FontWeight="Bold" FontFamily="Snap ITC" Background="#FF7DAEDE" />
+        </StackPanel>
+        <Frame x:Name="Main" Margin="0,50,0,0" NavigationUIVisibility="Hidden"/>
 
     </Grid>
 </Window>

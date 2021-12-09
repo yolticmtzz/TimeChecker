@@ -31,45 +31,21 @@ namespace TimeCheckerWPF
             InitializeComponent();
         }
 
-        private void Canvas_Loaded(object sender, RoutedEventArgs e)
+
+        private void Button_Click1(object sender, RoutedEventArgs e)
         {
-            //Connection.openConnection();
-
-            //TextBox.Text = Connection.ReadToTextBox();
-            //ListBox.ItemsSource = Connection.ReadToListBox();
-
-            //Connection.closeConnection();
+            Main.Content = new Page1();
         }
 
-        private void BTextBox_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Show(object sender, RoutedEventArgs e)
         {
-
-            Connection.openConnection();
-
-            TextBox.Text = Connection.ReadToTextBox();
-
-            Connection.closeConnection();
-
+            Main.Content = new Show();
         }
 
-        private void BListBox_Click(object sender, RoutedEventArgs e)
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-
-            Connection.openConnection();
-
-            Connection.sql = "use TimeChecker select * from Timeentry"; // load data from Database
-            Connection.cmd.CommandType = CommandType.Text;
-            Connection.cmd.CommandText = Connection.sql;
-
-            Connection.sql_adapt = new SqlDataAdapter(Connection.cmd);
-
-            Connection.tblData = new DataTable();
-            Connection.sql_adapt.Fill(Connection.tblData);
-
-            MyDataGrid.ItemsSource = Connection.tblData.DefaultView; // return table data into DataGrid
-            
-            Connection.closeConnection();
-
+            Main.Content = new Page1();
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace TimeCheckerWPF.Classes
 {
-    class Connection
+    class Connections
     {
 
         public static string GetConnectionsStrings()
@@ -26,10 +26,9 @@ namespace TimeCheckerWPF.Classes
 
         public static string sql;
         public static SqlConnection con = new SqlConnection();
-        public static SqlCommand cmd = new SqlCommand("", con);   
+        public static SqlCommand cmd = new SqlCommand("", con);
         public static DataTable tblData;
         public static SqlDataAdapter sql_adapt;
-        //public static SqlDataReader rd;
 
         public static string ReadToTextBox()
         {
@@ -38,13 +37,13 @@ namespace TimeCheckerWPF.Classes
             reader = command.ExecuteReader();
 
             string s = " ";
-    
+
 
             while (reader.Read())
             {
 
                 s = s + reader["Comment"] + " " + reader["User"] + " \n".ToString();
-               
+
             }
 
             return s;
@@ -119,4 +118,4 @@ namespace TimeCheckerWPF.Classes
 }
 
 
-    
+
