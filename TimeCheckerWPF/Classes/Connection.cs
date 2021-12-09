@@ -16,8 +16,9 @@ namespace TimeCheckerWPF.Classes
 
         public static string GetConnectionsStrings()
         {
-            string strConString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            //ConfigurationManager.ConnectionStrings["conString"].ToString();
+            string strConString = Properties.Settings.Default.TimeCheckerConnectionString;
+            //@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
             return strConString;
         }
 
@@ -44,7 +45,6 @@ namespace TimeCheckerWPF.Classes
 
                 s = s + reader["Comment"] + " " + reader["User"] + " \n".ToString();
                
-
             }
 
             return s;
@@ -69,6 +69,22 @@ namespace TimeCheckerWPF.Classes
 
             return s;
         }
+
+        //public static void ReadToTextBox2()
+        //{
+        //    //SqlCommand command = new SqlCommand("use TimeChecker select * from Timeentry", con);
+
+        //    string sql_Text = "use TimeChecker select * from Timeentry";
+        //    SqlDataAdapter sql_adapt = new SqlDataAdapter(sql_Text, con);
+
+        //    DataTable tblData = new DataTable();
+        //    sql_adapt.Fill(tblData);
+
+        //    ListBox.ItemsSource = tblData;
+            
+
+
+        //}
 
         public static void openConnection()
         {

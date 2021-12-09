@@ -54,10 +54,18 @@ namespace TimeCheckerWPF
 
         private void BListBox_Click(object sender, RoutedEventArgs e)
         {
+
             Connection.openConnection();
 
-            ListBox.ItemsSource = Connection.ReadToListBox();
+            string sql_Text = "use TimeChecker select * from Timeentry";
+            SqlDataAdapter sql_adapt = new SqlDataAdapter(sql_Text, Connection.con);
 
+            DataTable tblData = new DataTable();
+            sql_adapt.Fill(tblData);
+
+            // ListBox.DataContext = tblData;
+            MyDataGrid.ItemsSource = tblData.DefaultView;
+            
             Connection.closeConnection();
 
         }

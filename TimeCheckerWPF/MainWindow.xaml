@@ -8,11 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Canvas x:Name="Canvas" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792" Loaded="Canvas_Loaded">
-            <ListBox x:Name="ListBox" Height="225" Canvas.Left="407" Canvas.Top="80" Width="195"/>
-            <TextBox x:Name="TextBox" Height="211" Canvas.Left="84" TextWrapping="Wrap" Text="TextBox" Canvas.Top="80" Width="198"/>
-            <Button x:Name="BTextBox" Content="Button" Canvas.Left="133" Canvas.Top="30" Width="92" Height="37" Click="BTextBox_Click"/>
-            <Button x:Name="BListBox" Content="Button" Canvas.Left="464" Canvas.Top="30" Width="87" Height="37" Click="BListBox_Click"/>
+            <TextBox x:Name="TextBox" Height="211" Canvas.Left="29" TextWrapping="Wrap" Text="TextBox" Canvas.Top="67" Width="198"/>
+            <Button x:Name="BTextBox" Content="Button" Canvas.Left="75" Canvas.Top="10" Width="92" Height="37" Click="BTextBox_Click"/>
+            <Button x:Name="BListBox" Content="Button" Canvas.Left="475" Canvas.Top="10" Width="87" Height="37" Click="BListBox_Click"/>
         </Canvas>
+        <DataGrid x:Name="MyDataGrid" HorizontalAlignment="Left" Height="299" Margin="289,64,0,0" VerticalAlignment="Top" Width="443" IsSynchronizedWithCurrentItem="True"/>
 
     </Grid>
 </Window>
