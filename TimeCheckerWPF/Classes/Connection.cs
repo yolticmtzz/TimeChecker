@@ -24,12 +24,12 @@ namespace TimeCheckerWPF.Classes
 
 
 
-        //public static string sql;
+        public static string sql;
         public static SqlConnection con = new SqlConnection();
-        public static SqlCommand cmd = new SqlCommand("", con);
+        public static SqlCommand cmd = new SqlCommand("", con);   
+        public static DataTable tblData;
+        public static SqlDataAdapter sql_adapt;
         //public static SqlDataReader rd;
-        //public static DataTable dt;
-        //public static SqlDataAdapter da;
 
         public static string ReadToTextBox()
         {
@@ -70,21 +70,6 @@ namespace TimeCheckerWPF.Classes
             return s;
         }
 
-        //public static void ReadToTextBox2()
-        //{
-        //    //SqlCommand command = new SqlCommand("use TimeChecker select * from Timeentry", con);
-
-        //    string sql_Text = "use TimeChecker select * from Timeentry";
-        //    SqlDataAdapter sql_adapt = new SqlDataAdapter(sql_Text, con);
-
-        //    DataTable tblData = new DataTable();
-        //    sql_adapt.Fill(tblData);
-
-        //    ListBox.ItemsSource = tblData;
-            
-
-
-        //}
 
         public static void openConnection()
         {

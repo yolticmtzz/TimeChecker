@@ -57,14 +57,16 @@ namespace TimeCheckerWPF
 
             Connection.openConnection();
 
-            string sql_Text = "use TimeChecker select * from Timeentry";
-            SqlDataAdapter sql_adapt = new SqlDataAdapter(sql_Text, Connection.con);
+            Connection.sql = "use TimeChecker select * from Timeentry"; // load data from Database
+            Connection.cmd.CommandType = CommandType.Text;
+            Connection.cmd.CommandText = Connection.sql;
 
-            DataTable tblData = new DataTable();
-            sql_adapt.Fill(tblData);
+            Connection.sql_adapt = new SqlDataAdapter(Connection.cmd);
 
-            // ListBox.DataContext = tblData;
-            MyDataGrid.ItemsSource = tblData.DefaultView;
+            Connection.tblData = new DataTable();
+            Connection.sql_adapt.Fill(Connection.tblData);
+
+            MyDataGrid.ItemsSource = Connection.tblData.DefaultView; // return table data into DataGrid
             
             Connection.closeConnection();
 
@@ -74,14 +76,5 @@ namespace TimeCheckerWPF
 
 
 //DbClass.sql = "use TimeChecker SELECT [ID], [Type], [Date], [Time], [user], [User] FROM Timeentry;";
-//DbClass.cmd.CommandType = CommandType.Text;
-//DbClass.cmd.CommandText = DbClass.sql;
-
-//DbClass.da = new SqlDataAdapter(DbClass.cmd);
-//DbClass.dt = new DataTable();
-//DbClass.da.Fill(DbClass.dt);
-
-//ListBox.ItemsSource = DbClass.dt.DefaultView;
-//TextBox.Text = DbClass.sql;
 
 
