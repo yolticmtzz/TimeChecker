@@ -20,6 +20,5 @@
         <Label Content="Time" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top" Background="#FFB6BED8" Width="64"/>
         <Label Content="Comment" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Background="#FFB6BED8"/>
         <Label Content="User" HorizontalAlignment="Left" Margin="10,256,0,0" VerticalAlignment="Top" Background="#FFB6BED8" Width="62"/>
-
     </Grid>
 </Page>

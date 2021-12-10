@@ -31,23 +31,24 @@ namespace TimeCheckerWPF
 
         private void MyDataGridd_Loaded(object sender, RoutedEventArgs e)
         {
+
+            ConnectionSQL.openConnection();
+
+            ConnectionSQL.sql = "SELECT * FROM Timeentry"; // Command to load data from Database
+            ConnectionSQL.cmd.CommandType = CommandType.Text;
+            ConnectionSQL.cmd.CommandText = ConnectionSQL.sql;
+
+            ConnectionSQL.sql_adapt = new SqlDataAdapter(ConnectionSQL.cmd);
+            ConnectionSQL.tblData = new DataTable();
+
+
+            ConnectionSQL.sql_adapt.Fill(ConnectionSQL.tblData);
+
             
 
-            Connections.sql = "SELECT * FROM Timeentry"; // Command to load data from Database
-            Connections.cmd.CommandType = CommandType.Text;
-            Connections.cmd.CommandText = Connections.sql;
+            MyDataGrid.ItemsSource = ConnectionSQL.tblData.DefaultView; // return table data into DataGrid
 
-            Connections.sql_adapt = new SqlDataAdapter(Connections.cmd);
-            Connections.tblData = new DataTable();
-
-
-            Connections.sql_adapt.Fill(Connections.tblData);
-
-            Connections.openConnection();
-
-            MyDataGrid.ItemsSource = Connections.tblData.DefaultView; // return table data into DataGrid
-
-            Connections.closeConnection();
+            ConnectionSQL.closeConnection();
         }
     }
 }

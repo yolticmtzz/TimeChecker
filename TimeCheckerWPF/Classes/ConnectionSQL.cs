@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace TimeCheckerWPF.Classes
 {
-    class Connections
+    class ConnectionSQL
     {
 
         public static string GetConnectionsStrings()
@@ -30,44 +30,44 @@ namespace TimeCheckerWPF.Classes
         public static DataTable tblData;
         public static SqlDataAdapter sql_adapt;
 
-        public static string ReadToTextBox()
-        {
-            SqlCommand command = new SqlCommand("use TimeChecker select * from Timeentry", con);
-            SqlDataReader reader = null;
-            reader = command.ExecuteReader();
+        //public static string ReadToTextBox()
+        //{
+        //    SqlCommand command = new SqlCommand("use TimeChecker select * from Timeentry", con);
+        //    SqlDataReader reader = null;
+        //    reader = command.ExecuteReader();
 
-            string s = " ";
-
-
-            while (reader.Read())
-            {
-
-                s = s + reader["Comment"] + " " + reader["User"] + " \n".ToString();
-
-            }
-
-            return s;
-        }
-
-        public static string ReadToListBox()
-        {
-            SqlCommand command = new SqlCommand("use TimeChecker select * from Timeentry", con);
-            SqlDataReader reader = null;
-            reader = command.ExecuteReader();
-
-            string s = " ";
+        //    string s = " ";
 
 
-            while (reader.Read())
-            {
+        //    while (reader.Read())
+        //    {
 
-                // s = s + reader["Comment"] + " " + reader["User"] + " \n".ToString();
-                s = s + reader["Type"];
+        //        s = s + reader["Comment"] + " " + reader["User"] + " \n".ToString();
 
-            }
+        //    }
 
-            return s;
-        }
+        //    return s;
+        //}
+
+        //public static string ReadToListBox()
+        //{
+        //    SqlCommand command = new SqlCommand("use TimeChecker select * from Timeentry", con);
+        //    SqlDataReader reader = null;
+        //    reader = command.ExecuteReader();
+
+        //    string s = " ";
+
+
+        //    while (reader.Read())
+        //    {
+
+        //        // s = s + reader["Comment"] + " " + reader["User"] + " \n".ToString();
+        //        s = s + reader["Type"];
+
+        //    }
+
+        //    return s;
+        //}
 
 
         public static void openConnection()
@@ -104,10 +104,12 @@ namespace TimeCheckerWPF.Classes
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                //
+                MessageBox.Show("The connection could not closed." + Environment.NewLine +
+                "Descriptions: " + ex.Message.ToString(), "C# Connect to SQL Server", MessageBoxButton.OK,
+                MessageBoxImage.Error);
 
             }
 

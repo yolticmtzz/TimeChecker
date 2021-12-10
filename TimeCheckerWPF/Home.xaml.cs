@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 using TimeCheckerWPF.Classes;
+using System.Threading;
 
 namespace TimeCheckerWPF
 {
@@ -47,27 +48,32 @@ namespace TimeCheckerWPF
 
         private void CheckInOut_Click(object sender, RoutedEventArgs e)
         {
+            ConnectionSQL.openConnection();
 
+            ConnectionSQL.sql = "INSERT INTO Timeentry VALUES (@Type, @Date, @Time, @Comment, @User)"; // Command to insert data to Database
+            ConnectionSQL.cmd.CommandType = CommandType.Text;
+            ConnectionSQL.cmd.CommandText = ConnectionSQL.sql;
+            var bl = new BusinessLogic();
 
-            Connections.sql = "INSERT INTO Timeentry VALUES (@Type, @Date, @Time, @Comment, @User)"; // Command to insert data to Database
-            Connections.cmd.CommandType = CommandType.Text;
-            Connections.cmd.CommandText = Connections.sql;
 
             // Add Values form the TextBox to DataBase
-            Connections.cmd.Parameters.AddWithValue("@Type", TextBoxType.Text);
-            Connections.cmd.Parameters.AddWithValue("@Date", TextBoxDate.Text);
-            Connections.cmd.Parameters.AddWithValue("@Time", TextBoxTime.Text);
-            Connections.cmd.Parameters.AddWithValue("@Comment", TextBoxComment.Text);
-            Connections.cmd.Parameters.AddWithValue("@User", TextBoxUser.Text);
+            ConnectionSQL.cmd.Parameters.AddWithValue("@Type", '2');
+            //ConnectionSQL.cmd.Parameters.AddWithValue("@Type", TextBoxType.Text);
+            ConnectionSQL.cmd.Parameters.AddWithValue("@Date", bl.Date());
+            //ConnectionSQL.cmd.Parameters.AddWithValue("@Date", TextBoxDate.Text);
+            ConnectionSQL.cmd.Parameters.AddWithValue("@Time", bl.Time());
+            //Connections.cmd.Parameters.AddWithValue("@Time", TextBoxTime.Text);
+            ConnectionSQL.cmd.Parameters.AddWithValue("@Comment", TextBoxComment.Text);
+            //ConnectionSQL.cmd.Parameters.AddWithValue("@Comment", TextBoxComment.Text);
+            ConnectionSQL.cmd.Parameters.AddWithValue("@User", "Jose Panov");
+           // ConnectionSQL.cmd.Parameters.AddWithValue("@User", TextBoxUser.Text);
 
 
-            Connections.openConnection();
+            ConnectionSQL.cmd.ExecuteNonQuery();
 
-            Connections.cmd.ExecuteNonQuery();
+            ConnectionSQL.cmd.Parameters.Clear();
 
-            Connections.cmd.Parameters.Clear();
-
-            Connections.closeConnection();
+            ConnectionSQL.closeConnection();
 
             clearData();
 
@@ -79,3 +85,4 @@ namespace TimeCheckerWPF
 }
 
 
+//var timer = new Timer(this.CallbackFunction, "Es ist {0}:{1} Uhr", 0, 1000);
