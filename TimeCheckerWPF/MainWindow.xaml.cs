@@ -41,6 +41,7 @@ namespace TimeCheckerWPF
         private void Button_Show(object sender, RoutedEventArgs e)
         {
             Main.Content = new Show();
+            
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)

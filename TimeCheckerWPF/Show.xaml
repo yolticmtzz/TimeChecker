@@ -9,6 +9,9 @@
       Title="Show">
 
     <Grid>
+        <Grid.Effect>
+            <DropShadowEffect/>
+        </Grid.Effect>
         <DataGrid x:Name="MyDataGrid" Margin="10" Loaded="MyDataGridd_Loaded"/>
 
     </Grid>
