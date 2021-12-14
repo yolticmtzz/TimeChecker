@@ -12,9 +12,7 @@ namespace TimeChecker.DAL.Models
 
         public short Type { get; set; }
 
-        public string Date { get; set; }
-
-        public string Time { get; set; }
+        public DateTime DateTime { get; set; }
 
         public string Comment { get; set; }
 

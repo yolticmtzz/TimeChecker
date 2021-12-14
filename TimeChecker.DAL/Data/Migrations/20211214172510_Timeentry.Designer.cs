@@ -10,8 +10,8 @@ using TimeChecker.DAL.Data;
 namespace TimeChecker.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211207163430_addedTimeEntry")]
-    partial class addedTimeEntry
+    [Migration("20211214172510_Timeentry")]
+    partial class Timeentry
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -249,11 +249,8 @@ namespace TimeChecker.Data.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Time")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<short>("Type")
                         .HasColumnType("smallint");

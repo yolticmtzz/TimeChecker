@@ -247,11 +247,8 @@ namespace TimeChecker.Data.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Time")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<short>("Type")
                         .HasColumnType("smallint");
