@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:TimeCheckerWPF5._0"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <DataGrid x:Name="TodoItemGrid" AutoGenerateColumns="False" Margin="20">
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding ID}"
+                                    Header="TodoItem Id" Width="SizeToHeader" IsReadOnly="True"/>
+            <DataGridTextColumn Binding="{Binding Type}" Header="Title"
+                                    Width="200"/>
+            <DataGridTextColumn Binding="{Binding DateTime}" Header="Description"
+                                    Width="*"/>
+            <DataGridTextColumn Binding="{Binding Comment}" Header="Completed"
+                                    Width="SizeToHeader"/>
+            <DataGridTextColumn Binding="{Binding User}" Header="Completed"
+                                    Width="SizeToHeader"/>
+        </DataGrid.Columns>
+    </DataGrid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeChecker.DAL.Data;
 
 namespace TimeCheckerWPF5._0
 {
@@ -20,9 +21,19 @@ namespace TimeCheckerWPF5._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly ApplicationDbContext _context;
+
+        public MainWindow(ApplicationDbContext context)
         {
+            _context = context;
             InitializeComponent();
+            GetTodoItems();
+        }
+
+        private void GetTodoItems()
+        {
+            var todoItems = _context.Timeentry.ToList();
+            TodoItemGrid.ItemsSource = todoItems;
         }
     }
 }
