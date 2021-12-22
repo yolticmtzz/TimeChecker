@@ -21,19 +21,48 @@ namespace TimeCheckerWPF5._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
-        public MainWindow(ApplicationDbContext context)
+        public MainWindow()
         {
-            _context = context;
             InitializeComponent();
-            GetTodoItems();
+            SetUp();
+            InsertTimeentry();
+            GetTimeentry();
+
+
         }
 
-        private void GetTodoItems()
+
+        public void SetUp()
+        {
+            _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
+               .Options);
+        }
+
+        private void GetTimeentry()
         {
             var todoItems = _context.Timeentry.ToList();
-            TodoItemGrid.ItemsSource = todoItems;
+            TimeentryGrid.ItemsSource = todoItems;
         }
+
+
+        public void InsertTimeentry()
+        {
+            var record = new Timeentry()
+            {
+                Type = 6,
+                Comment = "Organize meeting to discuss the project"
+            };
+
+            _context.Timeentry.Add(record);
+
+            _context.SaveChanges();
+
+        }
+
+
     }
 }
+
