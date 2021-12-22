@@ -25,15 +25,14 @@ namespace TimeCheckerWPF5._0
     public partial class MainWindow : Window
     {
         private ApplicationDbContext _context;
+        DateTime currentDate = DateTime.Now;
+        private int _TimeentryId;
 
         public MainWindow()
         {
             InitializeComponent();
             SetUp();
-            InsertTimeentry();
-            GetTimeentry();
-
-
+            LoadDatagrid();
         }
 
 
@@ -44,28 +43,79 @@ namespace TimeCheckerWPF5._0
                .Options);
         }
 
-        private void GetTimeentry()
+
+        public void clearData()
         {
-            var todoItems = _context.Timeentry.ToList();
-            TimeentryGrid.ItemsSource = todoItems;
+            Type_txt.Clear();
+            Comment_txt.Clear();
+            User_txt.Clear();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            clearData();
         }
 
 
-        public void InsertTimeentry()
+        private void Insert(object sender, RoutedEventArgs e)
         {
+            short Type_int = Int16.Parse(Type_txt.Text);
+
             var record = new Timeentry()
             {
-                Type = 6,
-                Comment = "Organize meeting to discuss the project"
+                Type = Type_int,
+                DateTime = currentDate,
+                Comment = Comment_txt.Text,
+                User = User_txt.Text,
             };
 
             _context.Timeentry.Add(record);
 
             _context.SaveChanges();
 
+            _TimeentryId = record.ID;
+
+            LoadDatagrid();
+
+        }
+
+        private void LoadDatagrid()
+        {
+            var timeentryitems = _context.Timeentry.ToList();
+            TimeentryGrid.ItemsSource = timeentryitems;        
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int ID_int = Int32.Parse(ID_txt.Text);
+
+            var existing = _context.Timeentry.Single(x => x.ID == ID_int);
+            //var existing = _context.Timeentry.Single(x => x.Type == 2);
+
+            _context.Timeentry.Remove(existing);
+
+            _context.SaveChanges();
+
+            LoadDatagrid();
         }
 
 
     }
 }
 
+
+
+
+//public void InsertTimeentry()
+//{
+//    var record = new Timeentry()
+//    {
+//        Type = 6,
+//        Comment = "Organize meeting to discuss the project"
+//    };
+
+//    _context.Timeentry.Add(record);
+
+//    _context.SaveChanges();
+
+//}
