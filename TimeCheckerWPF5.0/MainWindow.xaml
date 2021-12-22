@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:TimeCheckerWPF5._0"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <DataGrid x:Name="TimeentryGrid" AutoGenerateColumns="False" Margin="20">
+
+    <Canvas >
+        <DataGrid x:Name="TimeentryGrid" AutoGenerateColumns="False" Margin="20" Height="260" Width="459" Canvas.Left="269" Canvas.Top="10">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}"
                                     Header="ID" Width="SizeToHeader" IsReadOnly="True"/>
@@ -21,5 +22,16 @@
                                     Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-    </StackPanel>
+
+        <Button Content="Insert" Canvas.Left="62" Canvas.Top="338" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD"/>
+        <Button Content="Update" Canvas.Left="317" Canvas.Top="338" Height="50" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD"/>
+        <Button Content="Delete" Canvas.Left="541" Canvas.Top="338" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD"/>
+        <Label Content="Type" Canvas.Left="35" Canvas.Top="55"/>
+        <Label Content="Comment" Canvas.Left="21" Canvas.Top="134"/>
+        <Label Content="User" Canvas.Left="36" Canvas.Top="217"/>
+        <TextBox Canvas.Left="116" Canvas.Top="59" TextWrapping="Wrap" Width="120"/>
+        <TextBox Canvas.Left="116" Canvas.Top="138" TextWrapping="Wrap" Width="120"/>
+        <TextBox Canvas.Left="116" Canvas.Top="221" TextWrapping="Wrap" Width="120"/>
+    </Canvas>
+
 </Window>

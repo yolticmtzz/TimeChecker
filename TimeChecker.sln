@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeChecker", "TimeChecker\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeChecker.DAL", "TimeChecker.DAL\TimeChecker.DAL.csproj", "{9E3D9885-6DF1-4642-96FD-616DC1825ED7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeCheckerWPF5.0", "TimeCheckerWPF5.0\TimeCheckerWPF5.0.csproj", "{125A001E-550C-4E27-9F42-9217C314839D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeCheckerWPF5.0", "TimeCheckerWPF5.0\TimeCheckerWPF5.0.csproj", "{125A001E-550C-4E27-9F42-9217C314839D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeCheckerWPF", "TimeCheckerWPF\TimeCheckerWPF.csproj", "{5E8B4E58-A4ED-4991-A0EF-98BD60A4C362}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoManager.DAL.Tests", "..\TodoManager\TodoManager.DAL.Tests\TodoManager.DAL.Tests.csproj", "{6CC42008-D4F7-4537-B3EB-6C1221A257B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{125A001E-550C-4E27-9F42-9217C314839D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{125A001E-550C-4E27-9F42-9217C314839D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{125A001E-550C-4E27-9F42-9217C314839D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E8B4E58-A4ED-4991-A0EF-98BD60A4C362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8B4E58-A4ED-4991-A0EF-98BD60A4C362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8B4E58-A4ED-4991-A0EF-98BD60A4C362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8B4E58-A4ED-4991-A0EF-98BD60A4C362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CC42008-D4F7-4537-B3EB-6C1221A257B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC42008-D4F7-4537-B3EB-6C1221A257B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC42008-D4F7-4537-B3EB-6C1221A257B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC42008-D4F7-4537-B3EB-6C1221A257B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
