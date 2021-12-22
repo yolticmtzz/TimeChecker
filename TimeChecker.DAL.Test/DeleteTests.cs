@@ -2,11 +2,12 @@ using NUnit.Framework;
 using Microsoft.EntityFrameworkCore;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
+using System.Linq;
 
 
 namespace TimeChecker.DAL.Test
 {
-    public class Tests
+    public class DeleteTests
     {
         private ApplicationDbContext _context;
 
@@ -14,15 +15,15 @@ namespace TimeChecker.DAL.Test
         public void SetUp()
         {
             _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoListManager;Trusted_Connection=True;MultipleActiveResultSets=true")
+               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
                .Options);
-        }
-        [Test]
-        public void InsertTodoItem()
-        {
+        
+
             var record = new Timeentry()
             {
+                Type = 2,
                 Comment = "Service",
+                User = "Max Mustermann"
 
             };
 
@@ -30,19 +31,21 @@ namespace TimeChecker.DAL.Test
 
             _context.SaveChanges();
 
-            var addedTodoItem = _context.Timeentry.Single(x => x.Comment == "Service");
-
-            Assert.Greater(addedTodoItem.Id, 0);
-
-            Assert.AreEqual(record.Comment, addedTodoItem.Comment);
         }
 
-        [TearDown]
-        public void TearDown()
+
+
+        [Test]
+        public void DeleteTodoItem()
         {
-            var todoItem = _context.Timeentry.Single(x => x.Comment == "Organize meeting");
-            _context.Timeentry.Remove(todoItem);
+            var existing = _context.Timeentry.Single(x => x.Type == 2);
+
+            var TimeentryId = existing.ID;
+            _context.Timeentry.Remove(existing);
             _context.SaveChanges();
+
+            var found = _context.Timeentry.SingleOrDefault(x => x.Type == 2);
+            Assert.IsNull(found);
         }
     }
 }
