@@ -6,18 +6,20 @@
         xmlns:local="clr-namespace:TimeCheckerWPF5._0"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <DataGrid x:Name="TodoItemGrid" AutoGenerateColumns="False" Margin="20">
-        <DataGrid.Columns>
-            <DataGridTextColumn Binding="{Binding ID}"
-                                    Header="TodoItem Id" Width="SizeToHeader" IsReadOnly="True"/>
-            <DataGridTextColumn Binding="{Binding Type}" Header="Title"
+    <StackPanel>
+        <DataGrid x:Name="TimeentryGrid" AutoGenerateColumns="False" Margin="20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}"
+                                    Header="ID" Width="SizeToHeader" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Type}" Header="Type"
                                     Width="200"/>
-            <DataGridTextColumn Binding="{Binding DateTime}" Header="Description"
+                <DataGridTextColumn Binding="{Binding DateTime}" Header="DateandTime"
                                     Width="*"/>
-            <DataGridTextColumn Binding="{Binding Comment}" Header="Completed"
+                <DataGridTextColumn Binding="{Binding Comment}" Header="Comment"
+                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding User}" Header="User"
                                     Width="SizeToHeader"/>
-            <DataGridTextColumn Binding="{Binding User}" Header="Completed"
-                                    Width="SizeToHeader"/>
-        </DataGrid.Columns>
-    </DataGrid>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
 </Window>
