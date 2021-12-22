@@ -31,7 +31,7 @@ namespace TimeCheckerWPF5._0
 
         public MainWindow()
         {
-
+           
             InitializeComponent();
             SetUp();
             LoadDatagrid();

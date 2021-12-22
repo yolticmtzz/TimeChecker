@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeCheckerWPF5.0", "TimeCh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoManager.DAL.Tests", "..\TodoManager\TodoManager.DAL.Tests\TodoManager.DAL.Tests.csproj", "{6CC42008-D4F7-4537-B3EB-6C1221A257B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeChecker.DAL.Test", "TimeChecker.DAL.Test\TimeChecker.DAL.Test.csproj", "{9270D65B-4DC8-4D3B-903D-941380C37BE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6CC42008-D4F7-4537-B3EB-6C1221A257B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CC42008-D4F7-4537-B3EB-6C1221A257B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CC42008-D4F7-4537-B3EB-6C1221A257B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9270D65B-4DC8-4D3B-903D-941380C37BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9270D65B-4DC8-4D3B-903D-941380C37BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9270D65B-4DC8-4D3B-903D-941380C37BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9270D65B-4DC8-4D3B-903D-941380C37BE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
