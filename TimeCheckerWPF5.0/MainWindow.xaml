@@ -24,8 +24,8 @@
         </DataGrid>
 
         <Button x:Name="InsertBtn" Content="Insert" Canvas.Left="62" Canvas.Top="338" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="Insert"/>
-        <Button x:Name="UpdateBtn" Content="Update" Canvas.Left="189" Canvas.Top="337" Height="50" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD"/>
-        <Button x:Name="DeleteBtn" Content="Delete" Canvas.Left="317" Canvas.Top="339" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="DeleteBtn_Click"/>
+        <Button x:Name="UpdateBtn" Content="Update" Canvas.Left="189" Canvas.Top="337" Height="50" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="UpdateBtn_Click"/>
+        <Button x:Name="DeleteBtn" Content="Delete" Canvas.Left="376" Canvas.Top="339" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="DeleteBtn_Click"/>
         <Button Content="Clear" Canvas.Left="642" Canvas.Top="339" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="Button_Click"/>
         <Label Content="Type" Canvas.Left="35" Canvas.Top="55"/>
         <Label Content="Comment" Canvas.Left="21" Canvas.Top="134"/>
@@ -33,8 +33,8 @@
         <TextBox x:Name="Type_txt" Canvas.Left="116" Canvas.Top="59" TextWrapping="Wrap" Width="120"/>
         <TextBox x:Name="Comment_txt" Canvas.Left="116" Canvas.Top="138" TextWrapping="Wrap" Width="120"/>
         <TextBox x:Name="User_txt" Canvas.Left="116" Canvas.Top="221" TextWrapping="Wrap" Width="120"/>
-        <Label Content="ID" Canvas.Left="436" Canvas.Top="335" Width="28" Height="24"/>
-        <TextBox x:Name="ID_txt" Canvas.Left="420" Canvas.Top="364" TextWrapping="Wrap" Width="60"/>
+        <Label Content="ID" Canvas.Left="305" Canvas.Top="334" Width="28" Height="24"/>
+        <TextBox x:Name="ID_txt" Canvas.Left="289" Canvas.Top="364" TextWrapping="Wrap" Width="60"/>
     </Canvas>
 
 </Window>

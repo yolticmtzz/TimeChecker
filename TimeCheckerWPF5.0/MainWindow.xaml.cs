@@ -28,8 +28,10 @@ namespace TimeCheckerWPF5._0
         DateTime currentDate = DateTime.Now;
         private int _TimeentryId;
 
+
         public MainWindow()
         {
+
             InitializeComponent();
             SetUp();
             LoadDatagrid();
@@ -43,6 +45,11 @@ namespace TimeCheckerWPF5._0
                .Options);
         }
 
+        private void LoadDatagrid()
+        {
+            var timeentryitems = _context.Timeentry.ToList();
+            TimeentryGrid.ItemsSource = timeentryitems;
+        }
 
         public void clearData()
         {
@@ -73,17 +80,12 @@ namespace TimeCheckerWPF5._0
 
             _context.SaveChanges();
 
-            _TimeentryId = record.ID;
+           // _TimeentryId = record.ID;
 
             LoadDatagrid();
 
         }
 
-        private void LoadDatagrid()
-        {
-            var timeentryitems = _context.Timeentry.ToList();
-            TimeentryGrid.ItemsSource = timeentryitems;        
-        }
 
         private void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -100,6 +102,24 @@ namespace TimeCheckerWPF5._0
         }
 
 
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int ID_int = Int32.Parse(ID_txt.Text);
+            short Type_int = Int16.Parse(Type_txt.Text);
+
+            var existing = _context.Timeentry.Single(x => x.ID == ID_int);
+
+
+            existing.Type = Type_int;
+            existing.DateTime = currentDate;
+            existing.Comment = Comment_txt.Text;
+            existing.User = User_txt.Text;
+
+            _context.SaveChanges();
+
+            LoadDatagrid();
+
+        }
     }
 }
 
