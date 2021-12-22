@@ -8,41 +8,41 @@ namespace TimeChecker.DAL.Test
 {
     public class Tests
     {
-    //    private ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
-    //    [SetUp]
-    //    public void SetUp()
-    //    {
-    //        _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
-    //           .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoListManager;Trusted_Connection=True;MultipleActiveResultSets=true")
-    //           .Options);
-    //    }
-    //    [Test]
-    //    //public void InsertTodoItem()
-    //    //{
-    //    //    var record = new Timeentry()
-    //    //    {
-    //    //        Comment = "Organize meeting",
+        [SetUp]
+        public void SetUp()
+        {
+            _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoListManager;Trusted_Connection=True;MultipleActiveResultSets=true")
+               .Options);
+        }
+        [Test]
+        public void InsertTodoItem()
+        {
+            var record = new Timeentry()
+            {
+                Comment = "Service",
 
-    //    //    };
+            };
 
-    //    //    _context.Timeentry.Add(record);
+            _context.Timeentry.Add(record);
 
-    //    //    _context.SaveChanges();
+            _context.SaveChanges();
 
-    //    //    var addedTodoItem = _context.Timeentry.Single(x => x.Comment == "Organize meeting");
+            var addedTodoItem = _context.Timeentry.Single(x => x.Comment == "Service");
 
-    //    //    Assert.Greater(addedTodoItem.Id, 0);
+            Assert.Greater(addedTodoItem.Id, 0);
 
-    //    //    Assert.AreEqual(record.Comment, addedTodoItem.Completed);
-    //    //}
+            Assert.AreEqual(record.Comment, addedTodoItem.Comment);
+        }
 
-    //    //[TearDown]
-    //    //public void TearDown()
-    //    //{
-    //    //    var todoItem = _context.Timeentry.Single(x => x.Comment == "Organize meeting");
-    //    //    _context.Timeentry.Remove(todoItem);
-    //    //    _context.SaveChanges();
-    //    //}
+        [TearDown]
+        public void TearDown()
+        {
+            var todoItem = _context.Timeentry.Single(x => x.Comment == "Organize meeting");
+            _context.Timeentry.Remove(todoItem);
+            _context.SaveChanges();
+        }
     }
 }
