@@ -7,34 +7,136 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <Canvas >
-        <DataGrid x:Name="TimeentryGrid" AutoGenerateColumns="False" Margin="20" Height="260" Width="459" Canvas.Left="269" Canvas.Top="10">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding ID}"
-                                    Header="ID" Width="SizeToHeader" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Type}" Header="Type"
-                                    Width="SizeToHeader"/>
-                <DataGridTextColumn Binding="{Binding DateTime}" Header="DateandTime"
-                                    Width="*"/>
-                <DataGridTextColumn Binding="{Binding Comment}" Header="Comment"
-                                    Width="*"/>
-                <DataGridTextColumn Binding="{Binding User}" Header="User"
-                                    Width="100"/>
-            </DataGrid.Columns>
-        </DataGrid>
+    <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
 
-        <Button x:Name="InsertBtn" Content="Insert" Canvas.Left="62" Canvas.Top="338" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="Insert"/>
-        <Button x:Name="UpdateBtn" Content="Update" Canvas.Left="189" Canvas.Top="337" Height="50" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="UpdateBtn_Click"/>
-        <Button x:Name="DeleteBtn" Content="Delete" Canvas.Left="376" Canvas.Top="339" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="DeleteBtn_Click"/>
-        <Button Content="Clear" Canvas.Left="642" Canvas.Top="339" Height="49" Width="83" FontSize="16" FontWeight="Bold" Background="#FF810C0C" Foreground="#FFEADDDD" Click="Button_Click"/>
-        <Label Content="Type" Canvas.Left="35" Canvas.Top="55"/>
-        <Label Content="Comment" Canvas.Left="21" Canvas.Top="134"/>
-        <Label Content="User" Canvas.Left="36" Canvas.Top="217"/>
-        <TextBox x:Name="Type_txt" Canvas.Left="116" Canvas.Top="59" TextWrapping="Wrap" Width="120"/>
-        <TextBox x:Name="Comment_txt" Canvas.Left="116" Canvas.Top="138" TextWrapping="Wrap" Width="120"/>
-        <TextBox x:Name="User_txt" Canvas.Left="116" Canvas.Top="221" TextWrapping="Wrap" Width="120"/>
-        <Label Content="ID" Canvas.Left="305" Canvas.Top="334" Width="28" Height="24"/>
-        <TextBox x:Name="ID_txt" Canvas.Left="289" Canvas.Top="364" TextWrapping="Wrap" Width="60"/>
-    </Canvas>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row ="1"  x:Name="CheckinButtonPanel" Margin="10">
+            <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75"
+                          Click="CheckInButton_OnClick">
+                <ToggleButton.Style>
+                    <Style TargetType= "{x:Type ToggleButton}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center"                  
+                                                      VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                                <Setter Property="BorderBrush" Value="DarkRed"/>
+                                <Setter Property="Content" Value="Check Out"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Background" Value="Green" />
+                                <Setter Property="BorderBrush" Value="DarkGreen"/>
+                                <Setter Property="Content" Value="Check In"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="DarkGoldenrod"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderBrush" Value="DarkGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+                <ToggleButton.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                        <Setter Property="BorderThickness" Value="10"/>
+                    </Style>
+                </ToggleButton.Resources>
+            </ToggleButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin ="10, 30,10,10">
+            <ToggleButton x:Name="BreakButton" Visibility="Hidden"  IsChecked="False" FontSize="15" Foreground="White" Width="100" Height="100" Canvas.Left="200" Canvas.Top="300" BorderThickness="5" 
+                              Click="BreakButton_OnClick">
+                <ToggleButton.Style>
+                    <Style TargetType= "{x:Type ToggleButton}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ToggleButton">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center"                  
+                                                      VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="DarkBlue"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="Content" Value="End Break"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Background" Value="Blue" />
+                                <Setter Property="BorderBrush" Value="DarkBlue"/>
+                                <Setter Property="Content" Value="Start Break"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="DarkGoldenrod"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderBrush" Value="DarkGray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+                <ToggleButton.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="100"/>
+                        <Setter Property="BorderThickness" Value="5"/>
+                    </Style>
+                </ToggleButton.Resources>
+            </ToggleButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row ="1"  Grid.Column="1" Margin="10">
+            <TextBox x:Name="StatusScreen" Text="Checked out" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
+            </TextBox>
+
+            <TextBlock x:Name="TimeWatch" Text="00:00:00" Foreground="White" FontSize="50" TextAlignment="Center" Background="Black" Width="250" Height="120" Canvas.Left="459" Canvas.Top="100" Margin= "10">
+            </TextBlock>
+        </StackPanel>
+
+        <StackPanel x:Name="BreakTimeWatchStackPanel" Grid.Row="2" Grid.Column="1" Margin="10,30,10,10">
+            <TextBlock x:Name="BreakTimeWatch" Visibility="Hidden" Text="00:00:00" Foreground="White" FontSize="50" TextAlignment="Center" Background="Black" Width="250" Height="80" Canvas.Left="459" Canvas.Top="300" Margin= "10">
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+    
 </Window>
