@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace TimeCheckerWPF5._0.Models
 {
-    class TickEventArgs
+    public class TickEventArgs : EventArgs
     {
         //Data carrier of the Timespans and it must inherit the EventArgs. To be used with the EventHandler
-        public class TickEventArgs : EventArgs
-
-        {
-            public TimeSpan TimeSpan { get; set; }
-        }
+        public TimeSpan TimeSpan { get; set; }
+        
     }
 
 }
