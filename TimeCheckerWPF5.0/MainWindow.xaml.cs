@@ -284,20 +284,3 @@ namespace TimeCheckerWPF5._0
 //        }
 //    }
 //}
-
-
-
-
-//public void InsertTimeentry()
-//{
-//    var record = new Timeentry()
-//    {
-//        Type = 6,
-//        Comment = "Organize meeting to discuss the project"
-//    };
-
-//    _context.Timeentry.Add(record);
-
-//    _context.SaveChanges();
-
-//}
