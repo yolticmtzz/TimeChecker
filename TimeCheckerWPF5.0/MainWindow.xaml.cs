@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
-
+using TimeCheckerWPF5._0.Models;
 
 namespace TimeCheckerWPF5._0
 {
@@ -109,11 +109,14 @@ namespace TimeCheckerWPF5._0
                 try
                 {
                     //catch a comment*
-                    Insert(2, "", _loggedInUser);
-                    CheckInButton.IsEnabled = false;
-                    BreakButton.IsEnabled = false;
-                    StatusScreen.Text = "About to Check Out";
-                    MainTimewatch.StopwatchStop();
+                    Insert(2, "Check Out Comment to be implemented", _loggedInUser);
+                    //CheckInButton.IsEnabled = false;
+                    //BreakButton.IsEnabled = false;
+                    StatusScreen.Text = "Checked Out";
+                    MainTimewatch.StopwatchReset();
+
+                    BreakButton.Visibility = Visibility.Hidden;
+                    BreakTimeWatch.Visibility = Visibility.Hidden;
 
                 }
                 catch (Exception exception)
