@@ -13,8 +13,7 @@ namespace TimeChecker.DAL.Models
         public string Prename { get; set; }
 
         public string Lastname { get; set; }
-
-        
+       
 
     }
 }
