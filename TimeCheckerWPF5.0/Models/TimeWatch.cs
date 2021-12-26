@@ -17,7 +17,6 @@ namespace TimeCheckerWPF5._0.Models
 
 
 
-
         public TimeWatch()
         {
             //Subscribing the dispatcherTimer on tick to call the OnDispatchTimerTick event and define the Time interval of the TimeSpan to tick.
