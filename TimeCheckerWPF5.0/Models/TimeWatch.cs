@@ -15,8 +15,6 @@ namespace TimeCheckerWPF5._0.Models
         internal DispatcherTimer dispatcherTimer = new DispatcherTimer();
         internal Stopwatch stopwatch = new Stopwatch();
 
-
-
         public TimeWatch()
         {
             //Subscribing the dispatcherTimer on tick to call the OnDispatchTimerTick event and define the Time interval of the TimeSpan to tick.
@@ -37,7 +35,6 @@ namespace TimeCheckerWPF5._0.Models
             {
                 stopwatch.Stop();
             }
-            //etil.AddItemToTimeItemList(currentTime);
         }
 
         internal string StopwatchReset()
