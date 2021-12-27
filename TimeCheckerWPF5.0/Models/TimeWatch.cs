@@ -72,5 +72,21 @@ namespace TimeCheckerWPF5._0.Models
             }
         }
 
+        //Access the Timewatch Events to trigger, since its subscribed to the delegate
+        // -> The MainTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+        private void MainTimewatchTriggered(object? sender, TickEventArgs e)
+        {
+            var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
+                e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+        }
+
+        //Access the Timewatch Events to trigger, since its subscribed to the delegate
+        // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+        private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
+        {
+            var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}", e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+        }
+
+
     }
 }

@@ -14,8 +14,6 @@ namespace TimeCheckerWPF5._0.ViewModels
     public class TimeCheckerViewModel : INotifyPropertyChanged
     {
         //Utilities
-        private readonly TimeWatch mainTimeWatch;
-        private readonly TimeWatch breakTimeWatch;
         private readonly Employee user;
 
 
@@ -116,19 +114,12 @@ namespace TimeCheckerWPF5._0.ViewModels
                 }
             }
         }
-        public string MainTimeWatchScreen { get => mainTimeWatch.CurrentTime; }
-        public string BreakTimeWatchScreen { get => breakTimeWatch.CurrentTime; }
 
         public TimeCheckerViewModel()
         {
             Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
             user = new Employee();
-            mainTimeWatch = new TimeWatch();
-            breakTimeWatch = new TimeWatch();
-
-            mainTimeWatch.TickEvent += mainTimeWatch.TimeWatchTrigger;
-            breakTimeWatch.TickEvent += breakTimeWatch.TimeWatchTrigger;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -138,7 +129,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             if (!string.IsNullOrEmpty(propertyName))
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(propertyName)));
         }
-
 
     }
 }

@@ -26,9 +26,7 @@ namespace TimeCheckerWPF5._0
     {
         private readonly ApplicationDbContext _context;
         private readonly string _loggedInUser = "Dummy";
-        TimeWatch mainTimeWatch = new TimeWatch();
-        TimeWatch breakTimeWatch = new TimeWatch();
-        
+
         public MainWindow(ApplicationDbContext context)
         {
             _context = context;
@@ -36,10 +34,6 @@ namespace TimeCheckerWPF5._0
             
             Application.Current.Exit += new ExitEventHandler(ExitApp);
             WindowStartupLocation = WindowStartupLocation.CenterScreen;}
-
-        public TimeWatch MainTimewatch { get; set; }
-
-        public TimeWatch BreakTimewatch { get; set; }
 
 
         private void Insert(short type, string comment, string user)
@@ -77,7 +71,6 @@ namespace TimeCheckerWPF5._0
                 {
                     Insert(1, "", _loggedInUser);
                     StatusScreen.Text = "Checked In";
-                    mainTimeWatch.StopwatchStart();
                     BreakButton.Visibility = Visibility.Visible;
                     BreakTimeWatch.Visibility = Visibility.Visible;
                 }
@@ -100,7 +93,6 @@ namespace TimeCheckerWPF5._0
                     //CheckInButton.IsEnabled = false;
                     //BreakButton.IsEnabled = false;
                     StatusScreen.Text = "Checked Out";
-                    mainTimeWatch.StopwatchReset();
 
                     BreakButton.Visibility = Visibility.Hidden;
                     BreakTimeWatch.Visibility = Visibility.Hidden;
@@ -129,8 +121,6 @@ namespace TimeCheckerWPF5._0
                 {
                     Insert(3, "", _loggedInUser);
                     StatusScreen.Text = "Check In paused";
-                    mainTimeWatch.StopwatchStop();
-                    breakTimeWatch.StopwatchStart();
                     CheckInButton.IsEnabled = false;
                 }
                 catch (Exception exception)
@@ -150,8 +140,6 @@ namespace TimeCheckerWPF5._0
                     Insert(4, "", _loggedInUser);
                     CheckInButton.IsEnabled = true;
                     StatusScreen.Text = "Checked In";
-                    mainTimeWatch.StopwatchStart();
-                    breakTimeWatch.StopwatchStop();
                 }
                 catch (Exception exception)
                 {
@@ -163,23 +151,6 @@ namespace TimeCheckerWPF5._0
 
         }
 
-        //Access the Timewatch Events to trigger, since its subscribed to the delegate
-        // -> The MainTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
-        private void MainTimewatchTriggered(object? sender, TickEventArgs e)
-        {
-            var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
-                e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
-            MainTimeWatch.Text = CurrentTime;
-        }
-
-        //Access the Timewatch Events to trigger, since its subscribed to the delegate
-        // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
-        private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
-        {
-            var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}", e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
-            BreakTimeWatch.Text = CurrentTime;
-        }
-
         private void ExitApp(object sender, ExitEventArgs e)
         {
             MessageBox.Show("TimeChecker wurde beendet.");
@@ -188,101 +159,3 @@ namespace TimeCheckerWPF5._0
 }
 
 
-
-
-
-
-//        private void LoadDatagrid()
-//        {
-//            var timeentryitems = _context.Timeentry.ToList();
-//            TimeentryGrid.ItemsSource = timeentryitems;
-//        }
-
-//        public void clearData()
-//        {
-//            Type_txt.Clear();
-//            Comment_txt.Clear();
-//            User_txt.Clear();
-//        }
-
-//        private void Button_Click(object sender, RoutedEventArgs e)
-//        {
-//            clearData();
-//        }
-
-
-//        private void Insert(object sender, RoutedEventArgs e)
-//        {
-//            short Type_int = Int16.Parse(Type_txt.Text);
-
-//            var record = new Timeentry()
-//            {
-//                Type = Type_int,
-//                DateTime = currentDate,
-//                Comment = Comment_txt.Text,
-//                User = User_txt.Text,
-//            };
-
-//            _context.Timeentry.Add(record);
-
-//            _context.SaveChanges();
-
-//           // _TimeentryId = record.ID;
-
-//            LoadDatagrid();
-
-//        }
-
-
-//        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
-//        {
-//            int ID_int = Int32.Parse(ID_txt.Text);
-
-//            var existing = _context.Timeentry.Single(x => x.ID == ID_int);
-//            //var existing = _context.Timeentry.Single(x => x.Type == 2);
-
-//            _context.Timeentry.Remove(existing);
-
-//            _context.SaveChanges();
-
-//            LoadDatagrid();
-//        }
-
-
-//        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
-//        {
-//            int ID_int = Int32.Parse(ID_txt.Text);
-//            short Type_int = Int16.Parse(Type_txt.Text);
-
-//            var existing = _context.Timeentry.Single(x => x.ID == ID_int);
-
-
-//            existing.Type = Type_int;
-//            existing.DateTime = currentDate;
-//            existing.Comment = Comment_txt.Text;
-//            existing.User = User_txt.Text;
-
-//            _context.SaveChanges();
-
-//            LoadDatagrid();
-
-//        }
-//    }
-//}
-
-
-
-
-//public void InsertTimeentry()
-//{
-//    var record = new Timeentry()
-//    {
-//        Type = 6,
-//        Comment = "Organize meeting to discuss the project"
-//    };
-
-//    _context.Timeentry.Add(record);
-
-//    _context.SaveChanges();
-
-//}
