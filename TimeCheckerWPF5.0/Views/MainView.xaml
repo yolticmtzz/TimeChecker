@@ -28,7 +28,7 @@
 
         <TextBlock Grid.Row ="1"  x:Name="UserTitle" Margin="302,9,0,29" Text = "Employee:" FontSize="14" Foreground="Black" HorizontalAlignment ="Left" Grid.Column="1"/>
         <TextBlock Grid.Row ="1"  x:Name="DateTitle" Margin="334,28,0,11" Text = "Date:" FontSize="14" Foreground="Black" HorizontalAlignment="Left" Grid.Column="1" Width="34" RenderTransformOrigin="0.791,-1.244"/>
-        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="377,9,22,10" Text = "{Binding User}" FontSize="14" Foreground="White"/>
+        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="377,9,22,10" Text = "{Binding UserFullName}" FontSize="14" Foreground="White" />
         <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="DateData" Margin="377,28,10,10" Text = "{Binding Date}" FontSize="14" Foreground="White"  />
 
         <StackPanel Grid.Row ="3"  x:Name="CheckinButtonPanel" Margin="30 0 0 0" >
@@ -138,7 +138,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row ="3"  Grid.Column="1" Margin="10">
-            <TextBox x:Name="StatusScreen" Text="{Binding Status}" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
+            <TextBox x:Name="StatusScreen" Text="{Binding StatusScreenText}" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
             </TextBox>
             <Label x:Name="MainTimeWatch" Content="{Binding MainTimeWatchScreen}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="50" Background="Black" Width="250" Height="120"/>
         </StackPanel>

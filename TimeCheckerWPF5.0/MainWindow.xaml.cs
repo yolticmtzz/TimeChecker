@@ -35,7 +35,7 @@ namespace TimeCheckerWPF5._0
             InitializeComponent();
             
             Application.Current.Exit += new ExitEventHandler(ExitApp);
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;        }
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;}
 
         public TimeWatch MainTimewatch { get; set; }
 
@@ -169,7 +169,7 @@ namespace TimeCheckerWPF5._0
         {
             var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
                 e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
-            TimeWatch.Text = CurrentTime;
+            MainTimeWatch.Text = CurrentTime;
         }
 
         //Access the Timewatch Events to trigger, since its subscribed to the delegate
