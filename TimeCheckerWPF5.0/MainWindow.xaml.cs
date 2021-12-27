@@ -25,7 +25,6 @@ namespace TimeCheckerWPF5._0
     public partial class MainWindow : Window
     {
         private readonly ApplicationDbContext _context;
-        private readonly string _loggedInUser = "Dummy";
 
         public MainWindow(ApplicationDbContext context)
         {
@@ -69,7 +68,7 @@ namespace TimeCheckerWPF5._0
                 */
                 try
                 {
-                    Insert(1, "", _loggedInUser);
+                    Insert(1, "", "dummy");
                     StatusScreen.Text = "Checked In";
                     BreakButton.Visibility = Visibility.Visible;
                     BreakTimeWatch.Visibility = Visibility.Visible;
@@ -89,7 +88,7 @@ namespace TimeCheckerWPF5._0
                 try
                 {
                     //catch a comment*
-                    Insert(2, "Check Out Comment to be implemented", _loggedInUser);
+                    Insert(2, "Check Out Comment to be implemented", "dummy");
                     //CheckInButton.IsEnabled = false;
                     //BreakButton.IsEnabled = false;
                     StatusScreen.Text = "Checked Out";
@@ -119,7 +118,7 @@ namespace TimeCheckerWPF5._0
             {
                 try
                 {
-                    Insert(3, "", _loggedInUser);
+                    Insert(3, "", "dummy");
                     StatusScreen.Text = "Check In paused";
                     CheckInButton.IsEnabled = false;
                 }
@@ -137,7 +136,7 @@ namespace TimeCheckerWPF5._0
                  */
                 try
                 {
-                    Insert(4, "", _loggedInUser);
+                    Insert(4, "", "dummy");
                     CheckInButton.IsEnabled = true;
                     StatusScreen.Text = "Checked In";
                 }

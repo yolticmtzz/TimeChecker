@@ -114,6 +114,14 @@ namespace TimeCheckerWPF5._0.ViewModels
                 }
             }
         }
+        public string MainTimeWatchScreen
+        {
+            get => "00:00:00";
+        }
+        public string BreakTimeWatchScreen 
+        { 
+            get => "00:00:00";
+        }
 
         public TimeCheckerViewModel()
         {
