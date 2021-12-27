@@ -35,15 +35,7 @@ namespace TimeCheckerWPF5._0
             InitializeComponent();
             
             Application.Current.Exit += new ExitEventHandler(ExitApp);
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-            mainTimeWatch.TickEvent += mainTimeWatch.TimeWatchTrigger;
-            breakTimeWatch.TickEvent += breakTimeWatch.TimeWatchTrigger;
-
-        }
-
-
-
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;        }
 
         public TimeWatch MainTimewatch { get; set; }
 

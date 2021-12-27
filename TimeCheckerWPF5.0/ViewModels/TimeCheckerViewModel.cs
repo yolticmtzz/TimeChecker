@@ -17,9 +17,8 @@ namespace TimeCheckerWPF5._0.ViewModels
         public TimeWatch breakTimeWatch;
         public Employee user;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string User {get => user.Fullname;}
+    
+        public string UserFullName {get => user.Fullname;}
         public string Date { get; set; }
         public string Status { get; set; }
 
@@ -43,7 +42,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             breakTimeWatch.TickEvent += breakTimeWatch.TimeWatchTrigger;
         }
 
-
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
     }
