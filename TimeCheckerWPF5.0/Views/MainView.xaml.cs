@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TimeCheckerWPF5._0.Views
 {
     /// <summary>
-    /// Interaction logic for TimeCheckerView.xaml
+    /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class TimeCheckerView : UserControl
+    public partial class MainView : UserControl
     {
-        public TimeCheckerView()
+        public MainView()
         {
             InitializeComponent();
         }

@@ -14,6 +14,7 @@ namespace TimeCheckerWPF5._0.Models
         internal EventHandler<TickEventArgs> TickEvent;
         internal DispatcherTimer dispatcherTimer = new DispatcherTimer();
         internal Stopwatch stopwatch = new Stopwatch();
+        internal string CurrentTime ="00:00:00";
 
         public TimeWatch()
         {
@@ -27,6 +28,13 @@ namespace TimeCheckerWPF5._0.Models
         {
             stopwatch.Start();
             dispatcherTimer.Start();
+        }
+
+        internal void TimeWatchTrigger(object? sender, TickEventArgs e)
+        {
+            CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
+            e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+
         }
 
         internal void StopwatchStop()
@@ -63,5 +71,6 @@ namespace TimeCheckerWPF5._0.Models
                 OnWatchTickEvent(tickEvent);
             }
         }
+
     }
 }

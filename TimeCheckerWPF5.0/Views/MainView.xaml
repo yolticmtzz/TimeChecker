@@ -1,11 +1,16 @@
-﻿<Window x:Class="TimeCheckerWPF5._0.Views.TimeCheckerView"
+﻿<UserControl x:Class="TimeCheckerWPF5._0.Views.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TimeCheckerWPF5._0"
-        mc:Ignorable="d"
-        Title="TimeChecker GUI" Height="450" Width="800">
+        xmlns:local="clr-namespace:TimeCheckerWPF5._0.Views" 
+        xmlns:viewmodels="clr-namespace:TimeCheckerWPF5._0.ViewModels"
+             mc:Ignorable="d"
+        d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <viewmodels:TimeCheckerViewModel/>
+    </UserControl.DataContext>
 
     <Grid Background="Gray">
         <Grid.ColumnDefinitions>
@@ -16,11 +21,18 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row ="1"  x:Name="CheckinButtonPanel" Margin="10">
-            <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75">
+        <TextBlock Grid.Row ="1"  x:Name="UserTitle" Margin="302,9,0,29" Text = "Employee:" FontSize="14" Foreground="Black" HorizontalAlignment ="Left" Grid.Column="1"/>
+        <TextBlock Grid.Row ="1"  x:Name="DateTitle" Margin="334,28,0,11" Text = "Date:" FontSize="14" Foreground="Black" HorizontalAlignment="Left" Grid.Column="1" Width="34" RenderTransformOrigin="0.791,-1.244"/>
+        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="377,9,22,10" Text = "{Binding User}" FontSize="14" Foreground="White"/>
+        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="DateData" Margin="377,28,10,10" Text = "{Binding Date}" FontSize="14" Foreground="White"  />
+
+        <StackPanel Grid.Row ="3"  x:Name="CheckinButtonPanel" Margin="30 0 0 0" >
+            <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75" Content="{Binding CheckInButtonText}">
 
                 <ToggleButton.Style>
                     <Style TargetType= "{x:Type ToggleButton}">
@@ -72,8 +84,8 @@
             </ToggleButton>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="0" Margin ="10, 30,10,10">
-            <ToggleButton x:Name="BreakButton" Visibility="Hidden"  IsChecked="False" FontSize="15" Foreground="White" Width="100" Height="100" Canvas.Left="200" Canvas.Top="300" BorderThickness="5">
+        <StackPanel Grid.Row="4" Grid.Column="0" Margin ="40, 30,10,10">
+            <ToggleButton x:Name="BreakButton"  IsChecked="False" FontSize="15" Foreground="White" Width="100" Height="100" Canvas.Left="200" Canvas.Top="300" BorderThickness="5" Content="{Binding BreakButtonText}">
 
                 <ToggleButton.Style>
                     <Style TargetType= "{x:Type ToggleButton}">
@@ -125,18 +137,16 @@
             </ToggleButton>
         </StackPanel>
 
-        <StackPanel Grid.Row ="1"  Grid.Column="1" Margin="10">
-            <TextBox x:Name="StatusScreen" Text="Checked out" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
+        <StackPanel Grid.Row ="3"  Grid.Column="1" Margin="10">
+            <TextBox x:Name="StatusScreen" Text="{Binding Status}" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
             </TextBox>
-
-            <TextBlock x:Name="TimeWatch" Text="00:00:00" Foreground="White" FontSize="50" TextAlignment="Center" Background="Black" Width="250" Height="120" Canvas.Left="459" Canvas.Top="100" Margin= "10">
-            </TextBlock>
+            <Label x:Name="MainTimeWatch" Content="{Binding MainTimeWatchScreen}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="50" Background="Black" Width="250" Height="120"/>
         </StackPanel>
 
-        <StackPanel x:Name="BreakTimeWatchStackPanel" Grid.Row="2" Grid.Column="1" Margin="10,30,10,10">
-            <TextBlock x:Name="BreakTimeWatch" Visibility="Hidden" Text="00:00:00" Foreground="White" FontSize="50" TextAlignment="Center" Background="Black" Width="250" Height="80" Canvas.Left="459" Canvas.Top="300" Margin= "10">
-            </TextBlock>
+        <StackPanel x:Name="BreakTimeWatchStackPanel" Grid.Row="4" Grid.Column="1" Margin="10,30,10,10">
+            <Label x:Name="BreakTimeWatch" Content="{Binding BreakTimeWatchScreen}" Foreground="White" FontSize="50" HorizontalContentAlignment ="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="80" Canvas.Left="459" Canvas.Top="300" Margin= "10">
+            </Label>
         </StackPanel>
     </Grid>
 
-</Window>
+</UserControl>

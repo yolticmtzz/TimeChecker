@@ -24,36 +24,31 @@ namespace TimeCheckerWPF5._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ApplicationDbContext _context;
-        private const string _loggedInUser = "DummyUser";
+        private readonly ApplicationDbContext _context;
+        private readonly string _loggedInUser = "Dummy";
+        TimeWatch mainTimeWatch = new TimeWatch();
+        TimeWatch breakTimeWatch = new TimeWatch();
         
-        public MainWindow()
+        public MainWindow(ApplicationDbContext context)
         {
-
+            _context = context;
             InitializeComponent();
-            SetUp();
+            
             Application.Current.Exit += new ExitEventHandler(ExitApp);
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            MainTimewatch = new TimeWatch();
-            BreakTimewatch = new TimeWatch();
 
-            //Subscribing the MainTimeWatch and the BreakTimeWatch to the TickEvent delegate
-            MainTimewatch.TickEvent += MainTimewatchTriggered;
-            BreakTimewatch.TickEvent += BreakTimewatchTriggered;
-            //LoadDatagrid();
+            mainTimeWatch.TickEvent += mainTimeWatch.TimeWatchTrigger;
+            breakTimeWatch.TickEvent += breakTimeWatch.TimeWatchTrigger;
+
         }
+
+
+
 
         public TimeWatch MainTimewatch { get; set; }
 
         public TimeWatch BreakTimewatch { get; set; }
 
-
-        public void SetUp()
-        {
-            _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
-               .Options);
-        }
 
         private void Insert(short type, string comment, string user)
         {
@@ -90,7 +85,7 @@ namespace TimeCheckerWPF5._0
                 {
                     Insert(1, "", _loggedInUser);
                     StatusScreen.Text = "Checked In";
-                    MainTimewatch.StopwatchStart();
+                    mainTimeWatch.StopwatchStart();
                     BreakButton.Visibility = Visibility.Visible;
                     BreakTimeWatch.Visibility = Visibility.Visible;
                 }
@@ -113,7 +108,7 @@ namespace TimeCheckerWPF5._0
                     //CheckInButton.IsEnabled = false;
                     //BreakButton.IsEnabled = false;
                     StatusScreen.Text = "Checked Out";
-                    MainTimewatch.StopwatchReset();
+                    mainTimeWatch.StopwatchReset();
 
                     BreakButton.Visibility = Visibility.Hidden;
                     BreakTimeWatch.Visibility = Visibility.Hidden;
@@ -129,7 +124,6 @@ namespace TimeCheckerWPF5._0
 
         private void BreakButton_OnClick(object sender, RoutedEventArgs e)
         {
-            string user = "DummyUser";
             //User -> from config file (XML)??. Can't add the System.Configuration.dll reference in 5.0...
             //string sAttr = ConfigurationManager.AppSettings.Get("User");
 
@@ -143,8 +137,8 @@ namespace TimeCheckerWPF5._0
                 {
                     Insert(3, "", _loggedInUser);
                     StatusScreen.Text = "Check In paused";
-                    MainTimewatch.StopwatchStop();
-                    BreakTimewatch.StopwatchStart();
+                    mainTimeWatch.StopwatchStop();
+                    breakTimeWatch.StopwatchStart();
                     CheckInButton.IsEnabled = false;
                 }
                 catch (Exception exception)
@@ -164,8 +158,8 @@ namespace TimeCheckerWPF5._0
                     Insert(4, "", _loggedInUser);
                     CheckInButton.IsEnabled = true;
                     StatusScreen.Text = "Checked In";
-                    MainTimewatch.StopwatchStart();
-                    BreakTimewatch.StopwatchStop();
+                    mainTimeWatch.StopwatchStart();
+                    breakTimeWatch.StopwatchStop();
                 }
                 catch (Exception exception)
                 {
@@ -190,8 +184,7 @@ namespace TimeCheckerWPF5._0
         // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
         private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
         {
-            var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
-                e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+            var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}", e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
             BreakTimeWatch.Text = CurrentTime;
         }
 

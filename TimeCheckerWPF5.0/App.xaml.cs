@@ -30,7 +30,8 @@ namespace TimeCheckerWPF5._0
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(ConfigurationManager.ConnectionStrings["TimeCheckerDatabase"].ConnectionString);
+                options.UseSqlServer(ConfigurationManager.ConnectionStrings
+                    ["TimeCheckerDatabase"].ConnectionString);
             });
 
             services.AddSingleton<MainWindow>();
