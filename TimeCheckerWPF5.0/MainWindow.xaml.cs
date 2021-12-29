@@ -37,7 +37,7 @@ namespace TimeCheckerWPF5._0
 
         private void Insert(short type, string comment, string user)
         {
-            
+
             var record = new Timeentry()
             {
                 Type = type,
@@ -49,10 +49,10 @@ namespace TimeCheckerWPF5._0
             _context.Timeentry.Add(record);
             _context.SaveChanges();
 
-         }
+        }
 
 
-            private void CheckInButton_OnClick(object sender, RoutedEventArgs e)
+        private void CheckInButton_OnClick(object sender, RoutedEventArgs e)
         {
 
             //User -> from config file (XML)??. Can't add the System.Configuration.dll reference in 5.0...
@@ -103,6 +103,11 @@ namespace TimeCheckerWPF5._0
                     throw;
                 }
             }
+        }
+
+        internal static void Insert()
+        {
+            throw new NotImplementedException();
         }
 
         private void BreakButton_OnClick(object sender, RoutedEventArgs e)
