@@ -4,13 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TimeCheckerWPF5._0.Models;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-    class CheckOutDialogViewModel
+    public class CheckOutDialogViewModel
     {
+        public event EventHandler CheckOut;
+        public event EventHandler Cancel;
 
-        private string dialogComment;
+
+        public CheckOutDialogViewModel()
+        {
+            CheckOutCommand = new DelegateCommand((o) => CheckOut?.Invoke(this, EventArgs.Empty));
+            CancelCommand = new DelegateCommand((o) => Cancel?.Invoke(this, EventArgs.Empty));
+        }
+
+        private string dialogComment = "";
 
         public string DialogComment {
             get => dialogComment;           

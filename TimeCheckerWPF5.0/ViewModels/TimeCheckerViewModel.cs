@@ -10,17 +10,34 @@ using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Models;
 using System.Windows.Input;
-
+using TimeCheckerWPF5._0.Views;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
+
     public class TimeCheckerViewModel : INotifyPropertyChanged
     {
 
+
         //General Data
-        private Employee user;
+        private readonly Employee user;
         public string UserFullName { get; set; }
         public string Date { get; set; }
+        public string comment;
+        public string Comment
+        {
+            get => comment;
+
+            set
+            {
+                if (value != comment)
+                {
+                    comment = value;
+                    RaisePropertyChanged();
+                }
+            }
+
+        }
 
         private Status status;
         public Status Status
@@ -29,11 +46,14 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-                status = value;
-                RaisePropertyChanged();
-                CheckInCommand.RaiseCanExecuteChanged();
-                BreakCommand.RaiseCanExecuteChanged();
-                UpdateGUIProperties();
+                if (value != status)
+                {
+                    status = value;
+                    RaisePropertyChanged();
+                    CheckInCommand.RaiseCanExecuteChanged();
+                    BreakCommand.RaiseCanExecuteChanged();
+                    UpdateGUIProperties();
+                }
             }
         }
 
@@ -151,8 +171,8 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public TimeCheckerViewModel()
         {
-            initiateCheckInCommand();
-            initiateBreakCommand();
+            InitiateCheckInCommand();
+            InitiateBreakCommand();
 
             MainTimeWatch = new TimeWatch();
             BreakTimeWatch = new TimeWatch();
@@ -160,7 +180,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             //Subscribing the MainTimeWatch and the BreakTimeWatch to the TickEvent delegate
             MainTimeWatch.TickEvent += MainTimewatchTriggered;
             BreakTimeWatch.TickEvent += BreakTimewatchTriggered;
-
 
             Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
@@ -178,10 +197,22 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         }
 
-        public DelegateCommand OpenDialog { get; set; }
+        private bool OpenCheckOutDialog()
+        {
+            CheckOutDialogWindow dialog = new CheckOutDialogWindow();
+            if (dialog.ShowDialog() == true)
+            {
+                var checkOutDialogViewModel = ((CheckOutDialogViewModel)dialog.DataContext);
+                Comment = checkOutDialogViewModel.DialogComment;
+                return true;
+            }
+
+            return false;
+
+        }
 
         public DelegateCommand CheckInCommand { get; set; }
-        private void initiateCheckInCommand()
+        private void InitiateCheckInCommand()
         {
             CheckInCommand = new DelegateCommand(
          (o) => Status != Status.BreakMode,
@@ -194,15 +225,27 @@ namespace TimeCheckerWPF5._0.ViewModels
              }
              else
              {
+                 MainTimeWatch.StopwatchStop();
+                 bool checkout = OpenCheckOutDialog();
 
-                 Status = Status.CheckedOut;
-                 MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
+                 if (checkout == true)
+                 {
+                     Status = Status.CheckedOut;
+                     MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
+
+                 }
+                  else
+                 {
+                     MainTimeWatch.StopwatchStart();
+                 }
+
+                
              }
          }
         );
         }
         public DelegateCommand BreakCommand { get; set; }
-        private void initiateBreakCommand()
+        private void InitiateBreakCommand()
         {
             BreakCommand = new DelegateCommand(
          (o) => Status != Status.CheckedOut,
