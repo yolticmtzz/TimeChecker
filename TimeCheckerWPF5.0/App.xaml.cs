@@ -9,6 +9,7 @@ using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TimeChecker.DAL.Data;
+using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0
 {

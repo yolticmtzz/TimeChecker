@@ -14,6 +14,9 @@ namespace TimeCheckerWPF5._0.ViewModels
 {
     public class TimeCheckerViewModel : INotifyPropertyChanged
     {
+
+        //ApplicationDbContext _context = 
+
         //General Data
         private Employee user;
         public string UserFullName { get; set; }
@@ -153,15 +156,10 @@ namespace TimeCheckerWPF5._0.ViewModels
              if (Status == Status.CheckedOut)
              {
                  Status = Status.CheckedIn;
-                 EntryType = 1;
-                 EntryDate = DateTime.Now;
              }
              else
              {
                  Status = Status.CheckedOut;
-                 EntryType = 2;
-                 EntryDate = DateTime.Now;
-
              }
          }
         );
@@ -176,16 +174,11 @@ namespace TimeCheckerWPF5._0.ViewModels
              if (Status == Status.CheckedIn)
              {
                  Status = Status.BreakMode;
-                 EntryType = 3;
-                 EntryDate = DateTime.Now;
              }
              else
              {
                  Status = Status.CheckedIn;
-                 EntryType = 4;
-                 EntryDate = DateTime.Now;
-
-             }
+              }
          }
         );
         }
