@@ -9,13 +9,13 @@ using System.Windows;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Models;
+using System.Windows.Input;
+
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
     public class TimeCheckerViewModel : INotifyPropertyChanged
     {
-
-        //ApplicationDbContext _context = 
 
         //General Data
         private Employee user;
@@ -84,11 +84,21 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeWatch MainTimeWatch;
+        public TimeWatch MainTimeWatch { get; set; }
 
+        private string mainTimeWatchScreen = "00:00:00";
         public string MainTimeWatchScreen
         {
-            get => "00:00:00";
+            get => mainTimeWatchScreen;
+
+            set
+            {
+                if (value != mainTimeWatchScreen)
+                {
+                    mainTimeWatchScreen = value;
+                    RaisePropertyChanged();
+                }
+            }
 
         }
 
@@ -120,11 +130,21 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeWatch BreakTimeWatch;
+        public TimeWatch BreakTimeWatch { get; set; }
 
+        private string breakTimeWatchScreen = "00:00:00";
         public string BreakTimeWatchScreen
         {
-            get => "00:00:00";
+            get => breakTimeWatchScreen;
+
+            set
+            {
+                if (value != breakTimeWatchScreen)
+                {
+                    breakTimeWatchScreen = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
 
@@ -137,8 +157,10 @@ namespace TimeCheckerWPF5._0.ViewModels
             MainTimeWatch = new TimeWatch();
             BreakTimeWatch = new TimeWatch();
 
-            MainTimeWatch += MainTimewatchTriggered();
-            MainTimeWatch += BreakTimeWatchTriggered();
+            //Subscribing the MainTimeWatch and the BreakTimeWatch to the TickEvent delegate
+            MainTimeWatch.TickEvent += MainTimewatchTriggered;
+            BreakTimeWatch.TickEvent += BreakTimewatchTriggered;
+
 
             Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
@@ -156,6 +178,8 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         }
 
+        public DelegateCommand OpenDialog { get; set; }
+
         public DelegateCommand CheckInCommand { get; set; }
         private void initiateCheckInCommand()
         {
@@ -170,8 +194,9 @@ namespace TimeCheckerWPF5._0.ViewModels
              }
              else
              {
+
                  Status = Status.CheckedOut;
-                 MainTimeWatch.StopwatchReset();
+                 MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
              }
          }
         );
@@ -192,7 +217,7 @@ namespace TimeCheckerWPF5._0.ViewModels
              else
              {
                  Status = Status.CheckedIn;
-                 BreakTimeWatch.StopwatchReset();
+                 BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
                  MainTimeWatch.StopwatchStart();
              }
          }
@@ -232,14 +257,20 @@ namespace TimeCheckerWPF5._0.ViewModels
             {
                 var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
                     e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+                MainTimeWatchScreen = CurrentTime;
             }
 
             //Access the Timewatch Events to trigger, since its subscribed to the delegate
             // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
             private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
             {
-                var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}", e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
-            }
+                var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
+                    e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+                BreakTimeWatchScreen = CurrentTime;
+        }
+
+
+            
 
      }
 

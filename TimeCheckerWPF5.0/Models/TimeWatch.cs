@@ -13,8 +13,8 @@ namespace TimeCheckerWPF5._0.Models
         //Declare a handler for when the watchtick is triggered to run of type of own arguments (timeSpan)
         internal EventHandler<TickEventArgs> TickEvent;
         internal DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        internal Stopwatch stopwatch = new Stopwatch();
-        internal string CurrentTime ="00:00:00";
+        private Stopwatch stopwatch = new Stopwatch();
+        private const string TimeReset ="00:00:00";
 
         public TimeWatch()
         {
@@ -24,20 +24,13 @@ namespace TimeCheckerWPF5._0.Models
         }
 
         //Stopwatch Start, Stop and Reset functions
-        internal void StopwatchStart()
+        public void StopwatchStart()
         {
             stopwatch.Start();
             dispatcherTimer.Start();
         }
 
-        internal void TimeWatchTrigger(object? sender, TickEventArgs e)
-        {
-            CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
-            e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
-
-        }
-
-        internal void StopwatchStop()
+        public void StopwatchStop()
         {
             if (stopwatch.IsRunning)
             {
@@ -45,10 +38,10 @@ namespace TimeCheckerWPF5._0.Models
             }
         }
 
-        internal string StopwatchReset()
+        public string StopwatchReset()
         {
             stopwatch.Reset();
-            return "00:00:00";
+            return TimeReset;
         }
 
         //Triggering the EventHandler
