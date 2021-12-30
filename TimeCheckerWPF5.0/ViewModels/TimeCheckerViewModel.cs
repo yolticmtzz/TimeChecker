@@ -84,6 +84,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
+        public TimeWatch MainTimeWatch;
+
         public string MainTimeWatchScreen
         {
             get => "00:00:00";
@@ -118,6 +120,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
+        public TimeWatch BreakTimeWatch;
+
         public string BreakTimeWatchScreen
         {
             get => "00:00:00";
@@ -129,7 +133,13 @@ namespace TimeCheckerWPF5._0.ViewModels
         {
             initiateCheckInCommand();
             initiateBreakCommand();
-            
+
+            MainTimeWatch = new TimeWatch();
+            BreakTimeWatch = new TimeWatch();
+
+            MainTimeWatch += MainTimewatchTriggered();
+            MainTimeWatch += BreakTimeWatchTriggered();
+
             Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
             user = new Employee("Dummy", "User 77");
@@ -156,10 +166,12 @@ namespace TimeCheckerWPF5._0.ViewModels
              if (Status == Status.CheckedOut)
              {
                  Status = Status.CheckedIn;
+                 MainTimeWatch.StopwatchStart();
              }
              else
              {
                  Status = Status.CheckedOut;
+                 MainTimeWatch.StopwatchReset();
              }
          }
         );
@@ -174,11 +186,15 @@ namespace TimeCheckerWPF5._0.ViewModels
              if (Status == Status.CheckedIn)
              {
                  Status = Status.BreakMode;
+                 MainTimeWatch.StopwatchStop();
+                 BreakTimeWatch.StopwatchStart();
              }
              else
              {
                  Status = Status.CheckedIn;
-              }
+                 BreakTimeWatch.StopwatchReset();
+                 MainTimeWatch.StopwatchStart();
+             }
          }
         );
         }
@@ -208,9 +224,23 @@ namespace TimeCheckerWPF5._0.ViewModels
                     MainTimeButtonColor = "LightGray";
                     break;
             }
-
-
         }
 
-    }
+            //Access the Timewatch Events to trigger, since its subscribed to the delegate
+            // -> The MainTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+            private void MainTimewatchTriggered(object? sender, TickEventArgs e)
+            {
+                var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
+                    e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+            }
+
+            //Access the Timewatch Events to trigger, since its subscribed to the delegate
+            // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+            private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
+            {
+                var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}", e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+            }
+
+     }
+
 }
