@@ -7,6 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Background="DeepSkyBlue" Width="100" HorizontalAlignment="Left">
+            <Label Content="Menu" HorizontalContentAlignment="Center" FontSize="14" VerticalContentAlignment="Center" Height="50" Background="Orange"/>
+            <Button Content="Home" Width="Auto"/>
+            <Button Content="Catched Times" Width="Auto"/>
+            <Button Content="Others" Width="Auto"/>
+            <Button Content="Exit" Width="Auto"/>
+            <Button Content="Help" Width="Auto" VerticalAlignment="Bottom" />
+        </StackPanel>
+        <Label Grid.Column="1" Grid.Row="0" Background="Green" Content="TimeChecker" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="30" VerticalContentAlignment="Center" Height="50"/>
     </Grid>
+
 </UserControl>
