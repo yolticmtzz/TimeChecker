@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="TimeCheckerWPF5._0.Views.MainView"
+﻿<UserControl x:Class="TimeCheckerWPF5._0.MainView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TimeCheckerWPF5._0.Views" 
         xmlns:viewmodels="clr-namespace:TimeCheckerWPF5._0.ViewModels"
+       
              mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800">
 
@@ -28,11 +29,11 @@
 
         <TextBlock Grid.Row ="1"  x:Name="UserTitle" Margin="302,9,0,29" Text = "Employee:" FontSize="14" Foreground="Black" HorizontalAlignment ="Left" Grid.Column="1"/>
         <TextBlock Grid.Row ="1"  x:Name="DateTitle" Margin="334,28,0,11" Text = "Date:" FontSize="14" Foreground="Black" HorizontalAlignment="Left" Grid.Column="1" Width="34" RenderTransformOrigin="0.791,-1.244"/>
-        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="377,9,22,30" Text = "{Binding UserFullName}" FontSize="14" Foreground="White" />
+        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="377,10,22,28" Text = "{Binding UserFullName}" FontSize="14" Foreground="White" />
         <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="DateData" Margin="377,28,10,10" Text = "{Binding Date}" FontSize="14" Foreground="White"  />
 
         <StackPanel Grid.Row ="3"  x:Name="CheckinButtonPanel" Margin="30 0 0 0" >
-            <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75" Content="{Binding MainTimeButtonText}" Background="{Binding MainTimeButtonColor}" Command="{Binding CheckInCommand}">
+            <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75" Content="{Binding MainTimeButtonText}" Command="{Binding CheckInCommand}" Background="{Binding MainTimeButtonColor}">
 
                 <ToggleButton.Style>
                     <Style TargetType= "{x:Type ToggleButton}">
@@ -147,6 +148,7 @@
             <Label x:Name="BreakTimeWatch" Content="{Binding BreakTimeWatchScreen}" Foreground="White" FontSize="50" HorizontalContentAlignment ="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="80" Canvas.Left="459" Canvas.Top="300" Margin= "10">
             </Label>
         </StackPanel>
+        <TextBlock Text="{Binding Comment}" HorizontalAlignment="Left" Margin="55,19,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 
 </UserControl>
