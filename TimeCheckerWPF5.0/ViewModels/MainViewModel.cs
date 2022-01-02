@@ -17,6 +17,14 @@ namespace TimeCheckerWPF5._0.ViewModels
         public MainViewModel(NavigationStore navigationStore)
         {
             _navigationStore = navigationStore;
+
+            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+        }
+
+        private void OnCurrentViewModelChanged()
+        {
+            RaisePropertyChanged();
+
         }
     }
 }

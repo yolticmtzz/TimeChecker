@@ -11,6 +11,7 @@ using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Models;
 using System.Windows.Input;
 using TimeCheckerWPF5._0.Views;
+using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -139,6 +140,9 @@ namespace TimeCheckerWPF5._0.ViewModels
         public TimeWatch BreakTimeWatch { get; set; }
 
         private string _breakTimeWatchScreen = "00:00:00";
+        
+        
+        
         public string BreakTimeWatchScreen
         {
             get => _breakTimeWatchScreen;
@@ -160,6 +164,7 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             MainTimeWatch = new TimeWatch();
             BreakTimeWatch = new TimeWatch();
+         
 
             //Subscribing the MainTimeWatch and the BreakTimeWatch to the TickEvent delegate
             MainTimeWatch.TickEvent += MainTimewatchTriggered;
@@ -187,6 +192,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             return false;
 
         }
+
 
         public DelegateCommand CheckInCommand { get; set; }
         private void InitiateCheckInCommand()

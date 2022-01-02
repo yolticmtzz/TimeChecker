@@ -17,7 +17,7 @@ namespace TimeCheckerWPF5._0.Stores
 
     }
 
-    public class NavigationStore : ViewModelBase
+    public class NavigationStore
     {
 
 
@@ -29,10 +29,16 @@ namespace TimeCheckerWPF5._0.Stores
             set
             {
                 _currentViewModel = value;
-                RaisePropertyChanged();
+                OnCurrentViewModelChanged();
             }
         }
 
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public event Action CurrentViewModelChanged;
+
+        private void OnCurrentViewModelChanged()
+        {
+            CurrentViewModelChanged?.Invoke();
+        }
+
     }
 }
