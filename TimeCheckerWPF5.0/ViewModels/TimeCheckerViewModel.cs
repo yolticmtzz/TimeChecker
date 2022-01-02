@@ -20,35 +20,40 @@ namespace TimeCheckerWPF5._0.ViewModels
 
 
         //General Data
-        private readonly Employee user;
+        private readonly Employee _user;
         public string UserFullName { get; set; }
         public string Date { get; set; }
-        public string comment;
+        ElapsedTimesView _elapsedTimesView;
+        ElapsedTimesViewModel elapsedTimesViewModel;
+
+
+
+        public string _comment;
         public string Comment
         {
-            get => comment;
+            get => _comment;
 
             set
             {
-                if (value != comment)
+                if (value != _comment)
                 {
-                    comment = value;
+                    _comment = value;
                     RaisePropertyChanged();
                 }
             }
 
         }
 
-        private Status status;
+        private Status _status;
         public Status Status
         {
-            get => status;
+            get => _status;
 
             set
             {
-                if (value != status)
+                if (value != _status)
                 {
-                    status = value;
+                    _status = value;
                     RaisePropertyChanged();
                     CheckInCommand.RaiseCanExecuteChanged();
                     BreakCommand.RaiseCanExecuteChanged();
@@ -62,43 +67,43 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         //UI Data
         //Status Dialog
-        private string statusScreenText;
+        private string _statusScreenText;
         public string StatusScreenText
         {
-            get => statusScreenText;
+            get => _statusScreenText;
             set
             {
-                if (statusScreenText != value)
+                if (_statusScreenText != value)
                 {
-                    statusScreenText = value;
+                    _statusScreenText = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
         //MainTime Button and Watch
-        private string mainTimeButtonText;
+        private string _mainTimeButtonText;
         public string MainTimeButtonText
         {
-            get => mainTimeButtonText;
+            get => _mainTimeButtonText;
             set
             {
-                if (mainTimeButtonText != value)
+                if (_mainTimeButtonText != value)
                 {
-                    mainTimeButtonText = value;
+                    _mainTimeButtonText = value;
                     RaisePropertyChanged();
                 }
             }
         }
-        private string mainTimeButtonColor;
+        private string _mainTimeButtonColor;
         public string MainTimeButtonColor
         {
-            get => mainTimeButtonColor;
+            get => _mainTimeButtonColor;
             set
             {
-                if (mainTimeButtonColor != value)
+                if (_mainTimeButtonColor != value)
                 {
-                    mainTimeButtonColor = value;
+                    _mainTimeButtonColor = value;
                     RaisePropertyChanged();
                 }
             }
@@ -106,16 +111,16 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public TimeWatch MainTimeWatch { get; set; }
 
-        private string mainTimeWatchScreen = "00:00:00";
+        private string _mainTimeWatchScreen = "00:00:00";
         public string MainTimeWatchScreen
         {
-            get => mainTimeWatchScreen;
+            get => _mainTimeWatchScreen;
 
             set
             {
-                if (value != mainTimeWatchScreen)
+                if (value != _mainTimeWatchScreen)
                 {
-                    mainTimeWatchScreen = value;
+                    _mainTimeWatchScreen = value;
                     RaisePropertyChanged();
                 }
             }
@@ -123,28 +128,28 @@ namespace TimeCheckerWPF5._0.ViewModels
         }
 
         //BreakTime Button and Watch
-        private string breakButtonText;
+        private string _breakButtonText;
         public string BreakButtonText
         {
-            get => breakButtonText;
+            get => _breakButtonText;
             set
             {
-                if (breakButtonText != value)
+                if (_breakButtonText != value)
                 {
-                    breakButtonText = value;
+                    _breakButtonText = value;
                     RaisePropertyChanged();
                 }
             }
         }
-        private string breakButtonColor;
+        private string _breakButtonColor;
         public string BreakButtonColor
         {
-            get => breakButtonColor;
+            get => _breakButtonColor;
             set
             {
-                if (breakButtonColor != value)
+                if (_breakButtonColor != value)
                 {
-                    breakButtonColor = value;
+                    _breakButtonColor = value;
                     RaisePropertyChanged();
                 }
             }
@@ -152,16 +157,16 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public TimeWatch BreakTimeWatch { get; set; }
 
-        private string breakTimeWatchScreen = "00:00:00";
+        private string _breakTimeWatchScreen = "00:00:00";
         public string BreakTimeWatchScreen
         {
-            get => breakTimeWatchScreen;
+            get => _breakTimeWatchScreen;
 
             set
             {
-                if (value != breakTimeWatchScreen)
+                if (value != _breakTimeWatchScreen)
                 {
-                    breakTimeWatchScreen = value;
+                    _breakTimeWatchScreen = value;
                     RaisePropertyChanged();
                 }
             }
@@ -183,8 +188,10 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
-            user = new Employee("Dummy", "User 77");
-            UserFullName = user.Fullname;
+            _user = new Employee("Dummy", "User 77");
+            UserFullName = _user.Fullname;
+            _elapsedTimesView = new ElapsedTimesView();
+            elapsedTimesViewModel = ((ElapsedTimesViewModel)_elapsedTimesView.DataContext);
         }
 
 
@@ -218,10 +225,14 @@ namespace TimeCheckerWPF5._0.ViewModels
          (o) => Status != Status.BreakMode,
          (o) =>
          {
-             if (Status == Status.CheckedOut)
-             {
-                 Status = Status.CheckedIn;
-                 MainTimeWatch.StopwatchStart();
+         if (Status == Status.CheckedOut)
+         {
+             Status = Status.CheckedIn;
+             MainTimeWatch.StopwatchStart();
+             elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
+
+
+
              }
              else
              {
@@ -232,14 +243,18 @@ namespace TimeCheckerWPF5._0.ViewModels
                  {
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
+                     elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
+                     elapsedTimesViewModel.CurrentTimeSpan.SetElapsedTime();
+                     elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
+                     _elapsedTimesView.Show();
 
                  }
                   else
                  {
                      MainTimeWatch.StopwatchStart();
                  }
-
                 
+
              }
          }
         );
@@ -255,13 +270,22 @@ namespace TimeCheckerWPF5._0.ViewModels
              {
                  Status = Status.BreakMode;
                  MainTimeWatch.StopwatchStop();
+                 elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
+                 elapsedTimesViewModel.CurrentTimeSpan.SetElapsedTime();
+                 elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
+
                  BreakTimeWatch.StopwatchStart();
+                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "BreakTime");
              }
              else
              {
                  Status = Status.CheckedIn;
                  BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
+                 elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
+                 elapsedTimesViewModel.CurrentTimeSpan.SetElapsedTime();
+                 elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedBreakTimeSpans);
                  MainTimeWatch.StopwatchStart();
+                 _elapsedTimesView.Show();
              }
          }
         );

@@ -18,7 +18,7 @@ namespace TimeCheckerWPF5._0.Views
     /// <summary>
     /// Interaction logic for ElapsedTimesView.xaml
     /// </summary>
-    public partial class ElapsedTimesView : UserControl
+    public partial class ElapsedTimesView : Window
     {
         public ElapsedTimesView()
         {

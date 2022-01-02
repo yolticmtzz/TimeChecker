@@ -36,7 +36,7 @@
 
         <StackPanel Grid.Row ="3"  x:Name="CheckinButtonPanel" Margin="30 0 0 0" >
             <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75" Content="{Binding MainTimeButtonText}" Command="{Binding CheckInCommand}" Background="{Binding MainTimeButtonColor}">
-
+              
                 <ToggleButton.Style>
                     <Style TargetType= "{x:Type ToggleButton}">
                         <Setter Property="Template">

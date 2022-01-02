@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
-
+using TimeCheckerWPF5._0.Views;
 
 namespace TimeCheckerWPF5._0
 {
