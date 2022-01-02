@@ -43,7 +43,7 @@ namespace TimeCheckerWPF5._0
 
         protected override void OnStartup(StartupEventArgs e) //(object sender, StartupEventArgs e)
         {
-            _navigationStore.CurrentViewModel = new TimeCheckerViewModel(_navigationStore);
+            _navigationStore.CurrentViewModel = new TimeCheckerViewModel();
 
             MainWindow = new MainWindow()
             {
