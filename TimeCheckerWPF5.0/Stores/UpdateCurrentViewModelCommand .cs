@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TimeCheckerWPF5._0.Views;
+using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Stores
 {
@@ -33,10 +33,10 @@ namespace TimeCheckerWPF5._0.Stores
                 switch (viewType)
                 {
                     case ViewType.TimeChecker:
-                        _navigator.CurrentViewModel = new TimeCheckerView();
+                        _navigator.CurrentViewModel = new TimeCheckerViewModel();
                         break;
                     case ViewType.ElapsedTimes:
-                        _navigator.CurrentViewModel = new ElapsedTimesView();
+                        _navigator.CurrentViewModel = new ElapsedTimesViewModel();
                         break;
                 }
             }
