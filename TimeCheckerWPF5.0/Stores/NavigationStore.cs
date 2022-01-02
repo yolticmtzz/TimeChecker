@@ -8,8 +8,19 @@ using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Stores
 {
-    public class NavigationStore : ViewModelBase, INavigator
+
+    public enum ViewType
     {
+        TimeChecker,
+        ElapsedTimes,
+        Help,
+
+    }
+
+    public class NavigationStore : ViewModelBase
+    {
+
+
 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel

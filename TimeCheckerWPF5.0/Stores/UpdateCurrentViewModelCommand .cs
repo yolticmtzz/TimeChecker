@@ -12,9 +12,9 @@ namespace TimeCheckerWPF5._0.Stores
     {
         public event EventHandler? CanExecuteChanged;
 
-        private INavigator _navigator;
+        private NavigationStore _navigator;
 
-        public UpdateCurrentViewModelCommand(INavigator navigator)
+        public UpdateCurrentViewModelCommand(NavigationStore navigator)
         {
             _navigator = navigator;
         }

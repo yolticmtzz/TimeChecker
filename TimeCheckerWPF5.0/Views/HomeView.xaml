@@ -19,7 +19,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="0" Background="Green" Content="TimeChecker" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="30" VerticalContentAlignment="Center" Height="50"/>
+        <Label Grid.Column="1" Grid.Row="0" Background="Green" Content="TimeChecker" FontWeight="Bold" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="30" VerticalContentAlignment="Center" Height="50"/>
 
         <Grid Grid.Column="1" Grid.Row="1" Background="LightGreen">
             <Grid.ColumnDefinitions>

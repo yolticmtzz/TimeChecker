@@ -11,11 +11,12 @@
     <Grid>
 
         <StackPanel Background="DeepSkyBlue" Width="100" HorizontalAlignment="Left">
-            <Label Content="Menu" HorizontalContentAlignment="Center" FontSize="14" VerticalContentAlignment="Center" Height="50" Background="Orange"/>
-            <Button Content="TimeChecker" Width="Auto" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navi:ViewType.TimeChecker}"/>
-            <Button Content="Catched Times" Width="Auto" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navi:ViewType.ElapsedTimes}"/>
-            <Button Content="Exit" Width="Auto"/>
-            <Button Content="Help" Width="Auto" VerticalAlignment="Bottom" />
+            <Label Content="Menu" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" VerticalContentAlignment="Center" Height="50" Background="Orange"/>
+            <Button Content="TimeChecker" FontSize="16" Width="Auto" Height="50" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navi:ViewType.TimeChecker}"/>
+            <Button Content="Elapsed Times" FontSize="14" Width="Auto" Height="40" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navi:ViewType.ElapsedTimes}"/>
+            <Button Content="Help"  Height="40" FontSize="16" Width="Auto" VerticalAlignment="Bottom" />
+            <Button Content="Exit" Height="40" FontSize="16"  Background="Red" Foreground="White" Width="Auto"/>
+            
         </StackPanel>
     </Grid>
 </UserControl>

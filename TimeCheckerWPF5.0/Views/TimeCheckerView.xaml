@@ -27,12 +27,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row ="1"  x:Name="UserTitle" Margin="302,9,0,29" Text = "Employee:" FontSize="14" Foreground="Black" HorizontalAlignment ="Left" Grid.Column="1"/>
-        <TextBlock Grid.Row ="1"  x:Name="DateTitle" Margin="334,28,0,11" Text = "Date:" FontSize="14" Foreground="Black" HorizontalAlignment="Left" Grid.Column="1" Width="34" RenderTransformOrigin="0.791,-1.244"/>
-        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="377,10,22,28" Text = "{Binding UserFullName}" FontSize="14" Foreground="White" />
-        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="DateData" Margin="377,28,10,10" Text = "{Binding Date}" FontSize="14" Foreground="White"  />
-
         <StackPanel Grid.Row ="3"  x:Name="CheckinButtonPanel" Margin="30 0 0 0" >
             <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75" Content="{Binding MainTimeButtonText}" Command="{Binding CheckInCommand}" Background="{Binding MainTimeButtonColor}">
 
