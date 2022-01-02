@@ -237,13 +237,14 @@ namespace TimeCheckerWPF5._0.ViewModels
              else
              {
                  MainTimeWatch.StopwatchStop();
+                 elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
+
                  bool checkout = OpenCheckOutDialog();
 
                  if (checkout == true)
                  {
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
-                     elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
                      elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
                      _elapsedTimesView.Show();
 
@@ -282,7 +283,8 @@ namespace TimeCheckerWPF5._0.ViewModels
                  elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
                  elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedBreakTimeSpans);
                  MainTimeWatch.StopwatchStart();
-                 _elapsedTimesView.Show();
+                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
+
              }
          }
         );

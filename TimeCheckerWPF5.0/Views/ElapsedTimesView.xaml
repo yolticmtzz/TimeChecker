@@ -16,9 +16,10 @@
     </Window.DataContext>
 
 
-    <Grid Background="Gray">
-        <Label x:Name="ElapsedMaintimesTitle" Background="Green" Height="25" Width="{Binding Path=ActualWidth, ElementName=ElaspedMaintimesListView}" HorizontalAlignment="Left" Margin="59,95,0,0" Content="Elapsed Maintimes" VerticalAlignment="Top" />
-        <ListView x:Name="ElaspedMaintimesListView" Margin="59,139,365,198" ItemsSource="{Binding ElapsedMainTimeSpans}">
+    <StackPanel Background="Gray">
+      
+        <Label x:Name="ElapsedMaintimesTitle" Background="Green" Height="25" Width="{Binding Path=ActualWidth, ElementName=ElaspedMaintimesListView}" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Maintimes" VerticalAlignment="Top" />
+        <ListView x:Name="ElaspedMaintimesListView" Margin="20,0,20,0" ItemsSource="{Binding ElapsedMainTimeSpans}">
             <ListView.View>
                 <GridView>
 
@@ -57,8 +58,8 @@
             </ListView.View>
         </ListView>
 
-        <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="59,270,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreaktimesListView}"/>
-        <ListView x:Name="ElapsedBreaktimesListView" Margin="59,305,365,32" ItemsSource="{Binding ElapsedBreakTimeSpans}">
+        <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreaktimesListView}"/>
+        <ListView x:Name="ElapsedBreaktimesListView" Margin="20,0,20,20" ItemsSource="{Binding ElapsedBreakTimeSpans}">
             <ListView.View>
                 <GridView>
 
@@ -96,5 +97,5 @@
                 </GridView>
             </ListView.View>
             </ListView>
-    </Grid>
+    </StackPanel>
 </Window>
