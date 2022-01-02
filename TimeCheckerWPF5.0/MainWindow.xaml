@@ -13,22 +13,22 @@
 
     <Grid MaxWidth="600" Margin="20 10">
 
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel}">
-                <views:TimeCheckerView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel}">
-                <views:ElapsedTimesView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:CheckOutDialogViewModel}">
-                <views:CheckOutDialogWindow/>
-            </DataTemplate>
-        </Grid.Resources>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
 
-        <ContentControl Content="{Binding CurrentViewModel}"/>
+            </Grid.RowDefinitions>
+            <views:Navigation Grid.Column="0" Grid.RowSpan="3" DataContext="{Binding Navigator}"/>
+            <ContentControl Grid.Row ="2" Grid.Column="2" Content="{Binding Navigator.CurrentViewModel}"/>
 
+        </Grid>
     </Grid>
-
 </Window>
 
 

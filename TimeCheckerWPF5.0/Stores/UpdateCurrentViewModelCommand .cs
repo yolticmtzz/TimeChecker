@@ -8,7 +8,7 @@ using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Stores
 {
-    class UpdateCurrentViewModelCommand : ICommand
+    public class UpdateCurrentViewModelCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
 
