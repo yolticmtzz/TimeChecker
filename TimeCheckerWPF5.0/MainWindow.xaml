@@ -11,12 +11,12 @@
         Title="TimeChecker"
         mc:Ignorable="d">
 
-    <Grid MaxWidth="600" Margin="20 10">
+    <Grid MaxWidth="800" Margin="20 10">
 
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
@@ -24,8 +24,9 @@
                 <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
-            <views:Navigation Grid.Column="0" Grid.RowSpan="3" DataContext="{Binding Navigator}"/>
-            <ContentControl Grid.Row ="2" Grid.Column="2" Content="{Binding Navigator.CurrentViewModel}"/>
+            <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding Navigator}"/>
+            <views:HomeView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+            <ContentControl Grid.Row ="2" Grid.Column="1" Content="{Binding Navigator.CurrentViewModel}"/>
 
         </Grid>
     </Grid>

@@ -7,49 +7,15 @@
              xmlns:viewmodels="clr-namespace:TimeCheckerWPF5._0.ViewModels"
              xmlns:navi="clr-namespace:TimeCheckerWPF5._0.Stores"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    
-    
+             d:DesignHeight="450" d:DesignWidth="100">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-
-        <StackPanel Grid.Column="0" Grid.RowSpan="3" Background="DeepSkyBlue" Width="100" HorizontalAlignment="Left">
+        <StackPanel Background="DeepSkyBlue" Width="100" HorizontalAlignment="Left">
             <Label Content="Menu" HorizontalContentAlignment="Center" FontSize="14" VerticalContentAlignment="Center" Height="50" Background="Orange"/>
-            <Button Content="TimeChecker" Width="Auto" />
-            <Button Content="Catched Times" Width="Auto"/>
-            <Button Content="Others" Width="Auto"/>
+            <Button Content="TimeChecker" Width="Auto" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navi:ViewType.TimeChecker}"/>
+            <Button Content="Catched Times" Width="Auto" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navi:ViewType.ElapsedTimes}"/>
             <Button Content="Exit" Width="Auto"/>
             <Button Content="Help" Width="Auto" VerticalAlignment="Bottom" />
         </StackPanel>
-        <Label Grid.Column="1" Grid.Row="0" Background="Green" Content="TimeChecker" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="30" VerticalContentAlignment="Center" Height="50"/>
-
-        <Grid Grid.Column="1" Grid.Row="1" Background="LightGreen">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row ="1"  x:Name="UserTitle" Margin="450,5,5,10" Text = "Employee:" FontSize="14" Foreground="Black" HorizontalAlignment ="Left" Grid.Column="1"/>
-        <TextBlock Grid.Row ="1"  x:Name="DateTitle" Margin="480,25,5,10" Text = "Date:" FontSize="14" Foreground="Black" HorizontalAlignment="Left" Grid.Column="1" Width="34" RenderTransformOrigin="0.791,-1.244"/>
-        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="530,5,10,28" Text = "{Binding UserFullName}" FontSize="14" Foreground="Yellow" />
-        <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="DateData" Margin="530,25,10,10" Text = "{Binding Date}" FontSize="14" Foreground="Yellow"  />
     </Grid>
-    </Grid>
-
 </UserControl>
