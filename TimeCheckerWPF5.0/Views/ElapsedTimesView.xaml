@@ -18,31 +18,83 @@
 
     <Grid Background="Gray">
         <Label x:Name="ElapsedMaintimesTitle" Background="Green" Height="25" HorizontalAlignment="Left" Margin="59,95,0,0" Content="Elapsed Maintimes" VerticalAlignment="Top" Width="120"/>
-        <ListBox x:Name="ElaspedMaintimesListView" Margin="59,139,365,198" ItemsSource="{Binding ElapsedMainTimeSpans}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
-                        <TextBlock Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
-                        <TextBlock Text="{Binding Path=Duration, StringFormat='{}{0: HH:mm:ss}'}"/>
-                        <TextBlock Text="{Binding Path=TimeSpanType}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView x:Name="ElaspedMaintimesListView" Margin="59,139,365,198" ItemsSource="{Binding ElapsedMainTimeSpans}">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Header="StartDate">
+                        <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Padding="0 0 20 0" Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
+                        </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="EndDate">
+                        <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
+                        </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Duration">
+                        <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
+                        </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Type">
+                        <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=TimeSpanType}"/>
+                        </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
         <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="59,270,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="120"/>
-        <ListBox x:Name="ElapsedBreaktimesListView" Margin="59,305,365,32" ItemsSource="{Binding ElapsedBreakTimeSpans}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
-                        <TextBlock Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
-                        <TextBlock Text="{Binding Path=Duration, StringFormat='{}{0: HH:mm:ss}'}"/>
-                        <TextBlock Text="{Binding Path=TimeSpanType}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <ListView x:Name="ElapsedBreaktimesListView" Margin="59,305,365,32" ItemsSource="{Binding ElapsedBreakTimeSpans}">
+            <ListView.View>
+                <GridView>
+
+                    <GridViewColumn Header="StartDate">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="EndDate">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Duration">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Type">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=TimeSpanType, StringFormat='{}{0: HH:mm:ss}'}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            </ListView>
     </Grid>
 </Window>

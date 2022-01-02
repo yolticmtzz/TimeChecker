@@ -12,30 +12,20 @@ namespace TimeCheckerWPF5._0.Models
    
 
         public string TimeSpanType { get; set; }
-        
-     
+
+
         public DateTime StartDateTime { get; set; }
 
+        private string endTime;
         public DateTime EndDateTime { get; set; }
 
-        public string Duration { get; set; }
+        public TimeSpan Duration => (EndDateTime).Subtract(StartDateTime);
 
         public ElapsedTimeSpan(DateTime startDateTime, string timeSpanType)
         {
             StartDateTime = startDateTime;
             TimeSpanType = timeSpanType;
         }
-
-        public void SetElapsedTime()
-        {
-            var _elapsedTime = (EndDateTime - StartDateTime);
-            Duration =  _elapsedTime.ToString();
-            
-                 
-             
-        }
-
-
 
 
     }

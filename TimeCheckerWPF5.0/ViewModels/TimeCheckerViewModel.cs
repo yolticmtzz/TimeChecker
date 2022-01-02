@@ -244,7 +244,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                      elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-                     elapsedTimesViewModel.CurrentTimeSpan.SetElapsedTime();
                      elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
                      _elapsedTimesView.Show();
 
@@ -271,7 +270,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                  Status = Status.BreakMode;
                  MainTimeWatch.StopwatchStop();
                  elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-                 elapsedTimesViewModel.CurrentTimeSpan.SetElapsedTime();
                  elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
 
                  BreakTimeWatch.StopwatchStart();
@@ -282,7 +280,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                  Status = Status.CheckedIn;
                  BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
                  elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-                 elapsedTimesViewModel.CurrentTimeSpan.SetElapsedTime();
                  elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedBreakTimeSpans);
                  MainTimeWatch.StopwatchStart();
                  _elapsedTimesView.Show();
