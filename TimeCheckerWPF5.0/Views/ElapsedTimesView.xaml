@@ -17,7 +17,7 @@
 
 
     <Grid Background="Gray">
-        <Label x:Name="ElapsedMaintimesTitle" Background="Green" Height="25" HorizontalAlignment="Left" Margin="59,95,0,0" Content="Elapsed Maintimes" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="ElapsedMaintimesTitle" Background="Green" Height="25" Width="{Binding Path=ActualWidth, ElementName=ElaspedMaintimesListView}" HorizontalAlignment="Left" Margin="59,95,0,0" Content="Elapsed Maintimes" VerticalAlignment="Top" />
         <ListView x:Name="ElaspedMaintimesListView" Margin="59,139,365,198" ItemsSource="{Binding ElapsedMainTimeSpans}">
             <ListView.View>
                 <GridView>
@@ -57,7 +57,7 @@
             </ListView.View>
         </ListView>
 
-        <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="59,270,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="59,270,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreaktimesListView}"/>
         <ListView x:Name="ElapsedBreaktimesListView" Margin="59,305,365,32" ItemsSource="{Binding ElapsedBreakTimeSpans}">
             <ListView.View>
                 <GridView>
