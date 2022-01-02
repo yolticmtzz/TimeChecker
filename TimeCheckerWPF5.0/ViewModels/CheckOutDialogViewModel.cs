@@ -8,7 +8,7 @@ using TimeCheckerWPF5._0.Models;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-    public class CheckOutDialogViewModel
+    public class CheckOutDialogViewModel : ViewModelBase
     {
         public event EventHandler CheckOut;
         public event EventHandler Cancel;
@@ -27,10 +27,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 
             set
             {
-                if (value != dialogComment)
-                {
-                    dialogComment = value;
-                }
+                   dialogComment = value;
             }     
           }
 

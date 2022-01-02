@@ -19,7 +19,7 @@ namespace TimeCheckerWPF5._0.Models
         private string endTime;
         public DateTime EndDateTime { get; set; }
 
-        public TimeSpan Duration => (EndDateTime).Subtract(StartDateTime);
+        public TimeSpan Duration => EndDateTime.Subtract(StartDateTime);
 
         public ElapsedTimeSpan(DateTime startDateTime, string timeSpanType)
         {

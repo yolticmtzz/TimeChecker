@@ -18,9 +18,9 @@ namespace TimeCheckerWPF5._0.Views
     /// <summary>
     /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainView : UserControl
+    public partial class TimeCheckerView : UserControl
     {
-        public MainView()
+        public TimeCheckerView()
         {
             InitializeComponent();
         }

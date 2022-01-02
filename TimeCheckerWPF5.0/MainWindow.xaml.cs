@@ -24,11 +24,11 @@ namespace TimeCheckerWPF5._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ApplicationDbContext _context;
+        //private readonly ApplicationDbContext _context;
 
-        public MainWindow(ApplicationDbContext context)
+        public MainWindow() //ApplicationDbContext context)
         {
-            _context = context;
+            //_context = context;
             InitializeComponent();
 
             Application.Current.Exit += new ExitEventHandler(ExitApp);

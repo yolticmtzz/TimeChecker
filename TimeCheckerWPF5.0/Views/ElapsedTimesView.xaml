@@ -23,7 +23,7 @@
             <ListView.View>
                 <GridView>
 
-                    <GridViewColumn Header="StartDate">
+                    <GridViewColumn Header="Start Time">
                         <GridViewColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Padding="0 0 20 0" Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
@@ -31,7 +31,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="EndDate">
+                    <GridViewColumn Header="End Time">
                         <GridViewColumn.CellTemplate>
                         <DataTemplate>
                                 <TextBlock Padding="0 0 20 0" Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
@@ -63,7 +63,7 @@
             <ListView.View>
                 <GridView>
 
-                    <GridViewColumn Header="StartDate">
+                    <GridViewColumn Header="Start Time">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Padding="0 0 20 0" Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
@@ -71,7 +71,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="EndDate">
+                    <GridViewColumn Header="End Time">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Padding="0 0 20 0" Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>

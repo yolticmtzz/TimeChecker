@@ -15,9 +15,8 @@ using TimeCheckerWPF5._0.Views;
 namespace TimeCheckerWPF5._0.ViewModels
 {
 
-    public class TimeCheckerViewModel : INotifyPropertyChanged
+    public class TimeCheckerViewModel : ViewModelBase
     {
-
 
         //General Data
         private readonly Employee _user;
@@ -35,11 +34,9 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-                if (value != _comment)
-                {
                     _comment = value;
                     RaisePropertyChanged();
-                }
+
             }
 
         }
@@ -51,14 +48,12 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-                if (value != _status)
-                {
+
                     _status = value;
                     RaisePropertyChanged();
                     CheckInCommand.RaiseCanExecuteChanged();
                     BreakCommand.RaiseCanExecuteChanged();
                     UpdateGUIProperties();
-                }
             }
         }
 
@@ -73,11 +68,10 @@ namespace TimeCheckerWPF5._0.ViewModels
             get => _statusScreenText;
             set
             {
-                if (_statusScreenText != value)
-                {
+
                     _statusScreenText = value;
                     RaisePropertyChanged();
-                }
+
             }
         }
 
@@ -88,11 +82,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             get => _mainTimeButtonText;
             set
             {
-                if (_mainTimeButtonText != value)
-                {
                     _mainTimeButtonText = value;
-                    RaisePropertyChanged();
-                }
+                    RaisePropertyChanged();           
             }
         }
         private string _mainTimeButtonColor;
@@ -101,11 +92,9 @@ namespace TimeCheckerWPF5._0.ViewModels
             get => _mainTimeButtonColor;
             set
             {
-                if (_mainTimeButtonColor != value)
-                {
                     _mainTimeButtonColor = value;
                     RaisePropertyChanged();
-                }
+
             }
         }
 
@@ -118,11 +107,9 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-                if (value != _mainTimeWatchScreen)
-                {
+
                     _mainTimeWatchScreen = value;
                     RaisePropertyChanged();
-                }
             }
 
         }
@@ -134,11 +121,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             get => _breakButtonText;
             set
             {
-                if (_breakButtonText != value)
-                {
                     _breakButtonText = value;
                     RaisePropertyChanged();
-                }
             }
         }
         private string _breakButtonColor;
@@ -147,11 +131,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             get => _breakButtonColor;
             set
             {
-                if (_breakButtonColor != value)
-                {
                     _breakButtonColor = value;
                     RaisePropertyChanged();
-                }
             }
         }
 
@@ -164,11 +145,8 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-                if (value != _breakTimeWatchScreen)
-                {
                     _breakTimeWatchScreen = value;
                     RaisePropertyChanged();
-                }
             }
         }
 
@@ -176,6 +154,7 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public TimeCheckerViewModel()
         {
+           
             InitiateCheckInCommand();
             InitiateBreakCommand();
 
@@ -194,15 +173,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             elapsedTimesViewModel = ((ElapsedTimesViewModel)_elapsedTimesView.DataContext);
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (!string.IsNullOrEmpty(propertyName))
-                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-        }
 
         private bool OpenCheckOutDialog()
         {
