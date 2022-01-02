@@ -216,7 +216,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                      elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
-                     _elapsedTimesView.Show();
 
                  }
                   else

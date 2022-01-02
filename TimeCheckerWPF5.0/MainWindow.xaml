@@ -15,18 +15,18 @@
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
-            <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding Navigator}"/>
+            <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding NavigationStore}"/>
             <views:HomeView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
-            <ContentControl Grid.Row ="2" Grid.Column="1" Content="{Binding Navigator.CurrentViewModel}"/>
+            <ContentControl Grid.Row ="2" Grid.Column="1" Content="{Binding NavigationStore.CurrentViewModel}"/>
 
         </Grid>
     </Grid>
