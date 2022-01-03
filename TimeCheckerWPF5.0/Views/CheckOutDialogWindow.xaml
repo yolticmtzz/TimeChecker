@@ -1,0 +1,27 @@
+﻿<Window x:Class="TimeCheckerWPF5._0.Views.CheckOutDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeCheckerWPF5._0.Views"
+        xmlns:viewmodels="clr-namespace:TimeCheckerWPF5._0.ViewModels"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        FocusManager.FocusedElement="{Binding ElementName=txtBox}"
+        mc:Ignorable="d"
+        Title="Checking Out..." Height="200" Width="300">
+
+    <Window.DataContext>
+        <viewmodels:CheckOutDialogViewModel/>
+    </Window.DataContext>
+
+
+    <Grid>
+        <TextBlock Text="Before definitely checking out, you have the possibility to leave a comment or check out without. Your Timewatch will be reset after checking out." HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
+        <TextBox Name="txtBox" Text="{Binding DialogComment}" HorizontalAlignment="Center" Height="61" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
+        <Button Name ="CheckOutButton" IsDefault="True" Content="Check Out" HorizontalAlignment="Left" Margin="27,127,0,0" VerticalAlignment="Top" Width="70" Height="33" Command="{Binding CheckOutCommand}" />
+        <Button Name="CancelButton" IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="204,127,0,0" VerticalAlignment="Top" Width="70" Height="33" Command="{Binding CancelCommand}"/>
+
+    </Grid>
+</Window>

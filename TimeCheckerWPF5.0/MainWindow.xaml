@@ -3,140 +3,52 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TimeCheckerWPF5._0"
-        mc:Ignorable="d"
-        Title="TimeChecker GUI" Height="450" Width="800">
+        xmlns:views="clr-namespace:TimeCheckerWPF5._0.Views" 
+        xmlns:viewmodels="clr-namespace:TimeCheckerWPF5._0.ViewModels" 
+        xmlns:stores="clr-namespace:TimeCheckerWPF5._0.Stores" 
+        
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        Title="TimeChecker"
+        mc:Ignorable="d" 
+        >
+    <!--<Window.DataContext>
+        <stores:NavigationStore/>
+    </Window.DataContext>-->
+   
+    <Grid MaxWidth="1000" Margin="20 10">
+        <Grid.Resources>
+          
+        </Grid.Resources>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
 
-    <Grid Background="Gray">
-        <Grid.ColumnDefinitions>
+            </Grid.RowDefinitions>
+            <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding NavigationViewModel}"/>
+            <views:HomeView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+            <ContentControl Grid.Row ="2" Grid.Column="1"  Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel}">
+                        <views:TimeCheckerView DataContext="{Binding}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel}">
+                        <views:ElapsedTimesView  DataContext="{Binding}"/>
+                    </DataTemplate>
+                </ContentControl.Resources>
+              
+            </ContentControl>
 
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row ="1"  x:Name="CheckinButtonPanel" Margin="10">
-            <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75"
-                          Click="CheckInButton_OnClick">
-                <ToggleButton.Style>
-                    <Style TargetType= "{x:Type ToggleButton}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ToggleButton">
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
-                                            Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center"                  
-                                                      VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" Value="Red"/>
-                                <Setter Property="BorderBrush" Value="DarkRed"/>
-                                <Setter Property="Content" Value="Check Out"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Background" Value="Green" />
-                                <Setter Property="BorderBrush" Value="DarkGreen"/>
-                                <Setter Property="Content" Value="Check In"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="Background" Value="DarkGoldenrod"/>
-                                <Setter Property="Foreground" Value="Black"/>
-                                <Setter Property="BorderBrush" Value="Black"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="Background" Value="White"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="BorderBrush" Value="DarkGray"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ToggleButton.Style>
-                <ToggleButton.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="100"/>
-                        <Setter Property="BorderThickness" Value="10"/>
-                    </Style>
-                </ToggleButton.Resources>
-            </ToggleButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Grid.Column="0" Margin ="10, 30,10,10">
-            <ToggleButton x:Name="BreakButton" Visibility="Hidden"  IsChecked="False" FontSize="15" Foreground="White" Width="100" Height="100" Canvas.Left="200" Canvas.Top="300" BorderThickness="5" 
-                              Click="BreakButton_OnClick">
-                <ToggleButton.Style>
-                    <Style TargetType= "{x:Type ToggleButton}">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ToggleButton">
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
-                                            Background="{TemplateBinding Background}">
-                                        <ContentPresenter HorizontalAlignment="Center"                  
-                                                      VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter Property="Background" Value="DarkBlue"/>
-                                <Setter Property="BorderBrush" Value="Black"/>
-                                <Setter Property="Content" Value="End Break"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Background" Value="Blue" />
-                                <Setter Property="BorderBrush" Value="DarkBlue"/>
-                                <Setter Property="Content" Value="Start Break"/>
-                                <Setter Property="Foreground" Value="White"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="Background" Value="DarkGoldenrod"/>
-                                <Setter Property="Foreground" Value="Black"/>
-                                <Setter Property="BorderBrush" Value="Black"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Cursor" Value="Hand"/>
-                                <Setter Property="Background" Value="White"/>
-                                <Setter Property="Foreground" Value="White"/>
-                                <Setter Property="BorderBrush" Value="DarkGray"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ToggleButton.Style>
-                <ToggleButton.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="100"/>
-                        <Setter Property="BorderThickness" Value="5"/>
-                    </Style>
-                </ToggleButton.Resources>
-            </ToggleButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row ="1"  Grid.Column="1" Margin="10">
-            <TextBox x:Name="StatusScreen" Text="Checked out" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
-            </TextBox>
-
-            <TextBlock x:Name="TimeWatch" Text="00:00:00" Foreground="White" FontSize="50" TextAlignment="Center" Background="Black" Width="250" Height="120" Canvas.Left="459" Canvas.Top="100" Margin= "10">
-            </TextBlock>
-        </StackPanel>
-
-        <StackPanel x:Name="BreakTimeWatchStackPanel" Grid.Row="2" Grid.Column="1" Margin="10,30,10,10">
-            <TextBlock x:Name="BreakTimeWatch" Visibility="Hidden" Text="00:00:00" Foreground="White" FontSize="50" TextAlignment="Center" Background="Black" Width="250" Height="80" Canvas.Left="459" Canvas.Top="300" Margin= "10">
-            </TextBlock>
-        </StackPanel>
+        </Grid>
     </Grid>
-    
 </Window>
+
+
