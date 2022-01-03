@@ -17,8 +17,7 @@
             <Label Content="Menu" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" VerticalContentAlignment="Center" Height="50" Background="Orange"/>
             <Button Content="TimeChecker" FontSize="16" Width="Auto" Height="50" Command="{Binding ShowTimeCheckerCommand}"/>
             <Button Content="Elapsed Times" FontSize="14" Width="Auto" Height="40" Command="{Binding ShowElapsedTimesCommand}"/>
-            <Button Content="Help"  Height="40" FontSize="16" Width="Auto" VerticalAlignment="Bottom" />
-            <Button Content="Exit" Height="40" FontSize="16"  Background="Red" Foreground="White" Width="Auto"/>
+            <Button Content="Exit" Height="40" FontSize="16"  Background="Red" Foreground="White" Width="Auto" Command="{Binding ExitCommand}" />
             
         </StackPanel>
     </Grid>

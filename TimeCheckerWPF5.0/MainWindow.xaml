@@ -16,22 +16,10 @@
     <!--<Window.DataContext>
         <stores:NavigationStore/>
     </Window.DataContext>-->
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel }">
-            <views:TimeCheckerView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel }">
-            <views:ElapsedTimesView/>
-        </DataTemplate>
-    </Window.Resources>
+   
     <Grid MaxWidth="1000" Margin="20 10">
         <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel}">
-                <views:TimeCheckerView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel}">
-                <views:ElapsedTimesView/>
-            </DataTemplate>
+          
         </Grid.Resources>
         
         <Grid>
@@ -48,6 +36,14 @@
             <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding NavigationViewModel}"/>
             <views:HomeView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
             <ContentControl Grid.Row ="2" Grid.Column="1"  Content="{Binding CurrentViewModel}">
+                <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel}">
+                        <views:TimeCheckerView DataContext="{Binding}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel}">
+                        <views:ElapsedTimesView  DataContext="{Binding}"/>
+                    </DataTemplate>
+                </ContentControl.Resources>
               
             </ContentControl>
 

@@ -39,7 +39,7 @@ namespace TimeCheckerWPF5._0
 
         private void ExitApp(object sender, ExitEventArgs e)
         {
-            MessageBox.Show("TimeChecker wurde beendet.");
+            MessageBox.Show("TimeChecker was terminated");
         }
     }
 }

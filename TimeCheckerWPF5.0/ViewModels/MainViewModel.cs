@@ -5,9 +5,7 @@ namespace TimeCheckerWPF5._0.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
         private readonly NavigationStore _navigationStore;
-
 
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
 
@@ -17,16 +15,11 @@ namespace TimeCheckerWPF5._0.ViewModels
         {
             _navigationStore = navigationStore;
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-            
-
-
-
         }
 
         private void OnCurrentViewModelChanged()
         {
-            RaisePropertyChanged();
-
+            RaisePropertyChanged("CurrentViewModel");
         }
     }
 }

@@ -9,12 +9,14 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public ICommand ShowTimeCheckerCommand { get; }
         public ICommand ShowElapsedTimesCommand { get; }
+        public ICommand ExitCommand { get; }
 
         public NavigationViewModel(NavigationStore navigationStore)
         {
             this.navigationStore = navigationStore;
             ShowTimeCheckerCommand = new NavigationCommandTimeChecker(navigationStore);
             ShowElapsedTimesCommand = new NavigationCommandElapsedTimes(navigationStore);
+            ExitCommand = new ExitCommand();
 
         }
 
