@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Stores
 {
 
-    public enum ViewType
-    {
-        TimeChecker,
-        ElapsedTimes,
-        Help,
-
-    }
-
     public class NavigationStore
     {
+
+        public ICommand ShowTimeCheckerCommand { get; }
+        public ICommand ShowElapsedTimesCommand { get; }
+
+        public NavigationStore()
+        {
+            ShowTimeCheckerCommand = new NavigationCommandTimeChecker(this);
+            ShowElapsedTimesCommand = new NavigationCommandElapsedTimes(this);
+        }
+
 
         private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel

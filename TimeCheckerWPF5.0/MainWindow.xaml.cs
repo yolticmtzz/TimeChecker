@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
+using TimeCheckerWPF5._0.Stores;
+using TimeCheckerWPF5._0.ViewModels;
 using TimeCheckerWPF5._0.Views;
 
 namespace TimeCheckerWPF5._0
@@ -24,11 +26,11 @@ namespace TimeCheckerWPF5._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        //private readonly ApplicationDbContext _context;
+        private readonly NavigationStore navigationStore;
 
-        public MainWindow() //ApplicationDbContext context)
+        public MainWindow()//ApplicationDbContext context)
         {
-            //_context = context;
+
             InitializeComponent();
 
             Application.Current.Exit += new ExitEventHandler(ExitApp);

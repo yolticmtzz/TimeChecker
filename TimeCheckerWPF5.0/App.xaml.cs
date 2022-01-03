@@ -38,23 +38,35 @@ namespace TimeCheckerWPF5._0
                     ["TimeCheckerDatabase"].ConnectionString);
             });
 
-            services.AddSingleton<MainWindow>();
+            services.AddSingleton(typeof(NavigationStore));
+            services.AddSingleton(typeof(MainWindow));
+
         }
 
         protected override void OnStartup(StartupEventArgs e) //(object sender, StartupEventArgs e)
         {
-            _navigationStore.CurrentViewModel = new TimeCheckerViewModel();
+         //   _navigationStore.CurrentViewModel = new TimeCheckerViewModel();
 
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_navigationStore)
-            };
-            MainWindow.Show();
+            //MainWindow = new MainWindow()
+            //{
+            //    DataContext = new MainViewModel(_navigationStore)
+            //};
+            //MainWindow.Show();
 
             base.OnStartup(e);
+
+
+            NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
+            navigationStore.CurrentViewModel = new TimeCheckerViewModel();
+
+            var mainWindow = _serviceProvider.GetService<MainWindow>();
+
+            MainViewModel mainViewModel = new MainViewModel(navigationStore);
+            mainViewModel.NavigationViewModel = new NavigationViewModel(navigationStore);
+            mainWindow.DataContext = mainViewModel;
             
-            //    var mainWindow = _serviceProvider.GetService<MainWindow>();
-            //mainWindow.Show();
+            mainWindow.Show();
+            
         }
 
 

@@ -164,7 +164,7 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public TimeCheckerViewModel()
         {
-           
+
             InitiateCheckInCommand();
             InitiateBreakCommand();
 
