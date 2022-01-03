@@ -32,7 +32,7 @@
                 <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
-            <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding NavigationStore}"/>
+            <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
             <views:HomeView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
             <ContentControl Grid.Row ="2" Grid.Column="1" Content="{Binding CurrentViewModel}"/>
 

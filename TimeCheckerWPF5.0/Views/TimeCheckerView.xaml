@@ -27,7 +27,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row ="3"  x:Name="CheckinButtonPanel" Margin="30 0 0 0" >
+        <StackPanel Grid.Row ="3"  x:Name="CheckinButtonPanel" Margin="30 20 0 0" >
             <ToggleButton x:Name="CheckInButton" IsChecked="False" FontSize = "30" Width="200" Height="200" Canvas.Left="147" Canvas.Top="75" Content="{Binding MainTimeButtonText}" Command="{Binding CheckInCommand}" Background="{Binding MainTimeButtonColor}">
 
                 <ToggleButton.Style>
@@ -143,7 +143,6 @@
             <Label x:Name="BreakTimeWatch" Content="{Binding BreakTimeWatchScreen}" Foreground="White" FontSize="50" HorizontalContentAlignment ="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="80" Canvas.Left="459" Canvas.Top="300" Margin= "10">
             </Label>
         </StackPanel>
-        <TextBlock Text="{Binding Comment}" HorizontalAlignment="Left" Margin="55,19,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top"/>
     </Grid>
 
 </UserControl>

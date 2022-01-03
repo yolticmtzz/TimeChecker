@@ -12,12 +12,18 @@ using TimeCheckerWPF5._0.Models;
 using System.Windows.Input;
 using TimeCheckerWPF5._0.Views;
 using TimeCheckerWPF5._0.Stores;
+using Microsoft.EntityFrameworkCore;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
 
     public class TimeCheckerViewModel : ViewModelBase
     {
+
+        //DBContext
+                ApplicationDbContext _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
+               .Options);
 
         //General Data
         private readonly Employee _user;
@@ -206,6 +212,7 @@ namespace TimeCheckerWPF5._0.ViewModels
              Status = Status.CheckedIn;
              MainTimeWatch.StopwatchStart();
              elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
+             Insert(1);
 
 
 
@@ -222,6 +229,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                      elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
+                     Insert(2);
 
                  }
                   else
@@ -247,6 +255,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                  MainTimeWatch.StopwatchStop();
                  elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
                  elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
+                 Insert(3);
 
                  BreakTimeWatch.StopwatchStart();
                  elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "BreakTime");
@@ -259,13 +268,28 @@ namespace TimeCheckerWPF5._0.ViewModels
                  elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedBreakTimeSpans);
                  MainTimeWatch.StopwatchStart();
                  elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
+                 Insert(4);
 
              }
          }
         );
         }
 
-        private void UpdateGUIProperties()
+        private void Insert(short type)
+        { 
+            var record = new Timeentry()
+            {
+                Type = type,
+                DateTime = DateTime.Now,
+                Comment = Comment,
+                User = _user.Fullname,
+            };
+
+            _context.Timeentry.Add(record);
+            _context.SaveChanges();
+        }
+
+    private void UpdateGUIProperties()
         {
             switch (Status)
             {
