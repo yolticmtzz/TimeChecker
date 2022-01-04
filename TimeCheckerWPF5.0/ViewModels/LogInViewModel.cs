@@ -9,7 +9,7 @@ using TimeCheckerWPF5._0.Models;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-    public class LogInViewModel : ViewModelBase
+    public class LogInDialogViewModel : ViewModelBase
     {
         public Employee User { get; set; }
 
@@ -37,7 +37,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public LogInViewModel()
+        public LogInDialogViewModel()
         {
             StartCommand = new DelegateCommand((o) => Start?.Invoke(this, EventArgs.Empty));
             CancelCommand = new DelegateCommand((o) => Cancel?.Invoke(this, EventArgs.Empty));

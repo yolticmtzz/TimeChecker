@@ -1,4 +1,4 @@
-﻿<Window x:Class="TimeCheckerWPF5._0.Views.LogInWindow"
+﻿<Window x:Class="TimeCheckerWPF5._0.Views.LogInDialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,7 +12,7 @@
         Title="Log In" Height="130" Width="300">
 
     <Window.DataContext>
-        <viewmodels:LogInViewModel/>
+        <viewmodels:LogInDialogViewModel/>
     </Window.DataContext>
 
     <Grid>
