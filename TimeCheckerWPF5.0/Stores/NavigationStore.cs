@@ -8,6 +8,7 @@ namespace TimeCheckerWPF5._0.Stores
     public class NavigationStore
     {   
         private ViewModelBase _currentViewModel;
+
         public ViewModelBase CurrentViewModel
         {
             get => _currentViewModel;

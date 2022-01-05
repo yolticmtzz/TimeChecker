@@ -13,7 +13,7 @@
     <UserControl.DataContext>
         <viewmodels:TimeCheckerViewModel/>
     </UserControl.DataContext>
-
+    <ScrollViewer>
     <Grid Background="Gray">
         <Grid.ColumnDefinitions>
 
@@ -134,7 +134,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row ="3"  Grid.Column="1" Margin="10">
-            <TextBox x:Name="StatusScreen" Text="{Binding StatusScreenText}" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
+            <TextBox x:Name="StatusScreen" IsReadOnly="True" Text="{Binding StatusScreenText}" Foreground="White" FontSize="20" TextAlignment="Center" VerticalContentAlignment="Center" Background="Black" Width="250" Height="40" Canvas.Left="459" Canvas.Top="38" BorderThickness="5" BorderBrush="Black" Margin= "10">
             </TextBox>
             <Label x:Name="MainTimeWatch" Content="{Binding MainTimeWatchScreen}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontSize="50" Background="Black" Width="250" Height="120"/>
         </StackPanel>
@@ -144,5 +144,5 @@
             </Label>
         </StackPanel>
     </Grid>
-
+    </ScrollViewer>
 </UserControl>

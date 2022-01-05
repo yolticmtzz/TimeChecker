@@ -10,24 +10,31 @@ namespace TimeCheckerWPF5._0.Stores
 {
     public class NavigationCommandTimeChecker : CommandBase
     {
-        private NavigationStore navigationStore;
+        private NavigationStore _navigationStore;
+        private ViewModelBase _timeCheckerViewModel;
 
-        // private readonly NavigationStore _navigationStore;
-
-        //public NavigationCommandTimeChecker()
-        //{
-        //   // _navigationStore = navigationStore;
-        //}
 
         public NavigationCommandTimeChecker(NavigationStore navigationStore)
         {
-            this.navigationStore = navigationStore;
+            _navigationStore = navigationStore;
         }
 
         public override void Execute(object parameter)
         {
-           navigationStore.CurrentViewModel = new TimeCheckerViewModel();
+            if (_timeCheckerViewModel is null)
+            {
+                _navigationStore.CurrentViewModel = new TimeCheckerViewModel();
+                _timeCheckerViewModel = _navigationStore.CurrentViewModel;
+
+
+            }
+
+            else
+            {
+                _navigationStore.CurrentViewModel = _timeCheckerViewModel;
+            }
+
         }
-        
     }
+
 }

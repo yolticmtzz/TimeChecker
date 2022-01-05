@@ -21,6 +21,10 @@ namespace TimeCheckerWPF5._0
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly NavigationStore _navigationStore;
+        
+        internal ApplicationDbContext _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
+               .Options);
 
         public App()
         {
@@ -40,6 +44,7 @@ namespace TimeCheckerWPF5._0
 
             services.AddSingleton(typeof(NavigationStore));
             services.AddSingleton(typeof(MainWindow));
+            //services.AddSingleton(typeof(NavigationCommandTimeChecker));
 
         }
 
@@ -57,7 +62,10 @@ namespace TimeCheckerWPF5._0
 
 
             NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
+            NavigationCommandTimeChecker startUpViewModel = _serviceProvider.GetService<NavigationCommandTimeChecker>();
+
             navigationStore.CurrentViewModel = new TimeCheckerViewModel();
+            //startUpViewModel._timeCheckerViewModel = navigationStore.CurrentViewModel;
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 

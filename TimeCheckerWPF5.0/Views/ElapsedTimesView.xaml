@@ -12,7 +12,7 @@
         <viewmodels:ElapsedTimesViewModel/>
     </UserControl.DataContext>
 
-
+    <ScrollViewer>
     <StackPanel Background="Gray">
       
         <Label x:Name="ElapsedMaintimesTitle" Background="Green" Height="25" Width="{Binding Path=ActualWidth, ElementName=ElaspedMaintimesListView}" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Maintimes" VerticalAlignment="Top" />
@@ -95,4 +95,5 @@
             </ListView.View>
             </ListView>
     </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Models;
-using System.Windows.Input;
 using TimeCheckerWPF5._0.Views;
-using TimeCheckerWPF5._0.Stores;
 using Microsoft.EntityFrameworkCore;
+using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -21,9 +13,10 @@ namespace TimeCheckerWPF5._0.ViewModels
     {
 
         //DBContext
-                ApplicationDbContext _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
-               .Options);
+        ApplicationDbContext _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+       .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
+       .Options);
+
 
         //General Data
         private readonly Employee _user;
@@ -31,7 +24,6 @@ namespace TimeCheckerWPF5._0.ViewModels
         public string Date { get; set; }
         ElapsedTimesView _elapsedTimesView;
         ElapsedTimesViewModel elapsedTimesViewModel;
-
 
 
         public string _comment;
@@ -43,7 +35,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             {
                     _comment = value;
                     RaisePropertyChanged();
-
             }
 
         }
@@ -55,7 +46,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-
                     _status = value;
                     RaisePropertyChanged();
                     CheckInCommand.RaiseCanExecuteChanged();
@@ -75,10 +65,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             get => _statusScreenText;
             set
             {
-
                     _statusScreenText = value;
                     RaisePropertyChanged();
-
             }
         }
 
@@ -101,7 +89,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             {
                     _mainTimeButtonColor = value;
                     RaisePropertyChanged();
-
             }
         }
 
@@ -114,7 +101,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-
                     _mainTimeWatchScreen = value;
                     RaisePropertyChanged();
             }
@@ -147,8 +133,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         private string _breakTimeWatchScreen = "00:00:00";
         
-        
-        
         public string BreakTimeWatchScreen
         {
             get => _breakTimeWatchScreen;
@@ -159,8 +143,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                     RaisePropertyChanged();
             }
         }
-
-
 
         public TimeCheckerViewModel()
         {
@@ -182,8 +164,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             UserFullName = _user.Fullname;
             _elapsedTimesView = new ElapsedTimesView();
             elapsedTimesViewModel = ((ElapsedTimesViewModel)_elapsedTimesView.DataContext);
+     
         }
-
 
         private bool OpenCheckOutDialog()
         {
@@ -199,7 +181,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         }
 
-
         public DelegateCommand CheckInCommand { get; set; }
         private void InitiateCheckInCommand()
         {
@@ -213,8 +194,6 @@ namespace TimeCheckerWPF5._0.ViewModels
              MainTimeWatch.StopwatchStart();
              elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
              Insert(1);
-
-
 
              }
              else
@@ -230,18 +209,17 @@ namespace TimeCheckerWPF5._0.ViewModels
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                      elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
                      Insert(2);
-
                  }
                   else
                  {
                      MainTimeWatch.StopwatchStart();
                  }
-                
 
              }
          }
         );
         }
+
         public DelegateCommand BreakCommand { get; set; }
         private void InitiateBreakCommand()
         {
@@ -269,10 +247,11 @@ namespace TimeCheckerWPF5._0.ViewModels
                  MainTimeWatch.StopwatchStart();
                  elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
                  Insert(4);
-
              }
          }
+
         );
+
         }
 
         private void Insert(short type)
@@ -333,9 +312,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                     e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
                 BreakTimeWatchScreen = CurrentTime;
         }
-
-
-            
 
      }
 

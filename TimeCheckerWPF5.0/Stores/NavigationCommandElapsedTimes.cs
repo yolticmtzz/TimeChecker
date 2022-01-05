@@ -5,7 +5,10 @@ namespace TimeCheckerWPF5._0.Stores
 {
     public class NavigationCommandElapsedTimes : CommandBase
     {
-        private NavigationStore navigationStore;
+        //Singleton Pattern.
+        // ElapsedTimeViewModel viewModel = *viewModel ablegen
+        private ViewModelBase _elapsedTimesViewModel;
+        private NavigationStore _navigationStore;
 
         //public NavigationCommandElapsedTimes()
         //{
@@ -13,12 +16,22 @@ namespace TimeCheckerWPF5._0.Stores
 
         public NavigationCommandElapsedTimes(NavigationStore navigationStore)
         {
-            this.navigationStore = navigationStore;
+            _navigationStore = navigationStore;
         }
 
         public override void Execute(object parameter)
         {
-           this.navigationStore.CurrentViewModel = new ElapsedTimesViewModel();
+
+            if (_elapsedTimesViewModel is null)
+            {
+                _elapsedTimesViewModel = new ElapsedTimesViewModel();
+                _navigationStore.CurrentViewModel = _elapsedTimesViewModel;
+            }
+
+            else
+            {
+                _navigationStore.CurrentViewModel = _elapsedTimesViewModel;
+            }
         }
 
     }
