@@ -18,7 +18,7 @@
 </style>
 
 <!--
-   Button "Create Employee" und Refresh erstellen und die Formen abschicken
+   Button "Create Timestamps" und Refresh erstellen und die Formen abschicken
 -->
 <div class="navbar">
     <form asp-action="CreateEdit">
@@ -56,7 +56,7 @@
 
     <tbody>
         @{
-            // Inhalt ViewBag in Variable employee übergeben und die einzelnen Attribute anzeigen
+            // Inhalt ViewBag in Variable timeentry übergeben und die einzelnen Attribute anzeigen
             foreach (var timeentry in ViewBag.Timeentry)
             {
                 <tr>
