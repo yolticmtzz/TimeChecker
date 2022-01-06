@@ -10,9 +10,10 @@ namespace TimeChecker.Controllers
 {
     public class EmployeeController : Controller
     {
-
+        // Variable für Datenbankinhalt
         private readonly ApplicationDbContext _context;
 
+        // Dependency injection Übergabe des Datenbankinhalts
         public EmployeeController(ApplicationDbContext context)
         {
             _context = context;
@@ -20,11 +21,13 @@ namespace TimeChecker.Controllers
 
         public IActionResult Index()
         {
+            // Datenbankinhalt employees in Variable employees speichern
             var employees = _context.Employees.ToList();
 
+            // Variable employees in ViewBag übergeben
             ViewBag.Employees = employees;
 
-
+            // ViewBag wird übergeben
             return View();
         }
 
@@ -47,7 +50,7 @@ namespace TimeChecker.Controllers
 
         }
 
-
+        // Employee hinzufügen oder updaten
         [HttpPost]
         public IActionResult CreateEditEmployee(Employee employee)
         {
@@ -65,7 +68,7 @@ namespace TimeChecker.Controllers
             return RedirectToAction("Index");     
         }
 
-        
+        // Employee löschen
         public IActionResult DeleteEmployee(int id)
         {
             var employeeInDb = _context.Employees.Find(id);

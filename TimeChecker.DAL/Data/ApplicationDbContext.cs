@@ -9,15 +9,12 @@ namespace TimeChecker.DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-
+        //Employees der Datenbank hinzufügen
         public DbSet<Employee> Employees { get; set; }
 
+        //Timeentry der Datenbank hinzufügen
         public DbSet<Timeentry> Timeentry { get; set; }
 
-        public ApplicationDbContext()
-        {
-
-        }
 
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
