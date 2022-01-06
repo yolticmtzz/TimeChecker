@@ -33,12 +33,13 @@ namespace TimeChecker
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +67,47 @@ namespace TimeChecker
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateRole(serviceProvider).Wait();
+            CreateDefaultUser(serviceProvider).Wait();
+        }
+
+        // Admin Role erstellen, falls Role nicht existiert neu erstellen
+        public async Task CreateRole(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
+
+            var adminRoleExisting = await roleManager.RoleExistsAsync("Admin");
+
+            if (adminRoleExisting == false)
+            {
+                await roleManager.CreateAsync(new IdentityRole("Admin"));    
+            
+            }
+        }
+
+        // Einen Admin Account erstellen mit Email-Adresse und Passwort
+        public async Task CreateDefaultUser(IServiceProvider serviceProvider)
+        {
+            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+
+            var adminUser = await userManager.FindByNameAsync("admin@em.de");
+
+            if (adminUser == null)
+            {
+
+                var user = new IdentityUser()
+                {
+                    Email = "admin@em.de",
+                    UserName = "admin@em.de"
+                };
+
+                await userManager.CreateAsync(user, "Test1.");
+
+                adminUser = await userManager.FindByNameAsync("admin@em.de");
+            }
+
+            await userManager.AddToRoleAsync(adminUser, "Admin");
         }
     }
 }

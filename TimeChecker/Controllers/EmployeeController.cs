@@ -21,7 +21,7 @@ namespace TimeChecker.Controllers
 
         public IActionResult Index()
         {
-            // Datenbankinhalt employees in Variable employees speichern
+            // Datenbankinhalt Employees in Variable employees speichern
             var employees = _context.Employees.ToList();
 
             // Variable employees in ViewBag übergeben
@@ -31,7 +31,7 @@ namespace TimeChecker.Controllers
             return View();
         }
 
-
+        // Bestehender Employee aus Datenbank bearbeiten
         public IActionResult CreateEdit(int id)
         {
             if (id == 0)
@@ -50,7 +50,7 @@ namespace TimeChecker.Controllers
 
         }
 
-        // Employee hinzufügen oder updaten
+        // Employee hinzufügen oder updaten wenn ID nicht 0 
         [HttpPost]
         public IActionResult CreateEditEmployee(Employee employee)
         {

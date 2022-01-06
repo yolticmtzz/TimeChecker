@@ -88,9 +88,14 @@
                     Button "Löschen" erstellen und Form DeleteTimeentry an Conroller abschicken
                     -->
                     <td class="align-middle">
-                        <form asp-action="DeleteTimeentry" asp-route-id="@timeentry.ID">
-                            <button type="submit" class="btn btn-danger">Löschen</button>
-                        </form>
+                        @{
+                            if (User.IsInRole("Admin"))
+                            {
+                                <form asp-action="DeleteTimeentry" asp-route-id="@timeentry.ID">
+                                    <button type="submit" class="btn btn-danger">Löschen</button>
+                                </form>
+                            }
+                        }
                     </td>
                 </tr>
             }
