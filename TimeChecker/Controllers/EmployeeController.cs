@@ -65,6 +65,7 @@ namespace TimeChecker.Controllers
 
             _context.SaveChanges();
 
+            // Weiterleitung zur Indexseite
             return RedirectToAction("Index");     
         }
 
@@ -81,7 +82,7 @@ namespace TimeChecker.Controllers
             _context.Employees.Remove(employeeInDb);
             _context.SaveChanges();
 
-
+            // Weiterleitung zur Indexseite
             return RedirectToAction("Index");
 
         }
