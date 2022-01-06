@@ -64,7 +64,27 @@
                         @timeentry.ID
                     </td>
                     <td class="align-middle">
-                        @timeentry.Type
+                        @{
+                            if (timeentry.Type == 1)
+                            {
+                                @timeentry.Type.ToString("Check In");
+                            }
+
+                            if (timeentry.Type == 2)
+                            {
+                                @timeentry.Type.ToString("Check Out");
+                            }
+
+                            if (timeentry.Type == 3)
+                            {
+                                @timeentry.Type.ToString("Start Break");
+                            }
+
+                            if (timeentry.Type == 4)
+                            {
+                                @timeentry.Type.ToString("Stop Break");
+                            }
+                        }
                     </td>
                     <td class="align-middle">
                         @timeentry.DateTime

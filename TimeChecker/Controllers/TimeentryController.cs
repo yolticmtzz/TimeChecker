@@ -15,6 +15,7 @@ namespace TimeChecker.Controllers
         // Variable für Datenbankinhalt
         private readonly ApplicationDbContext _context;
 
+
         // Dependency injection Übergabe des Datenbankinhalts
         public TimeentryController(ApplicationDbContext context)
         {
@@ -23,14 +24,15 @@ namespace TimeChecker.Controllers
 
         public IActionResult Index()
         {
+
             // Datenbankinhalt Timeentry in Variable employees speichern
             var timeentry = _context.Timeentry.ToList();
-
+        
             // Variable timeentry in ViewBag übergeben
-            ViewBag.Timeentry = timeentry;
-
-            // ViewBag wird übergeben
-            return View();
+             ViewBag.Timeentry = timeentry;
+            
+             // ViewBag wird übergeben
+             return View();            
         }
 
         // Bestehender Timeentry aus Datenbank bearbeiten
@@ -78,6 +80,7 @@ namespace TimeChecker.Controllers
             if (timeentryInDb == null)
             {
                 return NotFound();
+                
             }
 
             _context.Timeentry.Remove(timeentryInDb);
