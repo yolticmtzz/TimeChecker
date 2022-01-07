@@ -107,6 +107,7 @@
                     </td>
                     <td class="align-middle">
                         @{
+                            //Evaluation Timestamps
                             if (timeentry.Type == 1)
                             {
                                 type1 = timeentry.DateTime;
@@ -132,9 +133,7 @@
                                 var rounded34 = TimeSpan.FromSeconds(Math.Round(type34.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
                                 @timeentry.DateTime.ToString(rounded34);
                             }
-
                         }
-
                     </td>
                     <!--
                     Button "Bearbeiten" erstellen und Form CreateEdit an Conroller abschicken
