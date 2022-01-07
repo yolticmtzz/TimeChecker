@@ -2,7 +2,7 @@
 @{
 
     ViewData["Title"] = "Timeentry";
-
+    
 }
 
 <style>
@@ -47,8 +47,9 @@
             <th>Date/Time</th>
             <th>Comment</th>
             <th>User</th>
-            <th>Bearbeiten</th>
-            <th>Löschen</th>
+            <th>Evaluation</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     <thead>
 
@@ -56,6 +57,13 @@
 
     <tbody>
         @{
+            DateTime type1 = new DateTime();
+            DateTime type2 = new DateTime();
+            DateTime type3 = new DateTime();
+            DateTime type4 = new DateTime();
+            TimeSpan type12;
+            TimeSpan type34;
+
             // Inhalt ViewBag in Variable timeentry übergeben und die einzelnen Attribute anzeigen
             foreach (var timeentry in ViewBag.Timeentry)
             {
@@ -63,8 +71,10 @@
                     <td hidden class="align-middle">
                         @timeentry.ID
                     </td>
+
                     <td class="align-middle">
                         @{
+                            // Type Wert umwandeln in entsprechnder String
                             if (timeentry.Type == 1)
                             {
                                 @timeentry.Type.ToString("Check In");
@@ -83,7 +93,7 @@
                             if (timeentry.Type == 4)
                             {
                                 @timeentry.Type.ToString("Stop Break");
-                            }
+                            }                            
                         }
                     </td>
                     <td class="align-middle">
@@ -94,6 +104,37 @@
                     </td>
                     <td class="align-middle">
                         @timeentry.User
+                    </td>
+                    <td class="align-middle">
+                        @{
+                            if (timeentry.Type == 1)
+                            {
+                                type1 = timeentry.DateTime;
+                            }
+
+                            if (timeentry.Type == 3)
+                            {
+                                type3 = timeentry.DateTime;
+                            }
+
+                            if (timeentry.Type == 2)
+                            {
+                                type2 = timeentry.DateTime;
+                                type12 = type2.Subtract(type1);
+                                var rounded12 = TimeSpan.FromSeconds(Math.Round(type12.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");                      
+                                @timeentry.DateTime.ToString(rounded12);
+                            }
+
+                            if (timeentry.Type == 4)
+                            {
+                                type4 = timeentry.DateTime;
+                                type34 = type4.Subtract(type3);
+                                var rounded34 = TimeSpan.FromSeconds(Math.Round(type34.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
+                                @timeentry.DateTime.ToString(rounded34);
+                            }
+
+                        }
+
                     </td>
                     <!--
                     Button "Bearbeiten" erstellen und Form CreateEdit an Conroller abschicken
