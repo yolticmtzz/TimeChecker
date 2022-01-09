@@ -18,8 +18,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             _navigationStore = navigationStore;
             _elapsedTimeListService = elapsedTimeSpanListService;
 
-            NavigateTimeCheckerCommand = new NavigateCommand<TimeCheckerViewModel>(_navigationStore, _elapsedTimeListService, () => new TimeCheckerViewModel(_elapsedTimeListService));
-            NavigateElapsedTimeSpansCommand = new NavigateCommand<ElapsedTimesViewModel>(_navigationStore, _elapsedTimeListService, () => new ElapsedTimesViewModel(_elapsedTimeListService.ElapsedTimeSpanList));
+            NavigateTimeCheckerCommand = new NavigateCommand<TimeCheckerViewModel>(_navigationStore, () => new TimeCheckerViewModel(_elapsedTimeListService));
+            NavigateElapsedTimeSpansCommand = new NavigateCommand<ElapsedTimesViewModel>(_navigationStore, () => new ElapsedTimesViewModel(_elapsedTimeListService.ElapsedTimeSpanList));
             NavigateExitApplicationCommand = new NavigateExitApplicationCommand();
 
         }
