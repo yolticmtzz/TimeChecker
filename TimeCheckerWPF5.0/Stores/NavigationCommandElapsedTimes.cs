@@ -9,14 +9,15 @@ namespace TimeCheckerWPF5._0.Stores
         // ElapsedTimeViewModel viewModel = *viewModel ablegen
         private ElapsedTimesViewModel _elapsedTimesViewModel;
         private NavigationStore _navigationStore;
-
+        private readonly ElapsedTimeSpanListService _elapsedTimeSpanListService;
         //public NavigationCommandElapsedTimes()
         //{
         //}
 
-        public NavigationCommandElapsedTimes(NavigationStore navigationStore)
+        public NavigationCommandElapsedTimes(NavigationStore navigationStore, ElapsedTimeSpanListService elapsedTimeSpanListService)
         {
             _navigationStore = navigationStore;
+            _elapsedTimeSpanListService = elapsedTimeSpanListService;
         }
 
         public override void Execute(object parameter)
@@ -24,7 +25,7 @@ namespace TimeCheckerWPF5._0.Stores
 
             if (_elapsedTimesViewModel is null)
             {
-                var newViewModel = new ElapsedTimesViewModel();
+                var newViewModel = new ElapsedTimesViewModel(_elapsedTimeSpanListService.ElapsedTimeSpanList);
                 _navigationStore.CurrentViewModel = newViewModel;
                 _elapsedTimesViewModel = newViewModel;
             }

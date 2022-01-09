@@ -24,6 +24,9 @@ namespace TimeCheckerWPF5._0.ViewModels
         public string Date { get; set; }
         ElapsedTimesView _elapsedTimesView;
         ElapsedTimesViewModel elapsedTimesViewModel;
+        TimeSpanRecord TimeSpanRecord { get; set; }
+        private ElapsedTimeSpanListService _elapsedTimeSpanListService;
+        private DateTime TimeCatch { get; set; }
 
 
         public string _comment;
@@ -144,14 +147,17 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeCheckerViewModel()
+        public TimeCheckerViewModel(ElapsedTimeSpanListService elapsedTimeSpanListService)
         {
+            _elapsedTimeSpanListService = elapsedTimeSpanListService;
+
             InitiateCheckInCommand();
             InitiateBreakCommand();
 
             MainTimeWatch = new TimeWatch();
             BreakTimeWatch = new TimeWatch();
-         
+            TimeSpanRecord = new TimeSpanRecord();
+
 
             //Subscribing the MainTimeWatch and the BreakTimeWatch to the TickEvent delegate
             MainTimeWatch.TickEvent += MainTimewatchTriggered;
@@ -187,27 +193,29 @@ namespace TimeCheckerWPF5._0.ViewModels
          (o) => Status != Status.BreakMode,
          (o) =>
          {
+             TimeCatch = DateTime.Now;
+
          if (Status == Status.CheckedOut)
          {
              Status = Status.CheckedIn;
              MainTimeWatch.StopwatchStart();
-             elapsedTimesViewModel.CurrentTimeSpan = ElapsedTimeSpanListService( "MainTime");
-             Insert(1);
+             TimeSpanRecord.StartDateTime = TimeCatch;
+             Insert(1, TimeCatch);
 
              }
              else
              {
                  MainTimeWatch.StopwatchStop();
-                 elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-
+                 
                  bool checkout = OpenCheckOutDialog();
 
                  if (checkout == true)
                  {
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
-                     elapsedTimesViewModel.AddMainTimeSpan();
-                     Insert(2);
+                     TimeSpanRecord.EndDateTime = TimeCatch;
+                     _elapsedTimeSpanListService.AddTimeSpanRecord(TimeSpanRecord);
+                     Insert(2, TimeCatch);
                  }
                   else
                  {
@@ -226,26 +234,26 @@ namespace TimeCheckerWPF5._0.ViewModels
          (o) => Status != Status.CheckedOut,
          (o) =>
          {
+
+             TimeCatch = DateTime.Now;
+
              if (Status == Status.CheckedIn)
              {
                  Status = Status.BreakMode;
                  MainTimeWatch.StopwatchStop();
-                 elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-                 elapsedTimesViewModel.AddMainTimeSpan();
-                 Insert(3);
+                 
+                 Insert(3, TimeCatch);
 
                  BreakTimeWatch.StopwatchStart();
-                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpanList(DateTime.Now, "BreakTime");
+
              }
              else
              {
                  Status = Status.CheckedIn;
                  BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
-                 elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-                 elapsedTimesViewModel.AddBreakTimeSpan();
                  MainTimeWatch.StopwatchStart();
-                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpanList(DateTime.Now, "MainTime");
-                 Insert(4);
+
+                 Insert(4, TimeCatch);
              }
          }
 
@@ -253,12 +261,12 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         }
 
-        private void Insert(short type)
+        private void Insert(short type, DateTime timeCatch)
         { 
             var record = new Timeentry()
             {
                 Type = type,
-                DateTime = DateTime.Now,
+                DateTime = timeCatch,
                 Comment = Comment,
                 User = _user.Fullname,
             };

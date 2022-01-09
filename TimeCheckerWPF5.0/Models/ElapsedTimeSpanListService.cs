@@ -10,27 +10,36 @@ namespace TimeCheckerWPF5._0.Models
 {
     public class ElapsedTimeSpanListService
     {
-        private readonly ObservableCollection<ElapsedTimeSpanListService> _elapsedTimeSpans;
-        public ObservableCollection<ElapsedTimeSpanListService> ElapsedTimeSpans => _elapsedTimeSpans;
+        private readonly ObservableCollection<TimeSpanRecord> _elapsedTimeSpanList;
+        public ObservableCollection<TimeSpanRecord> ElapsedTimeSpanList => _elapsedTimeSpanList;
 
         public ElapsedTimeSpanListService()
         {
-            _elapsedTimeSpans = new ObservableCollection<ElapsedTimeSpanListService>();
+            _elapsedTimeSpanList = new ObservableCollection<TimeSpanRecord>();
 
         }
 
 
-        public void AddMainTimeSpan(TimeSpanRecord timeSpanRecord)
+        public void AddTimeSpanRecord(TimeSpanRecord timeSpanRecord)
         {
-            ElapsedTimeSpans.Add(timeSpanRecord);
+            ElapsedTimeSpanList.Add(timeSpanRecord);
         }
-
-
-        //public void AddBreakTimeSpan()
-        //{
-        //    ElapsedBreakTimeSpans.Add(CurrentTimeSpan);
-        //}
-
 
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

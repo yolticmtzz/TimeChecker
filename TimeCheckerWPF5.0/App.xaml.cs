@@ -9,6 +9,7 @@ using System.Windows;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TimeChecker.DAL.Data;
+using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.ViewModels;
 
@@ -44,6 +45,7 @@ namespace TimeCheckerWPF5._0
 
             services.AddSingleton(typeof(NavigationStore));
             services.AddSingleton(typeof(MainWindow));
+            services.AddSingleton(typeof(ElapsedTimeSpanListService));
             //services.AddSingleton(typeof(NavigationCommandTimeChecker));
 
         }
@@ -63,14 +65,15 @@ namespace TimeCheckerWPF5._0
 
             NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
             NavigationCommandTimeChecker startUpViewModel = _serviceProvider.GetService<NavigationCommandTimeChecker>();
+            ElapsedTimeSpanListService elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListService>();
 
-            navigationStore.CurrentViewModel = new TimeCheckerViewModel();
+            navigationStore.CurrentViewModel = new TimeCheckerViewModel(elapsedTimeSpanListService);
             //startUpViewModel._timeCheckerViewModel = navigationStore.CurrentViewModel;
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 
             MainViewModel mainViewModel = new MainViewModel(navigationStore);
-            mainViewModel.NavigationViewModel = new NavigationViewModel(navigationStore);
+            mainViewModel.NavigationViewModel = new NavigationViewModel(navigationStore, elapsedTimeSpanListService);
             mainWindow.DataContext = mainViewModel;
             
             mainWindow.Show();

@@ -10,17 +10,18 @@ namespace TimeCheckerWPF5._0.Stores
 {
     public class NavigationCommand : CommandBase
     {
-
+        private readonly ElapsedTimeSpanListService _elapsedTimeSpanListService;
         private readonly NavigationStore _navigationStore;
 
-        public NavigationCommand(NavigationStore navigationStore)
+        public NavigationCommand(NavigationStore navigationStore, ElapsedTimeSpanListService elapsedTimeSpanListService)
         {
             _navigationStore = navigationStore;
+            _elapsedTimeSpanListService = elapsedTimeSpanListService;
         }
 
         public override void Execute(object parameter)
         {
-            _navigationStore.CurrentViewModel = new ElapsedTimesViewModel();
+            _navigationStore.CurrentViewModel = new ElapsedTimesViewModel(_elapsedTimeSpanListService.ElapsedTimeSpanList);
         }
         
     }
