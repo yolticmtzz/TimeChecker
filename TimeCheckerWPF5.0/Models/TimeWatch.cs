@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 
 namespace TimeCheckerWPF5._0.Models
@@ -12,8 +8,8 @@ namespace TimeCheckerWPF5._0.Models
     {
         //Declare a handler for when the watchtick is triggered to run of type of own arguments (timeSpan)
         internal EventHandler<TickEventArgs> TickEvent;
-        internal DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private Stopwatch stopwatch = new Stopwatch();
+        internal DispatcherTimer dispatcherTimer = new();
+        private readonly Stopwatch stopwatch = new();
         private const string TimeReset ="00:00:00";
 
         public TimeWatch()
@@ -47,11 +43,7 @@ namespace TimeCheckerWPF5._0.Models
         //Triggering the EventHandler
         protected virtual void OnWatchTickEvent(TickEventArgs e)
         {
-            EventHandler<TickEventArgs> tickEvent = TickEvent;
-            if (tickEvent != null)
-            {
-                tickEvent(this, e);
-            }
+            TickEvent?.Invoke(this, e);
         }
 
         //Behavior if StopwatchTick Event was triggered
@@ -59,8 +51,10 @@ namespace TimeCheckerWPF5._0.Models
         {
             if (stopwatch.IsRunning)
             {
-                TickEventArgs tickEvent = new TickEventArgs();
-                tickEvent.TimeSpan = stopwatch.Elapsed;
+                TickEventArgs tickEvent = new()
+                {
+                    TimeSpan = stopwatch.Elapsed
+                };
                 OnWatchTickEvent(tickEvent);
             }
         }

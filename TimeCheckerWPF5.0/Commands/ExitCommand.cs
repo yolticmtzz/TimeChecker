@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TimeCheckerWPF5._0.Models;
-using static System.Net.Mime.MediaTypeNames;
+﻿using TimeCheckerWPF5._0.Models;
 
 namespace TimeCheckerWPF5._0.Stores
 {

@@ -4,7 +4,6 @@ using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Views;
 using Microsoft.EntityFrameworkCore;
-using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -13,7 +12,7 @@ namespace TimeCheckerWPF5._0.ViewModels
     {
 
         //DBContext
-        ApplicationDbContext _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+        readonly ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
        .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
        .Options);
 
@@ -22,10 +21,8 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly Employee _user;
         public string UserFullName { get; set; }
         public string Date { get; set; }
-        ElapsedTimesView _elapsedTimesView;
-        ElapsedTimesViewModel elapsedTimesViewModel;
         TimeSpanRecord TimeSpanRecord { get; set; }
-        private ElapsedTimeSpanListService _elapsedTimeSpanListService;
+        private readonly ElapsedTimeSpanListStoreService _elapsedTimeSpanListService;
         private DateTime TimeCatch { get; set; }
 
 
@@ -147,7 +144,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeCheckerViewModel(ElapsedTimeSpanListService elapsedTimeSpanListService)
+        public TimeCheckerViewModel(ElapsedTimeSpanListStoreService elapsedTimeSpanListService)
         {
             _elapsedTimeSpanListService = elapsedTimeSpanListService;
 
@@ -167,14 +164,12 @@ namespace TimeCheckerWPF5._0.ViewModels
             Status = Status.CheckedOut;
             _user = new Employee("Dummy", "User 77");
             UserFullName = $"{_user.Prename} {_user.Lastname}";
-            _elapsedTimesView = new ElapsedTimesView();
-            elapsedTimesViewModel = ((ElapsedTimesViewModel)_elapsedTimesView.DataContext);
      
         }
 
         private bool OpenCheckOutDialog()
         {
-            CheckOutDialogWindow dialog = new CheckOutDialogWindow();
+            CheckOutDialogWindow dialog = new();
             if (dialog.ShowDialog() == true)
             {
                 var checkOutDialogViewModel = ((CheckOutDialogViewModel)dialog.DataContext);

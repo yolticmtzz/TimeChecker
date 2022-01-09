@@ -1,5 +1,4 @@
-﻿using System.Windows.Input;
-using TimeCheckerWPF5._0.Stores;
+﻿using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -19,7 +18,7 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         private void OnCurrentViewModelChanged()
         {
-            RaisePropertyChanged("CurrentViewModel");
+            RaisePropertyChanged(nameof(CurrentViewModel));
          
         }
     }

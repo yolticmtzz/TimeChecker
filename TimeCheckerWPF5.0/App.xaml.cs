@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +17,8 @@ namespace TimeCheckerWPF5._0
     public partial class App : Application
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly NavigationStore _navigationStore;
         
-        internal ApplicationDbContext _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
+        internal ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
                .Options);
 
@@ -32,10 +27,9 @@ namespace TimeCheckerWPF5._0
             var services = new ServiceCollection();
             ConfigureServices(services);
             _serviceProvider = services.BuildServiceProvider();
-            _navigationStore = new NavigationStore();
         }
 
-        private void ConfigureServices(ServiceCollection services)
+        private static void ConfigureServices(ServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -45,7 +39,7 @@ namespace TimeCheckerWPF5._0
 
             services.AddSingleton(typeof(NavigationStore));
             services.AddSingleton(typeof(MainWindow));
-            services.AddSingleton(typeof(ElapsedTimeSpanListService));
+            services.AddSingleton(typeof(ElapsedTimeSpanListStoreService));
             //services.AddSingleton(typeof(NavigationCommandTimeChecker));
 
         }
@@ -64,15 +58,13 @@ namespace TimeCheckerWPF5._0
 
 
             NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
-            NavigationCommandTimeChecker startUpViewModel = _serviceProvider.GetService<NavigationCommandTimeChecker>();
-            ElapsedTimeSpanListService elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListService>();
+            ElapsedTimeSpanListStoreService elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListStoreService>();
 
             navigationStore.CurrentViewModel = new TimeCheckerViewModel(elapsedTimeSpanListService);
-            //startUpViewModel._timeCheckerViewModel = navigationStore.CurrentViewModel;
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 
-            MainViewModel mainViewModel = new MainViewModel(navigationStore);
+            MainViewModel mainViewModel = new(navigationStore);
             mainViewModel.NavigationViewModel = new NavigationViewModel(navigationStore, elapsedTimeSpanListService);
             mainWindow.DataContext = mainViewModel;
             

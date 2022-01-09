@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace TimeCheckerWPF5._0.Models
 {
-    public class ElapsedTimeSpanListService
+    public class ElapsedTimeSpanListStoreService
     {
         private readonly ObservableCollection<TimeSpanRecord> _elapsedTimeSpanList;
         public ObservableCollection<TimeSpanRecord> ElapsedTimeSpanList => _elapsedTimeSpanList;
 
-        public ElapsedTimeSpanListService()
+        public ElapsedTimeSpanListStoreService()
         {
             _elapsedTimeSpanList = new ObservableCollection<TimeSpanRecord>();
 

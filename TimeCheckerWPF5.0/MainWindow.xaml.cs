@@ -26,7 +26,6 @@ namespace TimeCheckerWPF5._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly NavigationStore navigationStore;
 
         public MainWindow()//ApplicationDbContext context)
         {
