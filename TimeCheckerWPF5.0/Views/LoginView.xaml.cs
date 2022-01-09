@@ -17,9 +17,9 @@ namespace TimeCheckerWPF5._0.Views
     /// <summary>
     /// Interaction logic for LogInView.xaml
     /// </summary>
-    public partial class LogInDialogWindow : Window
+    public partial class LoginView : Window
     {
-        public LogInDialogWindow()
+        public LoginView()
         {
             InitializeComponent();
         }

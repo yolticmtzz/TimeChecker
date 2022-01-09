@@ -50,7 +50,7 @@ namespace TimeCheckerWPF5._0
             ElapsedTimeSpanListStoreService elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListStoreService>();
 
             //elapsedTimeSpanListService = new ElapsedTimeSpanListStoreService();
-            navigationStore.CurrentViewModel = new TimeCheckerViewModel(elapsedTimeSpanListService);
+            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore, elapsedTimeSpanListService);
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 

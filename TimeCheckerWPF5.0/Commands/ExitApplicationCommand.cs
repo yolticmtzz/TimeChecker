@@ -2,7 +2,7 @@
 
 namespace TimeCheckerWPF5._0.Stores
 {
-    class NavigateExitApplicationCommand : CommandBase
+    class ExitApplicationCommand : CommandBase
     {
    
         public override void Execute(object parameter)

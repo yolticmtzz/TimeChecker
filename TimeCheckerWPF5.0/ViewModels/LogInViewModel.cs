@@ -1,48 +1,25 @@
 ﻿using System;
 using System.Windows.Input;
 using TimeChecker.DAL.Models;
+using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Models;
+using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-    public class LogInDialogViewModel : ViewModelBase
+    public class LoginViewModel : ViewModelBase
     {
-        public Employee User { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
 
-        public event EventHandler Start;
-        public event EventHandler Cancel;
-
-        private string firstname;
-        public string Firstname
+        public LoginViewModel(NavigationStore navigationStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListStoreService)
         {
-            get => firstname;
 
-            set
-            {
-                firstname = value;
-            }
-        }
-        private string lastname;
-        public string Lastname
-        {
-            get => lastname;
-
-            set
-            {
-                lastname = value;
-            }
+            LoginCommand = new LoginCommand(this, new Services.NavigationService<TimeCheckerViewModel>(
+                navigationStore, () => new TimeCheckerViewModel(elapsedTimeSpanListStoreService)));
         }
 
-        public LogInDialogViewModel()
-        {
-            StartCommand = new DelegateCommand((o) => Start?.Invoke(this, EventArgs.Empty));
-            CancelCommand = new DelegateCommand((o) => Cancel?.Invoke(this, EventArgs.Empty));
-            User = new Employee(Firstname, Lastname);
-        }
-
-        public ICommand StartCommand { get; set; }
-
-        public ICommand CancelCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
 
     }
 }
