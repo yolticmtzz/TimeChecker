@@ -146,7 +146,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public TimeCheckerViewModel()
         {
-
             InitiateCheckInCommand();
             InitiateBreakCommand();
 
@@ -161,7 +160,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
             _user = new Employee("Dummy", "User 77");
-            UserFullName = _user.Fullname;
+            UserFullName = $"{_user.Prename} {_user.Lastname}";
             _elapsedTimesView = new ElapsedTimesView();
             elapsedTimesViewModel = ((ElapsedTimesViewModel)_elapsedTimesView.DataContext);
      
@@ -192,7 +191,7 @@ namespace TimeCheckerWPF5._0.ViewModels
          {
              Status = Status.CheckedIn;
              MainTimeWatch.StopwatchStart();
-             elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
+             elapsedTimesViewModel.CurrentTimeSpan = ElapsedTimeSpanListService( "MainTime");
              Insert(1);
 
              }
@@ -207,7 +206,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                  {
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
-                     elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
+                     elapsedTimesViewModel.AddMainTimeSpan();
                      Insert(2);
                  }
                   else
@@ -232,20 +231,20 @@ namespace TimeCheckerWPF5._0.ViewModels
                  Status = Status.BreakMode;
                  MainTimeWatch.StopwatchStop();
                  elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-                 elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedMainTimeSpans);
+                 elapsedTimesViewModel.AddMainTimeSpan();
                  Insert(3);
 
                  BreakTimeWatch.StopwatchStart();
-                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "BreakTime");
+                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpanList(DateTime.Now, "BreakTime");
              }
              else
              {
                  Status = Status.CheckedIn;
                  BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
                  elapsedTimesViewModel.CurrentTimeSpan.EndDateTime = DateTime.Now;
-                 elapsedTimesViewModel.AddTimeSpan(elapsedTimesViewModel.ElapsedBreakTimeSpans);
+                 elapsedTimesViewModel.AddBreakTimeSpan();
                  MainTimeWatch.StopwatchStart();
-                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpan(DateTime.Now, "MainTime");
+                 elapsedTimesViewModel.CurrentTimeSpan = new ElapsedTimeSpanList(DateTime.Now, "MainTime");
                  Insert(4);
              }
          }

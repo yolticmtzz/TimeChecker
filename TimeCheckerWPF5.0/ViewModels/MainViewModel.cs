@@ -20,6 +20,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         private void OnCurrentViewModelChanged()
         {
             RaisePropertyChanged("CurrentViewModel");
+         
         }
     }
 }

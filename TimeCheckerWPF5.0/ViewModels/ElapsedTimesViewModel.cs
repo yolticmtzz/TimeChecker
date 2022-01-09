@@ -13,28 +13,17 @@ namespace TimeCheckerWPF5._0.ViewModels
     public class ElapsedTimesViewModel : ViewModelBase
     {
 
-        public ElapsedTimeSpan CurrentTimeSpan { get; set; }
-
-        private readonly ObservableCollection<ElapsedTimeSpan> _elapsedMainTimeSpans;
-        public ObservableCollection<ElapsedTimeSpan> ElapsedMainTimeSpans => _elapsedMainTimeSpans;
+        //private readonly ObservableCollection<ElapsedTimeSpanList> _elapsedMainTimeSpans;
+        //public ObservableCollection<ElapsedTimeSpanList> ElapsedMainTimeSpans => _elapsedMainTimeSpans;
        
-        private readonly ObservableCollection<ElapsedTimeSpan> _elapsedBreakTimeSpans;
+        private readonly ObservableCollection<ElapsedTimeSpanListService> _elapsedTimeList;
+        public ObservableCollection<ElapsedTimeSpanListService> ElapsedTimeSpanList => _elapsedTimeList;
 
-        public ObservableCollection<ElapsedTimeSpan> ElapsedBreakTimeSpans => _elapsedBreakTimeSpans;
 
-
-        public ElapsedTimesViewModel()
+        public ElapsedTimesViewModel(ObservableCollection<ElapsedTimeSpanListService> elapsedTimeSpan)
         {
-            _elapsedMainTimeSpans = new ObservableCollection<ElapsedTimeSpan>();
-            _elapsedBreakTimeSpans = new ObservableCollection<ElapsedTimeSpan>();
+            _elapsedTimeList = elapsedTimeSpan;
 
-        }
-
-
-
-        public void AddTimeSpan(ObservableCollection<ElapsedTimeSpan> elapsedTimeSpanList)
-        {
-            elapsedTimeSpanList.Add(CurrentTimeSpan);
         }
 
     }

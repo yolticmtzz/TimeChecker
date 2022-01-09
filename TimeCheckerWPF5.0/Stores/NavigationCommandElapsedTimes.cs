@@ -7,7 +7,7 @@ namespace TimeCheckerWPF5._0.Stores
     {
         //Singleton Pattern.
         // ElapsedTimeViewModel viewModel = *viewModel ablegen
-        private ViewModelBase _elapsedTimesViewModel;
+        private ElapsedTimesViewModel _elapsedTimesViewModel;
         private NavigationStore _navigationStore;
 
         //public NavigationCommandElapsedTimes()
@@ -24,8 +24,9 @@ namespace TimeCheckerWPF5._0.Stores
 
             if (_elapsedTimesViewModel is null)
             {
-                _elapsedTimesViewModel = new ElapsedTimesViewModel();
-                _navigationStore.CurrentViewModel = _elapsedTimesViewModel;
+                var newViewModel = new ElapsedTimesViewModel();
+                _navigationStore.CurrentViewModel = newViewModel;
+                _elapsedTimesViewModel = newViewModel;
             }
 
             else
