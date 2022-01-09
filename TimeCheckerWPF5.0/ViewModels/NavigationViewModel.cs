@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using TimeCheckerWPF5._0.Models;
+using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
@@ -12,20 +13,14 @@ namespace TimeCheckerWPF5._0.ViewModels
         public ICommand NavigateElapsedTimeSpansCommand { get; }
         public ICommand NavigateExitApplicationCommand { get; }
 
-        public NavigationViewModel(UserStore userStore, NavigationStore navigationStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListService)
+        public NavigationViewModel(NavigationService<TimeCheckerViewModel> timeCheckerNavigationService, NavigationService<ElapsedTimesViewModel> elapsedTimesNavigationService, NavigationService<LoginViewModel> loginNavigationService,
+            UserStore userStore, NavigationStore navigationStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListService)
         {
 
-            NavigateLoginCommand = new NavigateCommand<LoginViewModel>(new Services.NavigationService<LoginViewModel>(
-                navigationStore, () => new LoginViewModel(userStore, navigationStore, elapsedTimeSpanListService)));
-
-            NavigateTimeCheckerCommand = new NavigateCommand<TimeCheckerViewModel>(new Services.NavigationService<TimeCheckerViewModel>(
-                navigationStore, () => new TimeCheckerViewModel(userStore, elapsedTimeSpanListService)));
-
-            NavigateElapsedTimeSpansCommand = new NavigateCommand<ElapsedTimesViewModel>(new Services.NavigationService<ElapsedTimesViewModel>(
-                navigationStore, () => new ElapsedTimesViewModel(elapsedTimeSpanListService.ElapsedTimeSpanList)));
-
+            NavigateLoginCommand = new NavigateCommand<LoginViewModel>(loginNavigationService);
+            NavigateTimeCheckerCommand = new NavigateCommand<TimeCheckerViewModel>(timeCheckerNavigationService);
+            NavigateElapsedTimeSpansCommand = new NavigateCommand<ElapsedTimesViewModel>(elapsedTimesNavigationService);
             NavigateExitApplicationCommand = new ExitApplicationCommand();
-
         }
 
     }

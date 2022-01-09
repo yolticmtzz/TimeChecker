@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TimeChecker.DAL.Data;
 using TimeCheckerWPF5._0.Models;
+using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.ViewModels;
 
@@ -17,6 +18,7 @@ namespace TimeCheckerWPF5._0
     public partial class App : Application
     {
         private readonly IServiceProvider _serviceProvider;
+      
         
         internal ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
                .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
@@ -50,6 +52,8 @@ namespace TimeCheckerWPF5._0
             NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
             ElapsedTimeSpanListStoreService elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListStoreService>();
             UserStore userStore = _serviceProvider.GetService<UserStore>();
+            //NavigationsBarViewModel navigationsBarViewModel = new NavigationsBarViewModel
+
 
             //elapsedTimeSpanListService = new ElapsedTimeSpanListStoreService();
             navigationStore.CurrentViewModel = new LoginViewModel(userStore, navigationStore, elapsedTimeSpanListService);
@@ -57,7 +61,7 @@ namespace TimeCheckerWPF5._0
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 
             MainViewModel mainViewModel = new(navigationStore);
-            mainViewModel.NavigationViewModel = new NavigationViewModel(userStore, navigationStore, elapsedTimeSpanListService);
+            mainViewModel.NavigationViewModel = new NavigationViewModel(CreateNavigationService());
             mainWindow.DataContext = mainViewModel;
             
             mainWindow.Show();
@@ -66,6 +70,9 @@ namespace TimeCheckerWPF5._0
 
         }
 
-
+        private NavigationService<TimeCheckerViewModel> CreateNavigationService()
+        {
+            return new NavigationService<TimeCheckerViewModel>(navigationStore, () => new TimeCheckerViewModel(userStore, elapsedTimeSpanListService));
+        }
     }
 }
