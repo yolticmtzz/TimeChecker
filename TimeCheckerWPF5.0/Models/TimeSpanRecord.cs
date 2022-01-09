@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeCheckerWPF5._0.Models
 {
-    public class TimeSpan
+    public class TimeSpanRecord
     {
 
         public DateTime StartDateTime { get; set; }

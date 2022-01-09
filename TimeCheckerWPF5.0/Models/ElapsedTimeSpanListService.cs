@@ -20,9 +20,9 @@ namespace TimeCheckerWPF5._0.Models
         }
 
 
-        public void AddMainTimeSpan(TimeSpan timeSpan)
+        public void AddMainTimeSpan(TimeSpanRecord timeSpanRecord)
         {
-            ElapsedTimeSpans.Add(timeSpan);
+            ElapsedTimeSpans.Add(timeSpanRecord);
         }
 
 
