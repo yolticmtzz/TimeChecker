@@ -3,6 +3,7 @@ using System.Windows.Input;
 using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Models;
+using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
@@ -12,11 +13,15 @@ namespace TimeCheckerWPF5._0.ViewModels
         public string Firstname { get; set; }
         public string Lastname { get; set; }
 
-        public LoginViewModel(NavigationStore navigationStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListStoreService)
+        public LoginViewModel(UserStore userStore, NavigationStore navigationStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListStoreService)
         {
 
-            LoginCommand = new LoginCommand(this, new Services.NavigationService<TimeCheckerViewModel>(
-                navigationStore, () => new TimeCheckerViewModel(elapsedTimeSpanListStoreService)));
+            NavigationService<TimeCheckerViewModel> navigationService = new NavigationService<TimeCheckerViewModel>(
+                navigationStore,
+                () => new TimeCheckerViewModel(userStore, elapsedTimeSpanListStoreService));
+            
+            
+            LoginCommand = new LoginCommand(this, userStore, navigationService);
         }
 
         public ICommand LoginCommand { get; set; }

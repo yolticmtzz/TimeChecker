@@ -23,12 +23,7 @@ namespace TimeCheckerWPF5._0.Services
 
         public void Navigate()
         {
-
-
-
             _navigationStore.CurrentViewModel = _createViewModel();
-
-
         }
 
     }

@@ -40,6 +40,7 @@ namespace TimeCheckerWPF5._0
             services.AddSingleton(typeof(NavigationStore));
             services.AddSingleton(typeof(MainWindow));
             services.AddSingleton(typeof(ElapsedTimeSpanListStoreService));
+            services.AddSingleton(typeof(UserStore));
 
 
         }
@@ -48,14 +49,15 @@ namespace TimeCheckerWPF5._0
         {
             NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
             ElapsedTimeSpanListStoreService elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListStoreService>();
+            UserStore userStore = _serviceProvider.GetService<UserStore>();
 
             //elapsedTimeSpanListService = new ElapsedTimeSpanListStoreService();
-            navigationStore.CurrentViewModel = new LoginViewModel(navigationStore, elapsedTimeSpanListService);
+            navigationStore.CurrentViewModel = new LoginViewModel(userStore, navigationStore, elapsedTimeSpanListService);
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 
             MainViewModel mainViewModel = new(navigationStore);
-            mainViewModel.NavigationViewModel = new NavigationViewModel(navigationStore, elapsedTimeSpanListService);
+            mainViewModel.NavigationViewModel = new NavigationViewModel(userStore, navigationStore, elapsedTimeSpanListService);
             mainWindow.DataContext = mainViewModel;
             
             mainWindow.Show();

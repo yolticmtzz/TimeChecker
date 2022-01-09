@@ -4,6 +4,7 @@ using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Views;
 using Microsoft.EntityFrameworkCore;
+using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -18,8 +19,8 @@ namespace TimeCheckerWPF5._0.ViewModels
 
 
         //General Data
-        private readonly Employee _user;
-        public string UserFullName { get; set; }
+        private readonly UserStore _userStore;
+        public string UserFullName => $"{_userStore.CurrentUser?.Prename}, {_userStore.CurrentUser?.Lastname}";
         public string Date { get; set; }
         TimeSpanRecord TimeSpanRecord { get; set; }
         private readonly ElapsedTimeSpanListStoreService _elapsedTimeSpanListService;
@@ -144,9 +145,10 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeCheckerViewModel(ElapsedTimeSpanListStoreService elapsedTimeSpanListService)
+        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListService)
         {
             _elapsedTimeSpanListService = elapsedTimeSpanListService;
+            _userStore = userStore;
 
             InitiateCheckInCommand();
             InitiateBreakCommand();
@@ -162,8 +164,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
-            _user = new Employee("Dummy", "User 77");
-            UserFullName = $"{_user.Prename} {_user.Lastname}";
      
         }
 
