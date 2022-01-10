@@ -72,41 +72,8 @@ namespace TimeCheckerWPF5._0
            );
         }
 
-        private LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
-        {
 
-            NavigationService<TimeCheckerViewModel> navigationService = new NavigationService<TimeCheckerViewModel>(
-                serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>()); ;
-
-            return new LoginViewModel(
-                serviceProvider.GetRequiredService<UserStore>(),
-                navigationService);
-        }
-
-        private INavigationService CreateTimeCheckerNavigationService(IServiceProvider serviceProvider)
-        {
-            return new NavigationService<TimeCheckerViewModel>(
-                serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>());
-        }
-
-        private INavigationService CreateElapsedTimeNavigationService(IServiceProvider serviceProvider)
-        {
-            return new NavigationService<ElapsedTimesViewModel>(
-                serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<ElapsedTimesViewModel>());
-        }
-
-        private INavigationService CreateLoginNavigationService(IServiceProvider serviceProvider)
-        {
-            return new NavigationService<LoginViewModel>(
-                serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<LoginViewModel>());
-        }
-
-
-        protected override void OnStartup(StartupEventArgs e) 
+        protected override void OnStartup(StartupEventArgs e)
         {
             //NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
             //ElapsedTimeSpanListStore elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListStore>();
@@ -131,9 +98,41 @@ namespace TimeCheckerWPF5._0
 
         }
 
-        //private NavigationService<TimeCheckerViewModel> CreateNavigationService()
-        //{
-        //    return new NavigationService<TimeCheckerViewModel>(navigationStore, () => new TimeCheckerViewModel(userStore, elapsedTimeSpanListService));
-        //}
+        private INavigationService CreateLoginNavigationService(IServiceProvider serviceProvider)
+        {
+            return new NavigationService<LoginViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<LoginViewModel>());
+        }
+
+        private INavigationService CreateTimeCheckerNavigationService(IServiceProvider serviceProvider)
+        {
+            return new NavigationService<TimeCheckerViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>());
+        }
+
+        private INavigationService CreateElapsedTimeNavigationService(IServiceProvider serviceProvider)
+        {
+            return new NavigationService<ElapsedTimesViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<ElapsedTimesViewModel>());
+        }
+
+
+        private LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
+        {
+
+            NavigationService<TimeCheckerViewModel> navigationService = new NavigationService<TimeCheckerViewModel>(
+                serviceProvider.GetRequiredService<NavigationStore>(),
+                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>()); ;
+
+            return new LoginViewModel(
+                serviceProvider.GetRequiredService<UserStore>(),
+                navigationService);
+        }
+
+
+
     }
 }
