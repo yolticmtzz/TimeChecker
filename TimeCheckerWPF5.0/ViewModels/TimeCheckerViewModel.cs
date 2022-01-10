@@ -5,6 +5,7 @@ using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Views;
 using Microsoft.EntityFrameworkCore;
 using TimeCheckerWPF5._0.Stores;
+using TimeCheckerWPF5._0.Services;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -23,9 +24,9 @@ namespace TimeCheckerWPF5._0.ViewModels
         public string UserFullName => $"{_userStore.CurrentUser?.Prename}, {_userStore.CurrentUser?.Lastname}";
         public string Date { get; set; }
         TimeSpanRecord TimeSpanRecord { get; set; }
-        private readonly ElapsedTimeSpanListStoreService _elapsedTimeSpanListService;
+        private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
         private DateTime TimeCatch { get; set; }
-
+        
 
         public string _comment;
         public string Comment
@@ -145,7 +146,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListService)
+        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStore elapsedTimeSpanListService)
         {
             _elapsedTimeSpanListService = elapsedTimeSpanListService;
             _userStore = userStore;
@@ -263,7 +264,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 Type = type,
                 DateTime = timeCatch,
                 Comment = Comment,
-                User = _user.Fullname,
+                User = UserFullName,
             };
 
             _context.Timeentry.Add(record);

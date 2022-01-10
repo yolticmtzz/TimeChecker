@@ -10,21 +10,38 @@ namespace TimeCheckerWPF5._0.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-
-        public LoginViewModel(UserStore userStore, NavigationStore navigationStore, ElapsedTimeSpanListStoreService elapsedTimeSpanListStoreService)
+        private string _firstname;
+        public string Firstname
         {
+            get => _firstname;
 
-            NavigationService<TimeCheckerViewModel> navigationService = new NavigationService<TimeCheckerViewModel>(
-                navigationStore,
-                () => new TimeCheckerViewModel(userStore, elapsedTimeSpanListStoreService));
-            
-            
-            LoginCommand = new LoginCommand(this, userStore, navigationService);
+            set
+            {
+                _firstname = value;
+                RaisePropertyChanged(nameof(Firstname));
+            }
+        }
+
+        private string _lastName;
+        public string Lastname
+        {
+            get => _lastName;
+
+            set
+            {
+                _firstname = value;
+                RaisePropertyChanged(nameof(Lastname));
+            }
         }
 
         public ICommand LoginCommand { get; set; }
+
+        public LoginViewModel(UserStore userStore, INavigationService loginNavigationService)
+        {
+            LoginCommand = new LoginCommand(this, userStore, loginNavigationService);
+        }
+
+
 
     }
 }

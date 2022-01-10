@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Services
 {
-    public class NavigationService<TViewModel>
+    public class NavigationService<TViewModel> : INavigationService
         where TViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;

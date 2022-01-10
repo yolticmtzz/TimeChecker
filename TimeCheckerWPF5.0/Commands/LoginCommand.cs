@@ -16,10 +16,10 @@ namespace TimeCheckerWPF5._0.Commands
     {
 
         private readonly LoginViewModel _viewModel;
-        private readonly NavigationService<TimeCheckerViewModel> _navigationService;
+        private readonly INavigationService _navigationService;
         private readonly UserStore _userStore;
 
-        public LoginCommand(LoginViewModel viewModel, UserStore userStore, NavigationService<TimeCheckerViewModel> navigationService)
+        public LoginCommand(LoginViewModel viewModel, UserStore userStore, INavigationService navigationService)
         {
             _viewModel = viewModel;
             _userStore = userStore;

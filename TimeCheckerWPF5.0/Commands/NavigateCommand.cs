@@ -5,12 +5,12 @@ using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Stores
 {
-    public class NavigateCommand<TViewModel> : CommandBase
-        where TViewModel : ViewModelBase
+    public class NavigateCommand : CommandBase
+        
     {
-        private readonly NavigationService<TViewModel> _navigationService;
+        private readonly INavigationService _navigationService;
 
-        public NavigateCommand(NavigationService<TViewModel> navigationService)
+        public NavigateCommand(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }
