@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TimeChecker.DAL.Models
 {
-    public class Employee 
+    public class Employee
     {
         public int Id { get; set; }
 
@@ -15,6 +15,10 @@ namespace TimeChecker.DAL.Models
 
         public string Fullname { get => $"{Prename} {Lastname }"; }
 
+        public Employee ()
+        {
+
+        }
 
         public Employee(string prename, string lastname)
         {

@@ -164,8 +164,8 @@ namespace TimeChecker.Controllers
 
                     }
 
-
-                    writer.WriteLine(convertString);
+                    
+                    writer.Write(convertString);writer.Write(";");
                     writer.WriteLine(timeentry.DateTime);
                     writer.WriteLine(commentString);
                     writer.WriteLine(timeentry.User);
