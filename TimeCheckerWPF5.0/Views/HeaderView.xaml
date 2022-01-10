@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TimeCheckerWPF5._0.Views.HomeView"
+﻿<UserControl x:Class="TimeCheckerWPF5._0.Views.HeaderView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,9 +9,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewmodels:TimeCheckerViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
 
     <Grid>

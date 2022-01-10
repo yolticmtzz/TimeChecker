@@ -20,9 +20,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
 
         //General Data
-        private readonly UserStore _userStore;
-        public string UserFullName => $"{_userStore.CurrentUser?.Prename}, {_userStore.CurrentUser?.Lastname}";
-        public string Date { get; set; }
         TimeSpanRecord TimeSpanRecord { get; set; }
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
         private DateTime TimeCatch { get; set; }
@@ -146,10 +143,9 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStore elapsedTimeSpanListService)
+        public TimeCheckerViewModel(ElapsedTimeSpanListStore elapsedTimeSpanListService)
         {
             _elapsedTimeSpanListService = elapsedTimeSpanListService;
-            _userStore = userStore;
 
             InitiateCheckInCommand();
             InitiateBreakCommand();
@@ -163,7 +159,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             MainTimeWatch.TickEvent += MainTimewatchTriggered;
             BreakTimeWatch.TickEvent += BreakTimewatchTriggered;
 
-            Date = DateTime.Now.ToLongDateString();
             Status = Status.CheckedOut;
      
         }
@@ -264,7 +259,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 Type = type,
                 DateTime = timeCatch,
                 Comment = Comment,
-                User = UserFullName,
+                User = "",
             };
 
             _context.Timeentry.Add(record);

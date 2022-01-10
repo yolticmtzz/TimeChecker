@@ -8,16 +8,13 @@
              xmlns:navi="clr-namespace:TimeCheckerWPF5._0.Stores"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="100">
-    <UserControl.DataContext >
-        <navi:NavigationStore/>
-    </UserControl.DataContext>
     <Grid>
 
         <StackPanel Background="DeepSkyBlue" Width="100" HorizontalAlignment="Left">
             <Label Content="Menu" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" VerticalContentAlignment="Center" Height="50" Background="Orange"/>
-            <Button Content="TimeChecker" FontSize="16" Width="Auto" Height="50" Command="{Binding ShowTimeCheckerCommand}"/>
-            <Button Content="Elapsed Times" FontSize="14" Width="Auto" Height="40" Command="{Binding ShowElapsedTimesCommand}"/>
-            <Button Content="Exit" Height="40" FontSize="16"  Background="Red" Foreground="White" Width="Auto" Command="{Binding ExitCommand}" />
+            <Button Content="TimeChecker" FontSize="16" Width="Auto" Height="50" Command="{Binding NavigateTimeCheckerCommand}"/>
+            <Button Content="Elapsed Times" FontSize="14" Width="Auto" Height="40" Command="{Binding NavigateElapsedTimeSpansCommand}"/>
+            <Button Content="Exit" Height="40" FontSize="16"  Background="Red" Foreground="White" Width="Auto" Command="{Binding NavigateExitApplicationCommand}" />
             
         </StackPanel>
     </Grid>

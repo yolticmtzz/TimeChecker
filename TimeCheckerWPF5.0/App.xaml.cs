@@ -32,15 +32,15 @@ namespace TimeCheckerWPF5._0
                     ["TimeCheckerDatabase"].ConnectionString);
             });
 
-            services.AddSingleton(typeof(UserStore));
-            services.AddSingleton(typeof(ElapsedTimeSpanListStore));
-            services.AddSingleton(typeof(NavigationStore));
+            services.AddSingleton<UserStore>();
+            services.AddSingleton<ElapsedTimeSpanListStore>();
+            services.AddSingleton<NavigationStore>();
 
 
             services.AddSingleton<INavigationService>(s => CreateTimeCheckerNavigationService(s));
 
             services.AddTransient<TimeCheckerViewModel>(s => new TimeCheckerViewModel(
-                s.GetRequiredService<UserStore>(),
+                //s.GetRequiredService<UserStore>(),
                 s.GetRequiredService<ElapsedTimeSpanListStore>()
                 ));
             services.AddTransient<ElapsedTimesViewModel>(s => new ElapsedTimesViewModel(

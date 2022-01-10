@@ -16,12 +16,8 @@
     <!--<Window.DataContext>
         <stores:NavigationStore/>
     </Window.DataContext>-->
-   
+
     <Grid MaxWidth="1000" Margin="20 10">
-        <Grid.Resources>
-          
-        </Grid.Resources>
-        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -34,20 +30,19 @@
 
             </Grid.RowDefinitions>
             <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding NavigationViewModel}"/>
-            <views:HomeView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+            <views:HomeView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" DataContext="{Binding TimeCheckerViewModel}" />
             <ContentControl Grid.Row ="2" Grid.Column="1"  Content="{Binding CurrentViewModel}">
                 <ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                        <views:LoginView />
+                    </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel}">
                         <views:TimeCheckerView />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel}">
                         <views:ElapsedTimesView />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                        <views:LoginView />
-                    </DataTemplate>
                 </ContentControl.Resources>
-              
             </ContentControl>
 
         </Grid>

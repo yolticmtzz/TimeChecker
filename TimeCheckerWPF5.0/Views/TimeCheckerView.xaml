@@ -9,10 +9,11 @@
              mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="800">
 
-
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <viewmodels:TimeCheckerViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
+
+
     <ScrollViewer>
     <Grid Background="Gray">
         <Grid.ColumnDefinitions>

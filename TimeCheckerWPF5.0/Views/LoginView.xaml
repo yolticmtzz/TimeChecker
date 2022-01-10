@@ -11,9 +11,9 @@
         FocusManager.FocusedElement="{Binding ElementName=txtBox}"
         Title="Log In" Height="130" Width="300">
 
-    <Window.DataContext>
-        <viewmodels:LoginViewModel/>
-    </Window.DataContext>
+    <!--<UserControl.DataContext>
+        <viewmodels:TimeCheckerViewModel/>
+    </UserControl.DataContext>-->
 
     <Grid>
         <Grid.RowDefinitions>

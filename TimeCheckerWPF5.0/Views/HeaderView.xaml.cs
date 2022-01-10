@@ -18,9 +18,9 @@ namespace TimeCheckerWPF5._0.Views
     /// <summary>
     /// Interaction logic for Navigation.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class HeaderView : UserControl
     {
-        public HomeView()
+        public HeaderView()
         {
             InitializeComponent();
         }
