@@ -164,11 +164,14 @@ namespace TimeChecker.Controllers
 
                     }
 
-                    
-                    writer.Write(convertString);writer.Write(";");
-                    writer.WriteLine(timeentry.DateTime);
-                    writer.WriteLine(commentString);
-                    writer.WriteLine(timeentry.User);
+                    // Struktur passend für Excel
+                    writer.Write(convertString);
+                    writer.Write(";");
+                    writer.Write(timeentry.DateTime);
+                    writer.Write(";");
+                    writer.Write(commentString);
+                    writer.Write(";");
+                    writer.Write(timeentry.User);
                     writer.WriteLine();
                 }
 
