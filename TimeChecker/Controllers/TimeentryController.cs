@@ -17,7 +17,7 @@ namespace TimeChecker.Controllers
         // Variable für Datenbankinhalt
         private readonly ApplicationDbContext _context;
 
-        const string pathtxt = @"C:\Users\jopa\Desktop\Timeentry_Data.txt";
+        const string pathtxt = @"C:\temp\Timeentry_Data.txt";
 
 
         // Dependency injection Übergabe des Datenbankinhalts
