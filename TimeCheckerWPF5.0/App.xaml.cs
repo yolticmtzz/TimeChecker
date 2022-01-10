@@ -58,17 +58,6 @@ namespace TimeCheckerWPF5._0
 
             _serviceProvider = services.BuildServiceProvider();
 
-            services.AddSingleton(typeof(MainWindow));
-            
-
-
-            _serviceProvider = services.BuildServiceProvider();
-
-
-
-
-
-
         }
 
         private NavigationViewModel CreateNavigationViewModel(IServiceProvider serviceProvider)
@@ -119,22 +108,24 @@ namespace TimeCheckerWPF5._0
 
         protected override void OnStartup(StartupEventArgs e) 
         {
-            NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
-            ElapsedTimeSpanListStore elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListStore>();
-            UserStore userStore = _serviceProvider.GetService<UserStore>();
-            //NavigationsBarViewModel navigationsBarViewModel = new NavigationsBarViewModel
+            //NavigationStore navigationStore = _serviceProvider.GetService<NavigationStore>();
+            //ElapsedTimeSpanListStore elapsedTimeSpanListService = _serviceProvider.GetService<ElapsedTimeSpanListStore>();
+            //UserStore userStore = _serviceProvider.GetService<UserStore>();
+
+            //navigationStore.CurrentViewModel = new LoginViewModel(userStore, navigationStore, elapsedTimeSpanListService);
+
+            //var mainWindow = _serviceProvider.GetService<MainWindow>();
+
+            //MainViewModel mainViewModel = new(navigationStore);
+            //mainViewModel.NavigationViewModel = new NavigationViewModel(CreateNavigationService());
+            //mainWindow.DataContext = mainViewModel;
 
 
-            //elapsedTimeSpanListService = new ElapsedTimeSpanListStoreService();
-            navigationStore.CurrentViewModel = new LoginViewModel(userStore, navigationStore, elapsedTimeSpanListService);
+            INavigationService initialNavigationService = _serviceProvider.GetRequiredService<INavigationService>();
+            initialNavigationService.Navigate();
 
-            var mainWindow = _serviceProvider.GetService<MainWindow>();
-
-            MainViewModel mainViewModel = new(navigationStore);
-            mainViewModel.NavigationViewModel = new NavigationViewModel(CreateNavigationService());
-            mainWindow.DataContext = mainViewModel;
-            
-            mainWindow.Show();
+            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            MainWindow.Show();
 
             base.OnStartup(e);
 
