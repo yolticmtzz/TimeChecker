@@ -109,6 +109,7 @@ namespace TimeChecker.Controllers
         private static void SaveWithStream(string path, List<Timeentry> timeentryinDB)
         {
             var convertString = "";
+            var commentString = "";
 
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             using (TextWriter writer = new StreamWriter(fs))
@@ -140,14 +141,33 @@ namespace TimeChecker.Controllers
 
                         }
 
-                    if (timeentry.Comment == null)
+                        switch (timeentry.Type)
                     {
-                        timeentry.Comment = "Leer";
+                        case 1:
+                            commentString = "Leer";
+                            break;
+
+                        case 2:
+                            commentString = timeentry.Comment;
+                            break;
+
+                        case 3:
+                            commentString = "Leer";
+                            break;
+
+                        case 4:
+                            commentString = "Leer";
+                            break;
+
+                        default:
+                            break;
+
                     }
+
 
                     writer.WriteLine(convertString);
                     writer.WriteLine(timeentry.DateTime);
-                    writer.WriteLine(timeentry.Comment);
+                    writer.WriteLine(commentString);
                     writer.WriteLine(timeentry.User);
                     writer.WriteLine();
                 }
