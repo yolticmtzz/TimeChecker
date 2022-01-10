@@ -128,16 +128,16 @@
                             {
                                 type2 = timeentry.DateTime;
                                 type12 = type2.Subtract(type1);
-                                var rounded12 = TimeSpan.FromSeconds(Math.Round(type12.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
-                                @timeentry.DateTime.ToString(rounded12);
+                                var rounded = TimeSpan.FromSeconds(Math.Round(type12.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
+                                @timeentry.DateTime.ToString(rounded);
                             }
 
                             if (timeentry.Type == 4)
                             {
                                 type4 = timeentry.DateTime;
                                 type34 = type4.Subtract(type3);
-                                var rounded34 = TimeSpan.FromSeconds(Math.Round(type34.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
-                                @timeentry.DateTime.ToString(rounded34);
+                                var rounded = TimeSpan.FromSeconds(Math.Round(type34.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
+                                @timeentry.DateTime.ToString(rounded);
                             }
                         }
                     </td>

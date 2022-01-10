@@ -6,10 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
-using TimeChecker.Models;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using System.Text;
+
 
 namespace TimeChecker.Controllers
 {
