@@ -91,20 +91,20 @@ namespace TimeChecker
         {
             var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
 
-            var adminUser = await userManager.FindByNameAsync("admin@em.de");
+            var adminUser = await userManager.FindByNameAsync("admin@bluewin.ch");
 
             if (adminUser == null)
             {
 
                 var user = new IdentityUser()
                 {
-                    Email = "admin@em.de",
-                    UserName = "admin@em.de"
+                    Email = "admin@bluewin.ch",
+                    UserName = "admin@bluewin.ch"
                 };
 
                 await userManager.CreateAsync(user, "Test1.");
 
-                adminUser = await userManager.FindByNameAsync("admin@em.de");
+                adminUser = await userManager.FindByNameAsync("admin@bluewin.ch");
             }
 
             await userManager.AddToRoleAsync(adminUser, "Admin");

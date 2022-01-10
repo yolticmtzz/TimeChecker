@@ -106,7 +106,12 @@
                         @timeentry.DateTime
                     </td>
                     <td class="align-middle">
-                        @timeentry.Comment
+                        @{                          
+                            if (timeentry.Type == 2)
+                            {
+                                @timeentry.Comment
+                            }
+                        }
                     </td>
                     <td class="align-middle">
                         @timeentry.User
