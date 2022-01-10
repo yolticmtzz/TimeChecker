@@ -18,8 +18,8 @@
 
 
     <Grid>
-        <TextBlock Text="Before definitely checking out, you have the possibility to leave a comment or check out without. Your Timewatch will be reset after checking out." HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
-        <TextBox Name="txtBox" Text="{Binding DialogComment}" HorizontalAlignment="Center" Height="61" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
+        <TextBlock Text="Before definitely checking out, you have the possibility to leave a comment or check out without. Your Timewatch will be reset after checking out." HorizontalAlignment="Center" Margin="10,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
+        <TextBox Name="txtBox" Text="{Binding DialogComment}" HorizontalAlignment="Center" Height="61" Margin="10,60,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
         <Button Name ="CheckOutButton" IsDefault="True" Content="Check Out" HorizontalAlignment="Left" Margin="27,127,0,0" VerticalAlignment="Top" Width="70" Height="33" Command="{Binding CheckOutCommand}" />
         <Button Name="CancelButton" IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="204,127,0,0" VerticalAlignment="Top" Width="70" Height="33" Command="{Binding CancelCommand}"/>
 
