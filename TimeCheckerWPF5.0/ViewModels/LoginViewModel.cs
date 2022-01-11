@@ -1,8 +1,5 @@
-﻿using System;
-using System.Windows.Input;
-using TimeChecker.DAL.Models;
+﻿using System.Windows.Input;
 using TimeCheckerWPF5._0.Commands;
-using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 

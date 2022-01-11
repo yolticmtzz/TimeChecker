@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
 using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Stores

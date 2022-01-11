@@ -5,7 +5,6 @@ using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Views;
 using Microsoft.EntityFrameworkCore;
 using TimeCheckerWPF5._0.Stores;
-using TimeCheckerWPF5._0.Services;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -20,7 +19,6 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
         private DateTime TimeCatch { get; set; }
         
-
         public string _comment;
         public string Comment
         {

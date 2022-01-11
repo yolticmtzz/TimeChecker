@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Configuration;
 using System.Windows;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TimeChecker.DAL.Data;
-using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.ViewModels;
