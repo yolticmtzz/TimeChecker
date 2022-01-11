@@ -5,6 +5,19 @@ using TimeChecker.DAL.Models;
 using System.Linq;
 using System.Collections.Generic;
 
+/**
+ * Die Klasse UpdateTests testet das Updaten eines Timeentry Datensatz.
+ * 
+ * Methoden: 
+ * 
+ * UpdateTodoItem() - Updaten eines Timeentry Datensatz.
+ * 
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
+
+
 namespace TimeChecker.DAL.Test
 {
     [TestFixture]

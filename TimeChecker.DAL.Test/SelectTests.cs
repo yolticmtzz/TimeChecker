@@ -5,6 +5,19 @@ using TimeChecker.DAL.Models;
 using System.Linq;
 using System.Collections.Generic;
 
+/**
+ * Die Klasse SelectTests testet die Rückgabe des Timeentry Datensatz.
+ * 
+ * Methoden: 
+ * 
+ * GetAllTimeentries() - Rückgabe aller Timeentries
+ * 
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
+
+
 namespace TimeChecker.DAL.Test
 {
     [TestFixture]

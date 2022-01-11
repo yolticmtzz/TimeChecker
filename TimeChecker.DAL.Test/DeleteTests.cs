@@ -5,6 +5,18 @@ using TimeChecker.DAL.Models;
 using System.Linq;
 
 
+/**
+ * Die Klasse DeleteTests testet das Löschen eines Timeentry Datensatz.
+ * 
+ * Methoden: 
+ * 
+ * DeleteTodoItem() - Löschen Timeentry Datensatz
+ * 
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
+
 namespace TimeChecker.DAL.Test
 {
     public class DeleteTests
