@@ -143,7 +143,7 @@ namespace TimeChecker.Controllers
                 writer.Write("Type;");
                 writer.Write("DateTime;");
                 writer.Write("Comment;");
-                writer.Write("User;");
+                writer.Write("User");
                 writer.WriteLine();
 
                 foreach (var timeentry in timeentryinDB)
