@@ -37,7 +37,7 @@ namespace TimeChecker.DAL.Test
         public void GetAllTimeentries()
         {
             IEnumerable<Timeentry> Timeentries = _context.Timeentry.ToList();
-            Assert.AreEqual(2, Timeentries.Count());
+            Assert.AreEqual(0, Timeentries.Count());
         }
     }
 }
