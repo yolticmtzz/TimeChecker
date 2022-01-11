@@ -1,6 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+
+/**
+ * Die Klasse Timeentry ist eine Migration der Datenbank
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
+
 namespace TimeChecker.Data.Migrations
 {
     public partial class Timeentry : Migration
