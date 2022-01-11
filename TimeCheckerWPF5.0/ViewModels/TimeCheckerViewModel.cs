@@ -13,13 +13,11 @@ namespace TimeCheckerWPF5._0.ViewModels
     public class TimeCheckerViewModel : ViewModelBase
     {
 
-        //DBContext
+
         readonly ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
        .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
        .Options);
 
-
-        //General Data
         TimeSpanRecord TimeSpanRecord { get; set; }
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
         private DateTime TimeCatch { get; set; }
@@ -69,7 +67,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        //MainTime Button and Watch
         private string _mainTimeButtonText;
         public string MainTimeButtonText
         {
@@ -106,7 +103,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         }
 
-        //BreakTime Button and Watch
         private string _breakButtonText;
         public string BreakButtonText
         {
@@ -152,9 +148,7 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             MainTimeWatch = new TimeWatch();
             BreakTimeWatch = new TimeWatch();
-            TimeSpanRecord = new TimeSpanRecord();
-
-
+            
             //Subscribing the MainTimeWatch and the BreakTimeWatch to the TickEvent delegate
             MainTimeWatch.TickEvent += MainTimewatchTriggered;
             BreakTimeWatch.TickEvent += BreakTimewatchTriggered;
@@ -190,7 +184,8 @@ namespace TimeCheckerWPF5._0.ViewModels
          {
              Status = Status.CheckedIn;
              MainTimeWatch.StopwatchStart();
-             TimeSpanRecord.StartDateTime = TimeCatch;
+                 TimeSpanRecord = new TimeSpanRecord();
+                 TimeSpanRecord.StartDateTime = TimeCatch;
              Insert(1, TimeCatch);
 
              }
@@ -207,6 +202,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                      TimeSpanRecord.EndDateTime = TimeCatch;
                      _elapsedTimeSpanListService.AddTimeSpanRecord(TimeSpanRecord);
                      Insert(2, TimeCatch);
+                     Comment = String.Empty;
                  }
                   else
                  {

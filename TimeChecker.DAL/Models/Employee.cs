@@ -16,6 +16,9 @@ namespace TimeChecker.DAL.Models
         public string Fullname { get => $"{Prename} {Lastname }"; }
 
 
+        public Employee() { }
+ 
+
         public Employee(string prename, string lastname)
         {
             Prename = prename;

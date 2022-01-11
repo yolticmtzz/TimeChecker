@@ -43,14 +43,6 @@
                         </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-
-                    <GridViewColumn Header="Type">
-                        <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=TimeSpanType}"/>
-                        </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
