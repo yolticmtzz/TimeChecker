@@ -43,14 +43,16 @@ namespace TimeCheckerWPF5._0
                 //s.GetRequiredService<UserStore>(),
                 s.GetRequiredService<ElapsedTimeSpanListStore>()
                 ));
+
             services.AddTransient<ElapsedTimesViewModel>(s => new ElapsedTimesViewModel(
                 s.GetRequiredService<ElapsedTimeSpanListStore>()
                 ));
+
             services.AddTransient<LoginViewModel>(CreateLoginViewModel);
-
+            services.AddTransient<HeaderViewModel>(CreateHeaderViewModel);
             services.AddTransient<NavigationViewModel>(CreateNavigationViewModel);
+            
             services.AddSingleton<MainViewModel>();
-
             services.AddSingleton<MainWindow>(s => new MainWindow()
             {
                 DataContext = s.GetRequiredService<MainViewModel>()
@@ -59,19 +61,6 @@ namespace TimeCheckerWPF5._0
             _serviceProvider = services.BuildServiceProvider();
 
         }
-
-        private NavigationViewModel CreateNavigationViewModel(IServiceProvider serviceProvider)
-        {
-            return new NavigationViewModel(
-           serviceProvider.GetRequiredService<UserStore>(),
-           serviceProvider.GetRequiredService<NavigationStore>(),
-           serviceProvider.GetRequiredService<ElapsedTimeSpanListStore>(),
-           CreateLoginNavigationService(serviceProvider),
-           CreateTimeCheckerNavigationService(serviceProvider),
-           CreateElapsedTimeNavigationService(serviceProvider)
-           );
-        }
-
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -98,41 +87,75 @@ namespace TimeCheckerWPF5._0
 
         }
 
+        private HeaderViewModel CreateHeaderViewModel(IServiceProvider serviceProvider)
+        {
+            return new HeaderViewModel(serviceProvider.GetRequiredService<UserStore>());
+        }
+
+        private NavigationViewModel CreateNavigationViewModel(IServiceProvider serviceProvider)
+        {
+            return new NavigationViewModel(
+           serviceProvider.GetRequiredService<UserStore>(),
+           serviceProvider.GetRequiredService<NavigationStore>(),
+           serviceProvider.GetRequiredService<ElapsedTimeSpanListStore>(),
+           CreateLoginNavigationService(serviceProvider),
+           CreateTimeCheckerNavigationService(serviceProvider),
+           CreateElapsedTimeNavigationService(serviceProvider)
+           );
+        }
+
+
         private INavigationService CreateLoginNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<LoginViewModel>(
+            return new LayoutNavigationService<LoginViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<LoginViewModel>());
+                () => serviceProvider.GetRequiredService<LoginViewModel>(),
+                () => serviceProvider.GetRequiredService<HeaderViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationViewModel>()
+                );
         }
 
         private INavigationService CreateTimeCheckerNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<TimeCheckerViewModel>(
+            return new LayoutNavigationService<TimeCheckerViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>());
+                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>(),
+                () => serviceProvider.GetRequiredService<HeaderViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationViewModel>()
+                );
         }
 
         private INavigationService CreateElapsedTimeNavigationService(IServiceProvider serviceProvider)
         {
-            return new NavigationService<ElapsedTimesViewModel>(
+            return new LayoutNavigationService<ElapsedTimesViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<ElapsedTimesViewModel>());
+                () => serviceProvider.GetRequiredService<ElapsedTimesViewModel>(),
+                () => serviceProvider.GetRequiredService<HeaderViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationViewModel>()
+                );
         }
 
 
         private LoginViewModel CreateLoginViewModel(IServiceProvider serviceProvider)
         {
 
-            NavigationService<TimeCheckerViewModel> navigationService = new NavigationService<TimeCheckerViewModel>(
+            LayoutNavigationService<TimeCheckerViewModel> navigationService = new LayoutNavigationService<TimeCheckerViewModel>(
                 serviceProvider.GetRequiredService<NavigationStore>(),
-                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>()); ;
+                () => serviceProvider.GetRequiredService<TimeCheckerViewModel>(),
+                () => serviceProvider.GetRequiredService<HeaderViewModel>(),
+                () => serviceProvider.GetRequiredService<NavigationViewModel>()
+                ); ;
 
             return new LoginViewModel(
                 serviceProvider.GetRequiredService<UserStore>(),
                 navigationService);
         }
 
+        private TimeCheckerViewModel CreateTimeCheckerViewModel(IServiceProvider serviceProvider)
+        {
 
-
+            return new TimeCheckerViewModel(
+                serviceProvider.GetRequiredService<ElapsedTimeSpanListStore>());
+        }
     }
 }
