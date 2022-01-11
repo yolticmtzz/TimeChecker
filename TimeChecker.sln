@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeCheckerWPF5.0", "TimeCh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeChecker.DAL.Test", "TimeChecker.DAL.Test\TimeChecker.DAL.Test.csproj", "{9270D65B-4DC8-4D3B-903D-941380C37BE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeChecker_Arduino", "TimeChecker_Arduino\TimeChecker_Arduino.csproj", "{FFC4084B-D613-48B0-97D0-7A827ED904B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeCheckerWPF_Arduino", "TimeCheckerWPF_Arduino\TimeCheckerWPF_Arduino.csproj", "{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,14 +53,14 @@ Global
 		{9270D65B-4DC8-4D3B-903D-941380C37BE5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9270D65B-4DC8-4D3B-903D-941380C37BE5}.Release|x86.ActiveCfg = Release|Any CPU
 		{9270D65B-4DC8-4D3B-903D-941380C37BE5}.Release|x86.Build.0 = Release|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Debug|x86.Build.0 = Debug|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Release|x86.ActiveCfg = Release|Any CPU
-		{FFC4084B-D613-48B0-97D0-7A827ED904B7}.Release|x86.Build.0 = Release|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Debug|x86.Build.0 = Debug|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Release|x86.ActiveCfg = Release|Any CPU
+		{DBCD6017-5B51-4151-965F-DEAEE31C8F6D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
