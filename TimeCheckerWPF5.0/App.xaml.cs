@@ -37,7 +37,7 @@ namespace TimeCheckerWPF5._0
             services.AddSingleton<NavigationStore>();
 
 
-            services.AddSingleton<INavigationService>(s => CreateTimeCheckerNavigationService(s));
+            services.AddSingleton<INavigationService>(s => CreateLoginNavigationService(s));
 
             services.AddSingleton<TimeCheckerViewModel>(s => new TimeCheckerViewModel(
                 //s.GetRequiredService<UserStore>(),
@@ -48,9 +48,9 @@ namespace TimeCheckerWPF5._0
                 s.GetRequiredService<ElapsedTimeSpanListStore>()
                 ));
 
-            services.AddTransient<LoginViewModel>(CreateLoginViewModel);
-            services.AddTransient<HeaderViewModel>(CreateHeaderViewModel);
-            services.AddTransient<NavigationViewModel>(CreateNavigationViewModel);
+            services.AddSingleton<LoginViewModel>(CreateLoginViewModel);
+            services.AddSingleton<HeaderViewModel>(CreateHeaderViewModel);
+            services.AddSingleton<NavigationViewModel>(CreateNavigationViewModel);
             
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<MainWindow>(s => new MainWindow()
@@ -144,7 +144,7 @@ namespace TimeCheckerWPF5._0
                 () => serviceProvider.GetRequiredService<TimeCheckerViewModel>(),
                 () => serviceProvider.GetRequiredService<HeaderViewModel>(),
                 () => serviceProvider.GetRequiredService<NavigationViewModel>()
-                ); ;
+                ); 
 
             return new LoginViewModel(
                 serviceProvider.GetRequiredService<UserStore>(),

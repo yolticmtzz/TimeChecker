@@ -12,8 +12,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
     public class TimeCheckerViewModel : ViewModelBase
     {
-
-
         readonly ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
        .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
        .Options);
@@ -51,11 +49,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public int EntryType { get; set; }
-        public DateTime EntryDate { get; set; }
-
-        //UI Data
-        //Status Dialog
         private string _statusScreenText;
         public string StatusScreenText
         {
@@ -262,7 +255,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             _context.SaveChanges();
         }
 
-    private void UpdateGUIProperties()
+        private void UpdateGUIProperties()
         {
             switch (Status)
             {
@@ -289,18 +282,18 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-            //Access the Timewatch Events to trigger, since its subscribed to the delegate
-            // -> The MainTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
-            private void MainTimewatchTriggered(object? sender, TickEventArgs e)
+        //Access the Timewatch Events to trigger, since its subscribed to the delegate
+        // -> The MainTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+        private void MainTimewatchTriggered(object? sender, TickEventArgs e)
             {
                 var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
                     e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
                 MainTimeWatchScreen = CurrentTime;
             }
 
-            //Access the Timewatch Events to trigger, since its subscribed to the delegate
-            // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
-            private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
+        //Access the Timewatch Events to trigger, since its subscribed to the delegate
+        // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+        private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
             {
                 var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
                     e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
