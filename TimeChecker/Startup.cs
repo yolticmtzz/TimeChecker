@@ -13,6 +13,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using TimeChecker.DAL.Data;
 
+/**
+ * Die Klasse Startup stellt diverse Services beim Aufrufen der Runtime zur Verfügung
+
+ * Methoden: 
+ * 
+ * ConfigureServices() - This method gets called by the runtime. Use this method to add services to the container.
+ * 
+ * Configure() - This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+ * 
+ * CreateRole() - Admin Role erstellen, falls Role nicht existiert neu erstellen.
+ * 
+ * CreateDefaultUser() - Einen Admin Account erstellen mit Email-Adresse und Passwort.
+ * 
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
+
+
 namespace TimeChecker
 {
     public class Startup
@@ -72,7 +91,7 @@ namespace TimeChecker
             CreateDefaultUser(serviceProvider).Wait();
         }
 
-        // Admin Role erstellen, falls Role nicht existiert neu erstellen
+        // Admin Role erstellen, falls Role nicht existiert neu erstellen.
         public async Task CreateRole(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
@@ -86,7 +105,7 @@ namespace TimeChecker
             }
         }
 
-        // Einen Admin Account erstellen mit Email-Adresse und Passwort
+        // Einen Admin Account erstellen mit Email-Adresse und Passwort.
         public async Task CreateDefaultUser(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();

@@ -8,6 +8,30 @@ using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
 using System.IO;
 
+/**
+ * Die Klasse TimeentryController ist die Schnittstelle zwischen 
+ * Datenbank und den HTMl Seiten (View's) im Ordner "Views" -> "Timeentry" angelegt.
+ * Den Datenbank Inhalt wird über den Konstruktor übergeben.
+ * 
+ * Methoden: 
+ * 
+ * Index() - Die Hauptseite von Timeentry View, hier wird der Datenbank Inhalt 
+ * auf der Webseite übergeben und angezeigt.
+ * 
+ * CreateEdit() - Bestehender Timeentry bearbeiten
+ * 
+ * CreateEditEmployee() - Bestehender Timeentry bearbeiten updaten oder neuer hinzufügen
+ * 
+ * DeleteEmployee() - Bestehender Timeentry bearbeiten
+ * 
+ * Export() - Exportiert den Inhalt der Datenbank von Timeentry von der Webseite in eine Text Datei.
+ * 
+ * SaveWithStream() - Methode zum Speichern des Datenbank Inhalts von Timeentry
+ * 
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
 
 namespace TimeChecker.Controllers
 {
