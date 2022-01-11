@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeCheckerWPF5.0", "TimeCh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeChecker.DAL.Test", "TimeChecker.DAL.Test\TimeChecker.DAL.Test.csproj", "{9270D65B-4DC8-4D3B-903D-941380C37BE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeChecker_Arduino", "..\..\Projekte\TimeChecker_Arduino\TimeChecker_Arduino.csproj", "{FFC4084B-D613-48B0-97D0-7A827ED904B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeChecker_Arduino", "TimeChecker_Arduino\TimeChecker_Arduino.csproj", "{FFC4084B-D613-48B0-97D0-7A827ED904B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
