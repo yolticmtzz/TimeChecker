@@ -26,10 +26,12 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             set
             {
-                _firstname = value;
+                _lastName = value;
                 RaisePropertyChanged(nameof(Lastname));
             }
         }
+
+
 
         public ICommand LoginCommand { get; set; }
 
@@ -37,8 +39,6 @@ namespace TimeCheckerWPF5._0.ViewModels
         {
             LoginCommand = new LoginCommand(this, userStore, loginNavigationService);
         }
-
-
 
     }
 }
