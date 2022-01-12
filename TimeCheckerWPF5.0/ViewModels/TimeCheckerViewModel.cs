@@ -5,19 +5,17 @@ using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Views;
 using Microsoft.EntityFrameworkCore;
 using TimeCheckerWPF5._0.Stores;
+using TimeCheckerWPF5._0.DBOperations;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
 
     public class TimeCheckerViewModel : ViewModelBase
-    {
-        readonly ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
-       .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
-       .Options);
-
+    {    
         TimeSpanRecord MainTimeSpanRecord { get; set; }
         TimeSpanRecord BreakTimeSpanRecord { get; set; }
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
+        private readonly UserStore _userStore;
         private DateTime TimeCatch { get; set; }
         
         public string _comment;
@@ -131,8 +129,9 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        public TimeCheckerViewModel(ElapsedTimeSpanListStore elapsedTimeSpanListService)
+        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStore elapsedTimeSpanListService)
         {
+            _userStore = userStore;
             _elapsedTimeSpanListService = elapsedTimeSpanListService;
 
             InitiateCheckInCommand();
@@ -169,41 +168,38 @@ namespace TimeCheckerWPF5._0.ViewModels
             CheckInCommand = new DelegateCommand(
          (o) => Status != Status.BreakMode,
          (o) =>
-         {
-             TimeCatch = DateTime.Now;
-
-         if (Status == Status.CheckedOut)
-         {
-             Status = Status.CheckedIn;
-             MainTimeWatch.StopwatchStart();
-                 MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime);
-                 MainTimeSpanRecord.StartDateTime = TimeCatch;
-             Insert(1, TimeCatch);
-
-             }
-             else
              {
-                 MainTimeWatch.StopwatchStop();
+                 TimeCatch = DateTime.Now;
+
+                 if (Status == Status.CheckedOut)
+                 {
+                         Status = Status.CheckedIn;
+                         MainTimeWatch.StopwatchStart();
+                         MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
+                         new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
+                 }
+                 else
+                 {
+                         MainTimeWatch.StopwatchStop();
                  
-                 bool checkout = OpenCheckOutDialog();
+                         bool checkout = OpenCheckOutDialog();
 
-                 if (checkout == true)
-                 {
-                     Status = Status.CheckedOut;
-                     MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
-                     MainTimeSpanRecord.EndDateTime = TimeCatch;
-                     _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
-                     Insert(2, TimeCatch);
-                     Comment = String.Empty;
-                 }
-                  else
-                 {
-                     MainTimeWatch.StopwatchStart();
-                 }
+                         if (checkout == true)
+                         {
+                             Status = Status.CheckedOut;
+                             MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
+                             MainTimeSpanRecord.EndDateTime = TimeCatch;
+                             _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
+                             new TimeEntryAddDBOperation(2, TimeCatch, Comment, _userStore.CurrentUser.Fullname);
+                         }
+                          else
+                         {
+                             MainTimeWatch.StopwatchStart();
+                         }
 
+                }
              }
-         }
-        );
+         );
         }
 
         public DelegateCommand BreakCommand { get; set; }
@@ -222,13 +218,10 @@ namespace TimeCheckerWPF5._0.ViewModels
                  MainTimeWatch.StopwatchStop();
                  MainTimeSpanRecord.EndDateTime = TimeCatch;
                  _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
-
-                 Insert(3, TimeCatch);
+                 new TimeEntryAddDBOperation(3, TimeCatch, _userStore.CurrentUser.Fullname);
 
                  BreakTimeWatch.StopwatchStart();
-                 BreakTimeSpanRecord = new TimeSpanRecord(TimeSpanType.BreakTime);
-                 BreakTimeSpanRecord.StartDateTime = TimeCatch;
-
+                 BreakTimeSpanRecord = new TimeSpanRecord(TimeSpanType.BreakTime, TimeCatch, _userStore.CurrentUser.Fullname);
              }
              else
              {
@@ -237,31 +230,14 @@ namespace TimeCheckerWPF5._0.ViewModels
                  BreakTimeSpanRecord.EndDateTime = TimeCatch;
                  _elapsedTimeSpanListService.AddTimeSpanRecord(BreakTimeSpanRecord);
                  
-                 MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime);
-                 MainTimeSpanRecord.StartDateTime = TimeCatch;
+                 MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
                  MainTimeWatch.StopwatchStart();
-
-
-                 Insert(4, TimeCatch);
+                 new TimeEntryAddDBOperation(4, TimeCatch, _userStore.CurrentUser.Fullname);
              }
          }
 
         );
 
-        }
-
-        private void Insert(short type, DateTime timeCatch)
-        { 
-            var record = new Timeentry()
-            {
-                Type = type,
-                DateTime = timeCatch,
-                Comment = Comment,
-                User = "",
-            };
-
-            _context.Timeentry.Add(record);
-            _context.SaveChanges();
         }
 
         private void UpdateGUIProperties()

@@ -12,9 +12,11 @@ namespace TimeCheckerWPF5._0.Models
     
     public class TimeSpanRecord
     {
-        public TimeSpanRecord(TimeSpanType type)
+        public TimeSpanRecord(TimeSpanType type, DateTime startTime, string user)
         {
             TimeSpanType = type;
+            StartDateTime = startTime;
+            User = user;
 
         }
 
@@ -25,5 +27,7 @@ namespace TimeCheckerWPF5._0.Models
         public TimeSpan Duration => EndDateTime.Subtract(StartDateTime);
 
         public TimeSpanType TimeSpanType { get; set; }
+
+        public string User { get; set; }
     }
 }

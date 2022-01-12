@@ -16,9 +16,6 @@ namespace TimeCheckerWPF5._0
     public partial class App : Application
     {
         private readonly IServiceProvider _serviceProvider;
-        private readonly ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
-               .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
-               .Options);
 
         public App()
         {
@@ -38,8 +35,10 @@ namespace TimeCheckerWPF5._0
             services.AddSingleton<INavigationService>(s => CreateLoginNavigationService(s));
 
             services.AddSingleton<TimeCheckerViewModel>(s => new TimeCheckerViewModel(
+                s.GetRequiredService<UserStore>(),
                 s.GetRequiredService<ElapsedTimeSpanListStore>()
-                ));
+                
+                )) ;
 
             services.AddTransient<ElapsedTimesViewModel>(s => new ElapsedTimesViewModel(
                 s.GetRequiredService<ElapsedTimeSpanListStore>()
@@ -133,7 +132,8 @@ namespace TimeCheckerWPF5._0
         {
 
             return new TimeCheckerViewModel(
-                serviceProvider.GetRequiredService<ElapsedTimeSpanListStore>());
+                 serviceProvider.GetRequiredService<UserStore>(),
+                   serviceProvider.GetRequiredService<ElapsedTimeSpanListStore>());
         }
     }
 }
