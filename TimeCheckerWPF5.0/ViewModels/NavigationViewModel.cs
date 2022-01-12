@@ -13,12 +13,8 @@ namespace TimeCheckerWPF5._0.ViewModels
         public ICommand NavigateExitApplicationCommand { get; }
 
         public NavigationViewModel(
-            //UserStore userStore,
-            //NavigationStore navigationStore,
-            //ElapsedTimeSpanListStore elapsedTimeSpanListService,
-
             INavigationService loginNavigationService,
-            INavigationService timeCheckerNavigationService, 
+            INavigationService timeCheckerNavigationService,
             INavigationService elapsedTimesNavigationService
            )
         {

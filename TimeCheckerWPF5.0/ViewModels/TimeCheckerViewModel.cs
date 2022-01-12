@@ -15,7 +15,8 @@ namespace TimeCheckerWPF5._0.ViewModels
        .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
        .Options);
 
-        TimeSpanRecord TimeSpanRecord { get; set; }
+        TimeSpanRecord MainTimeSpanRecord { get; set; }
+        TimeSpanRecord BreakTimeSpanRecord { get; set; }
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
         private DateTime TimeCatch { get; set; }
         
@@ -175,8 +176,8 @@ namespace TimeCheckerWPF5._0.ViewModels
          {
              Status = Status.CheckedIn;
              MainTimeWatch.StopwatchStart();
-                 TimeSpanRecord = new TimeSpanRecord();
-                 TimeSpanRecord.StartDateTime = TimeCatch;
+                 MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime);
+                 MainTimeSpanRecord.StartDateTime = TimeCatch;
              Insert(1, TimeCatch);
 
              }
@@ -190,8 +191,8 @@ namespace TimeCheckerWPF5._0.ViewModels
                  {
                      Status = Status.CheckedOut;
                      MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
-                     TimeSpanRecord.EndDateTime = TimeCatch;
-                     _elapsedTimeSpanListService.AddTimeSpanRecord(TimeSpanRecord);
+                     MainTimeSpanRecord.EndDateTime = TimeCatch;
+                     _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
                      Insert(2, TimeCatch);
                      Comment = String.Empty;
                  }
@@ -219,17 +220,27 @@ namespace TimeCheckerWPF5._0.ViewModels
              {
                  Status = Status.BreakMode;
                  MainTimeWatch.StopwatchStop();
-                 
+                 MainTimeSpanRecord.EndDateTime = TimeCatch;
+                 _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
+
                  Insert(3, TimeCatch);
 
                  BreakTimeWatch.StopwatchStart();
+                 BreakTimeSpanRecord = new TimeSpanRecord(TimeSpanType.BreakTime);
+                 BreakTimeSpanRecord.StartDateTime = TimeCatch;
 
              }
              else
              {
                  Status = Status.CheckedIn;
                  BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
+                 BreakTimeSpanRecord.EndDateTime = TimeCatch;
+                 _elapsedTimeSpanListService.AddTimeSpanRecord(BreakTimeSpanRecord);
+                 
+                 MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime);
+                 MainTimeSpanRecord.StartDateTime = TimeCatch;
                  MainTimeWatch.StopwatchStart();
+
 
                  Insert(4, TimeCatch);
              }

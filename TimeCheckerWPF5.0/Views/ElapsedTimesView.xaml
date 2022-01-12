@@ -16,7 +16,7 @@
     <StackPanel Background="Gray">
       
         <Label x:Name="ElapsedMaintimesTitle" Background="Green" Height="25" Width="{Binding Path=ActualWidth, ElementName=ElaspedMaintimesListView}" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Maintimes" VerticalAlignment="Top" />
-        <ListView x:Name="ElaspedMaintimesListView" Margin="20,0,20,20" ItemsSource="{Binding ElapsedTimeSpanList}">
+            <ListView x:Name="ElaspedMaintimesListView" Margin="20,0,20,20" ItemsSource="{Binding ElapsedMainTimeSpanList}">
             <ListView.View>
                 <GridView>
 
@@ -43,12 +43,19 @@
                         </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                </GridView>
+                        <GridViewColumn Header="Timespan Type">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding Path=TimeSpanType}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
             </ListView.View>
         </ListView>
 
-        <!--<Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreaktimesListView}"/>
-        <ListView x:Name="ElapsedBreaktimesListView" Margin="20,0,20,20" ItemsSource="{Binding ElapsedBreakTimeSpans}">
+        <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreaktimesListView}"/>
+            <ListView x:Name="ElapsedBreaktimesListView" Margin="20,0,20,20" ItemsSource="{Binding ElapsedBreakTimeSpanList}">
             <ListView.View>
                 <GridView>
 
@@ -76,16 +83,16 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Type">
+                        <GridViewColumn Header="Timespan Type">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=TimeSpanType, StringFormat='{}{0: HH:mm:ss}'}"/>
+                                <TextBlock Padding="0 0 20 0" Text="{Binding Path=TimeSpanType}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
-            </ListView>-->
+            </ListView>
     </StackPanel>
     </ScrollViewer>
 </UserControl>
