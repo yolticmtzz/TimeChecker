@@ -127,13 +127,5 @@ namespace TimeCheckerWPF5._0
                 serviceProvider.GetRequiredService<UserStore>(),
                 navigationService);
         }
-
-        private TimeCheckerViewModel CreateTimeCheckerViewModel(IServiceProvider serviceProvider)
-        {
-
-            return new TimeCheckerViewModel(
-                 serviceProvider.GetRequiredService<UserStore>(),
-                   serviceProvider.GetRequiredService<ElapsedTimeSpanListStore>());
-        }
     }
 }
