@@ -15,8 +15,8 @@ void loop() {
   
 //  if(Serial.available())
 //  {
-//    //data = Serial.readString();
-//    //d1 = data.charAt(0);
+//    data = Serial.readString();
+//    d1 = data.charAt(0);
 //    appendSerialData += data;
 //
 //    if(d1 == 'h')
@@ -32,6 +32,7 @@ void loop() {
 //      Serial.print("Arduino Say>> LOW");
 //      Serial.println(appendSerialData);
 //    }  
+//  }
 
  while (Serial.available())
  {

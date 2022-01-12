@@ -16,9 +16,7 @@ using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using System.IO.Ports;
-
-
-
+using System.Windows.Threading;
 
 namespace TimeCheckerWPF_Arduino
 {
@@ -28,16 +26,29 @@ namespace TimeCheckerWPF_Arduino
     public partial class MainWindow : Window
     {
         SerialPort sp = new SerialPort();
+        private readonly DispatcherTimer _readSerialDataTimer = new DispatcherTimer();
+        
+
         public MainWindow()
         {
             InitializeComponent();
-
+            _readSerialDataTimer.Interval = TimeSpan.FromMilliseconds(500);
+            _readSerialDataTimer.Tick += _readSerialData;
         }
-
 
         ApplicationDbContext _context = new ApplicationDbContext(new DbContextOptionsBuilder<ApplicationDbContext>()
         .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
         .Options);
+
+        private void _readSerialData(object sender, EventArgs e)
+        {
+            string readSerial = sp.ReadExisting();
+            RichTextBox.AppendText(readSerial);
+            if (readSerial.Contains("Batch"))
+            {
+                Insert();
+            }
+        }
 
         private void Insert()
         {
@@ -46,7 +57,6 @@ namespace TimeCheckerWPF_Arduino
                 Type = 1,
                 DateTime = DateTime.Now,
                 Comment = "Batch",
-
             };
 
             _context.Timeentry.Add(record);
@@ -63,7 +73,6 @@ namespace TimeCheckerWPF_Arduino
 
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
 
@@ -72,6 +81,7 @@ namespace TimeCheckerWPF_Arduino
                 sp.BaudRate = 9600;
                 sp.Open();
                 Status.Text = "Connected";
+                _readSerialDataTimer.Start();
 
             }
 
@@ -86,30 +96,26 @@ namespace TimeCheckerWPF_Arduino
 
         private void Disconnect_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 sp.Close();
                 Status.Text = "Disconnected";
-
+                _readSerialDataTimer.Stop();
             }
 
             catch (Exception)
             {
                 MessageBox.Show("First connect and then disconnect!");
             }
-
-
         }
 
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
+        //private void Send_Click(object sender, RoutedEventArgs e)
+        //{
+        //    sp.Write(TextSendBox.Text + '#');
+        //    string s = sp.ReadLine();
+        //    RichTextBox.AppendText(s);       
+        //}
 
-            sp.Write(TextSendBox.Text + '#');
-            string s = sp.ReadLine();
-            RichTextBox.AppendText(s);
-            Insert();
-        }
     }
 
 }

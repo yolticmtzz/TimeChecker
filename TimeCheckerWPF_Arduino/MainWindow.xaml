@@ -12,7 +12,7 @@
         <ObjectDataProvider ObjectType="{x:Type ports:SerialPort}" MethodName="GetPortNames" x:Key="portNames"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid x:Name="MainWindow1">
         <ComboBox x:Name="COM"  ItemsSource="{Binding Source={StaticResource portNames}}" SelectionChanged="ComboBox_SelectionChanged" HorizontalAlignment="Left" Margin="38,103,0,0" VerticalAlignment="Top" Width="132" Height="27"/>
         <TextBlock x:Name="Status" HorizontalAlignment="Left" Margin="241,155,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Height="26" Width="128" FontSize="18"/>
         <Button x:Name="Connect" Content="Connect" HorizontalAlignment="Left" Margin="203,100,0,0" VerticalAlignment="Top" Click="Connect_Click" Width="76" Height="28"/>
@@ -20,7 +20,7 @@
         <TextBox x:Name="TextSendBox" HorizontalAlignment="Left" Margin="39,32,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="125" Height="41"/>
         <Button x:Name="Send" Content="Senden" HorizontalAlignment="Left" Margin="202,35,0,0" VerticalAlignment="Top" Width="73" Click="Send_Click" Height="30"/>
         <Label Content="Status" HorizontalAlignment="Left" Margin="157,155,0,0" VerticalAlignment="Top" Width="54" RenderTransformOrigin="1,0.695"/>
-        <RichTextBox x:Name="RichTextBox" Margin="461,34,58,253">
+        <RichTextBox x:Name="RichTextBox" Margin="461,34,58,53">
             <FlowDocument>
                 <Paragraph>
                     
