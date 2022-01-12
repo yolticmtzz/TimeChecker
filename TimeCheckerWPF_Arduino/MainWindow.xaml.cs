@@ -93,7 +93,6 @@ namespace TimeCheckerWPF_Arduino
 
         }
 
-
         private void Disconnect_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -109,12 +108,12 @@ namespace TimeCheckerWPF_Arduino
             }
         }
 
-        //private void Send_Click(object sender, RoutedEventArgs e)
-        //{
-        //    sp.Write(TextSendBox.Text + '#');
-        //    string s = sp.ReadLine();
-        //    RichTextBox.AppendText(s);       
-        //}
+        private void Send_Click(object sender, RoutedEventArgs e)
+        {
+            //sp.Write(TextSendBox.Text + '#');
+            //string s = sp.ReadLine();
+            //RichTextBox.AppendText(s);
+        }
 
     }
 
