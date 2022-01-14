@@ -150,9 +150,14 @@
                 Button "Bearbeiten" erstellen und Form CreateEdit an Conroller abschicken
                 -->
                     <td class="align-middle">
-                        <form asp-action="CreateEdit" asp-route-id="@timeentry.ID">
-                            <button type="submit" class="btn btn-warning">Bearbeiten</button>
-                        </form>
+                        @{
+                            if (User.IsInRole("Admin"))
+                            {
+                                <form asp-action="CreateEdit" asp-route-id="@timeentry.ID">
+                                    <button type="submit" class="btn btn-warning">Bearbeiten</button>
+                                </form>
+                            }
+                        }
                     </td>
 
                     <!--
