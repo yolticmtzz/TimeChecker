@@ -42,21 +42,43 @@ namespace TimeCheckerWPF_Arduino
 
         private void _readSerialData(object sender, EventArgs e)
         {
-            string readSerial = sp.ReadExisting();
+            string readSerial = sp.ReadLine();
             RichTextBox.AppendText(readSerial);
-            if (readSerial.Contains("Batch"))
+
+            if (readSerial.Contains("CheckIN"))
             {
-                Insert();
+                InsertCheckIn();
+                readSerial = "";
+            }
+            if (readSerial.Contains("CheckOUT"))
+            {
+                InsertCheckOut();
+                readSerial = "";
             }
         }
 
-        private void Insert()
+        private void InsertCheckIn()
         {
             var record = new Timeentry()
             {
                 Type = 1,
                 DateTime = DateTime.Now,
-                Comment = "Batch",
+                Comment = "Batch-IN",
+                User = "Dummy User 77",
+            };
+
+            _context.Timeentry.Add(record);
+            _context.SaveChanges();
+        }
+
+        private void InsertCheckOut()
+        {
+            var record = new Timeentry()
+            {
+                Type = 2,
+                DateTime = DateTime.Now,
+                Comment = "Batch-OUT",
+                User = "Dummy User 77",
             };
 
             _context.Timeentry.Add(record);
@@ -89,8 +111,6 @@ namespace TimeCheckerWPF_Arduino
             {
                 MessageBox.Show("Please give a valid port number or check your connection!");
             }
-
-
         }
 
         private void Disconnect_Click(object sender, RoutedEventArgs e)
@@ -106,13 +126,6 @@ namespace TimeCheckerWPF_Arduino
             {
                 MessageBox.Show("First connect and then disconnect!");
             }
-        }
-
-        private void Send_Click(object sender, RoutedEventArgs e)
-        {
-            //sp.Write(TextSendBox.Text + '#');
-            //string s = sp.ReadLine();
-            //RichTextBox.AppendText(s);
         }
 
     }
