@@ -92,6 +92,7 @@ namespace Serial_test_3
             this.progressBar_statusBar.Name = "progressBar_statusBar";
             this.progressBar_statusBar.Size = new System.Drawing.Size(100, 23);
             this.progressBar_statusBar.TabIndex = 7;
+            this.progressBar_statusBar.Click += new System.EventHandler(this.progressBar_statusBar_Click);
             // 
             // label4
             // 
@@ -134,6 +135,7 @@ namespace Serial_test_3
             this.label_status.TabIndex = 2;
             this.label_status.Text = "DISCONNECTED";
             this.label_status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label_status.Click += new System.EventHandler(this.label_status_Click);
             // 
             // comboBox_comPort
             // 

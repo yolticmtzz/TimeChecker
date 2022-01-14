@@ -157,5 +157,14 @@ namespace Serial_test_3
             richTextBox_textReceiver.ScrollToCaret();
         }
 
+        private void progressBar_statusBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label_status_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using System.IO.Ports;
 using System.Windows.Threading;
 
+
 namespace TimeCheckerWPF_Arduino
 {
     /// <summary>
@@ -32,7 +33,7 @@ namespace TimeCheckerWPF_Arduino
         public MainWindow()
         {
             InitializeComponent();
-            _readSerialDataTimer.Interval = TimeSpan.FromMilliseconds(500);
+            _readSerialDataTimer.Interval = TimeSpan.FromMilliseconds(1000);
             _readSerialDataTimer.Tick += _readSerialData;
         }
 
@@ -40,7 +41,7 @@ namespace TimeCheckerWPF_Arduino
         .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
         .Options);
 
-        private void _readSerialData(object sender, EventArgs e)
+        private async void _readSerialData(object sender, EventArgs e)
         {
             string readSerial = sp.ReadLine();
             RichTextBox.AppendText(readSerial);
@@ -102,7 +103,10 @@ namespace TimeCheckerWPF_Arduino
                 sp.PortName = portName;
                 sp.BaudRate = 9600;
                 sp.Open();
-                Status.Text = "Connected";
+                Status_text.Text = "Connected";         
+                ProgressBar.Value = 100;
+               // Status_text.Foreground = Color.FromValues
+
                 _readSerialDataTimer.Start();
 
             }
@@ -118,7 +122,8 @@ namespace TimeCheckerWPF_Arduino
             try
             {
                 sp.Close();
-                Status.Text = "Disconnected";
+                Status_text.Text = "Disconnected";
+                ProgressBar.Value = 0;
                 _readSerialDataTimer.Stop();
             }
 
