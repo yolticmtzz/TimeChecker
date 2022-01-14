@@ -1,15 +1,13 @@
 ﻿@model TimeChecker.DAL.Models.Employee
 
-
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
 
     ViewData["Title"] = "Employee";
 }
 
-
+<!--
+   Formular um ein neuen Employee zu erstellen
+-->
 <div class="card">
     <div class="card-header">
         <h5>Create or Edit an Employee</h5>
@@ -19,24 +17,31 @@
         <div class="card-body">
             <div class="row">
                 <div class="col form-group">
-                    <input hidden asp-for="Id" placeholder="Id" class="form-control"/>
+                    <input hidden asp-for="Id" placeholder="Id" class="form-control" />
                 </div>
             </div>
 
             <div class="row">
                 <div class="col form-group">
-                    <input asp-for="Prename" placeholder="Vorname" class="form-control"/>
+                    <input asp-for="Prename" placeholder="Vorname" class="form-control" />
                 </div>
             </div>
 
             <div class="row">
                 <div class="col form-group">
-                    <input asp-for="Lastname" placeholder="Nachname" class="form-control"/>
+                    <input asp-for="Lastname" placeholder="Nachname" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <input asp-for="Fullname" placeholder="Fullname" class="form-control" />
                 </div>
             </div>
         </div>
 
-
+        <!--
+        Button "Speichern" erstellen 
+        -->
         <div class="card-footer">
             <button type="submit" class="btn btn-primary"> Speichern </button>
         </div>

@@ -4,6 +4,17 @@ using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
 using System.Linq;
 
+/**
+ * Die Klasse AddTests testet das Hinzufügen eines Timeentry Datensatz.
+ * 
+ * Methoden: 
+ * 
+ * InsertTimeentry() - Hinzufügen Timeentry Datensatz
+ * 
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
 
 namespace TimeChecker.DAL.Test
 {

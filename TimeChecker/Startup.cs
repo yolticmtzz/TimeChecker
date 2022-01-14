@@ -13,6 +13,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using TimeChecker.DAL.Data;
 
+/**
+ * Die Klasse Startup stellt diverse Services beim Aufrufen der Runtime zur Verfügung
+
+ * Methoden: 
+ * 
+ * ConfigureServices() - This method gets called by the runtime. Use this method to add services to the container.
+ * 
+ * Configure() - This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+ * 
+ * CreateRole() - Admin Role erstellen, falls Role nicht existiert neu erstellen.
+ * 
+ * CreateDefaultUser() - Einen Admin Account erstellen mit Email-Adresse und Passwort.
+ * 
+ * 
+ * @Author Jose Panov
+ * @Version 2022.01.01
+ */
+
+
 namespace TimeChecker
 {
     public class Startup
@@ -33,12 +52,13 @@ namespace TimeChecker
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +86,47 @@ namespace TimeChecker
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            CreateRole(serviceProvider).Wait();
+            CreateDefaultUser(serviceProvider).Wait();
+        }
+
+        // Admin Role erstellen, falls Role nicht existiert neu erstellen.
+        public async Task CreateRole(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
+
+            var adminRoleExisting = await roleManager.RoleExistsAsync("Admin");
+
+            if (adminRoleExisting == false)
+            {
+                await roleManager.CreateAsync(new IdentityRole("Admin"));    
+            
+            }
+        }
+
+        // Einen Admin Account erstellen mit Email-Adresse und Passwort.
+        public async Task CreateDefaultUser(IServiceProvider serviceProvider)
+        {
+            var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
+
+            var adminUser = await userManager.FindByNameAsync("admin@bluewin.ch");
+
+            if (adminUser == null)
+            {
+
+                var user = new IdentityUser()
+                {
+                    Email = "admin@bluewin.ch",
+                    UserName = "admin@bluewin.ch"
+                };
+
+                await userManager.CreateAsync(user, "Test1.");
+
+                adminUser = await userManager.FindByNameAsync("admin@bluewin.ch");
+            }
+
+            await userManager.AddToRoleAsync(adminUser, "Admin");
         }
     }
 }

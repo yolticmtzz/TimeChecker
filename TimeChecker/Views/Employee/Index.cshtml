@@ -18,7 +18,9 @@
 
 
 
-
+<!--
+   Button "Create Employee" erstellen und Form CreateEdit abschicken
+-->
 <form asp-action="CreateEdit">
     <button type="submit" class="btn btn-primary"> + Create Employee  </button>
 </form>
@@ -26,24 +28,31 @@
 <hr />
 
 
-
+<!--
+   Table rows erstellen
+-->
 <table class="table table-dark table-striped table-hover">
     <thead>
         <tr>
+            <!--
             <th>ID</th>
+            -->
             <th>Vorname</th>
             <th>Nachname</th>
+            <th>Fullname</th>
             <th>Bearbeiten</th>
             <th>Löschen</th>
         </tr>
     </thead>
 
+
     <tbody>
-            @{
-                foreach (var employee in ViewBag.Employees)
-                {
+        @{
+            // Inhalt ViewBag in Variable employee übergeben und die einzelnen Attribute anzeigen
+            foreach (var employee in ViewBag.Employees)
+            {
                 <tr>
-                    <td>
+                    <td hidden>
                         @employee.Id
                     </td>
                     <td>
@@ -53,21 +62,30 @@
                         @employee.Lastname
                     </td>
                     <td>
+                        @employee.Fullname
+                    </td>
+                    <td>
+                        <!--
+                        Button "Bearbeiten" erstellen und Form CreateEdit an Controller abschicken
+                        -->
                         <form asp-action="CreateEdit" asp-route-id="@employee.Id">
                             <button type="submit" class="btn btn-warning">Bearbeiten</button>
                         </form>
                     </td>
                     <td>
+                        <!--
+                        Button "Löschen" erstellen und Form DeleteEmployee an Controller abschicken
+                        -->
                         <form asp-action="DeleteEmployee" asp-route-id="@employee.Id">
                             <button type="submit" class="btn btn-danger">Löschen</button>
                         </form>
                     </td>
                 </tr>
 
-                }
-
             }
-        </tbody>
+
+        }
+    </tbody>
 
 </table>
 

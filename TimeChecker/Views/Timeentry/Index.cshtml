@@ -1,17 +1,13 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-
-*@
+﻿
 @{
 
     ViewData["Title"] = "Timeentry";
-
+    
 }
 
 <style>
-    .navbar2{
-        display:flex;
+    .navbar2 {
+        display: flex;
         justify-content: space-between;
         align-items: center;
     }
@@ -19,109 +15,168 @@
     body {
         background-color: moccasin;
     }
-
 </style>
 
-
+<!--
+   Button "Create Timestamps" und Refresh erstellen und die Formen abschicken
+-->
 <div class="navbar">
-        <form asp-action="CreateEdit">
-            <button type="submit" class="btn btn-primary"> + Create Timestamps  </button>
+    <form asp-action="CreateEdit">
+        <button type="submit" class="btn btn-primary"> + Create Timestamps  </button>
+    </form>
+
+    <div>
+        <form asp-action="Index">
+            <button type="submit" class="btn btn-primary"> Refresh  </button>
         </form>
+    </div>
+    <div>
+        <form asp-action="Export">
+            <button type="submit" class="btn btn-primary"> Export  </button>
+        </form>
+    </div>
 
-        <div>
-            <form asp-action="Index">
-                <button type="submit" class="btn btn-primary"> Refresh  </button>
-            </form>
-        </div>
 </div>
-
-
-
 
 <hr />
 
+<!--
+   Table rows erstellen
+-->
 <table class="table table-dark table-striped table-hover table-bordered">
     <thead>
         <tr>
+            <!--
             <th>ID</th>
+            -->
             <th>Type</th>
             <th>Date/Time</th>
             <th>Comment</th>
             <th>User</th>
-            <th>Bearbeiten</th>
-            <th>Löschen</th>
+            <th>Evaluation</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     <thead>
 
 
 
     <tbody>
-
-
         @{
+            DateTime type1 = new DateTime();
+            DateTime type2 = new DateTime();
+            DateTime type3 = new DateTime();
+            DateTime type4 = new DateTime();
+            TimeSpan type12;
+            TimeSpan type34;
+
+            // Inhalt ViewBag in Variable timeentry übergeben und die einzelnen Attribute anzeigen
             foreach (var timeentry in ViewBag.Timeentry)
             {
                 <tr>
-                    <td class="align-middle">
+                    <td hidden class="align-middle">
                         @timeentry.ID
                     </td>
+
                     <td class="align-middle">
-                        @timeentry.Type
+                        @{
+                            // Type Wert umwandeln in entsprechnder String
+                            if (timeentry.Type == 1)
+                            {
+                                @timeentry.Type.ToString("Check In");
+                            }
+
+                            if (timeentry.Type == 2)
+                            {
+                                @timeentry.Type.ToString("Check Out");
+                            }
+
+                            if (timeentry.Type == 3)
+                            {
+                                @timeentry.Type.ToString("Start Break");
+                            }
+
+                            if (timeentry.Type == 4)
+                            {
+                                @timeentry.Type.ToString("Stop Break");                               
+                            }
+                        }
                     </td>
                     <td class="align-middle">
                         @timeentry.DateTime
                     </td>
-                    <td class="align-middle">
-                        @timeentry.Comment
+                    <td class="align-middle">                      
+                        @{                          
+                            if (timeentry.Type == 2)
+                            {
+                                @timeentry.Comment
+                            }
+                        }
                     </td>
                     <td class="align-middle">
                         @timeentry.User
                     </td>
                     <td class="align-middle">
+                        @{
+                            //Evaluation Timestamps
+                            if (timeentry.Type == 1)
+                            {
+                                type1 = timeentry.DateTime;
+                            }
+
+                            if (timeentry.Type == 3)
+                            {
+                                type3 = timeentry.DateTime;
+                            }
+
+                            if (timeentry.Type == 2)
+                            {
+                                type2 = timeentry.DateTime;
+                                type12 = type2.Subtract(type1);
+                                var rounded = TimeSpan.FromSeconds(Math.Round(type12.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
+                                @timeentry.DateTime.ToString(rounded);
+                            }
+
+                            if (timeentry.Type == 4)
+                            {
+                                type4 = timeentry.DateTime;
+                                type34 = type4.Subtract(type3);
+                                var rounded = TimeSpan.FromSeconds(Math.Round(type34.TotalSeconds, 1)).ToString(@"hh\:mm\:ss\.f");
+                                @timeentry.DateTime.ToString(rounded);
+                            }
+                        }
+                    </td>
+                    <!--
+                Button "Bearbeiten" erstellen und Form CreateEdit an Conroller abschicken
+                -->
+                    <td class="align-middle">
                         <form asp-action="CreateEdit" asp-route-id="@timeentry.ID">
                             <button type="submit" class="btn btn-warning">Bearbeiten</button>
                         </form>
                     </td>
+
+                    <!--
+                Button "Löschen" erstellen und Form DeleteTimeentry an Conroller abschicken
+                -->
                     <td class="align-middle">
-                        <form asp-action="DeleteTimeentry" asp-route-id="@timeentry.ID" >
-                            <button type="submit" class="btn btn-danger">Löschen</button>
-                        </form>
+                        @{
+                            if (User.IsInRole("Admin"))
+                            {
+                                <form asp-action="DeleteTimeentry" asp-route-id="@timeentry.ID">
+                                    <button type="submit" class="btn btn-danger">Löschen</button>
+                                </form>
+                            }
+                        }
                     </td>
                 </tr>
 
             }
 
         }
-
-
     </tbody>
-
 
 </table>
 
-
-
-@*
-       <table>
-
-        <tr>
-            <td>
-                <form asp-action="CreateEdit">
-                    <button type="submit" class="btn btn-primary"> + Create Timestamps  </button>
-                </form>
-            </td>
-
-            <td>
-                <form asp-action="Index">
-                    <button type="submit" class="btn btn-primary"> Get Timestamps  </button>
-                </form>
-            </td>
-        </tr>
-
-    </table>
-
-
-*@
 
 
 
