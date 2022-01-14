@@ -26,14 +26,14 @@ namespace TimeCheckerWPF_Arduino
     /// </summary>
     public partial class MainWindow : Window
     {
-        SerialPort sp = new SerialPort();
+        SerialPort serialport = new SerialPort();
         private readonly DispatcherTimer _readSerialDataTimer = new DispatcherTimer();
         
 
         public MainWindow()
         {
             InitializeComponent();
-            _readSerialDataTimer.Interval = TimeSpan.FromMilliseconds(1000);
+            _readSerialDataTimer.Interval = TimeSpan.FromMilliseconds(500);
             _readSerialDataTimer.Tick += _readSerialData;
         }
 
@@ -41,9 +41,10 @@ namespace TimeCheckerWPF_Arduino
         .UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TimeChecker;Trusted_Connection=True;MultipleActiveResultSets=true")
         .Options);
 
-        private async void _readSerialData(object sender, EventArgs e)
+        private void _readSerialData(object sender, EventArgs e)
         {
-            string readSerial = sp.ReadLine();
+ 
+            string readSerial = serialport.ReadExisting();
             RichTextBox.AppendText(readSerial);
 
             if (readSerial.Contains("CheckIN"))
@@ -90,8 +91,6 @@ namespace TimeCheckerWPF_Arduino
         {
             var selectedcomboitem = sender as ComboBox;
             string name = selectedcomboitem.SelectedItem as string;
-
-
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)
@@ -100,12 +99,14 @@ namespace TimeCheckerWPF_Arduino
             {
 
                 string portName = COM.SelectedItem as string;
-                sp.PortName = portName;
-                sp.BaudRate = 9600;
-                sp.Open();
-                Status_text.Text = "Connected";         
-                ProgressBar.Value = 100;
-               // Status_text.Foreground = Color.FromValues
+                serialport.PortName = portName;
+                serialport.BaudRate = 9600;
+                serialport.Open();
+
+                for (int i = 0; i < 101; i++)
+                {
+                    ProgressBar.Value = i;
+                }
 
                 _readSerialDataTimer.Start();
 
@@ -121,10 +122,13 @@ namespace TimeCheckerWPF_Arduino
         {
             try
             {
-                sp.Close();
+
+                serialport.Close();
                 Status_text.Text = "Disconnected";
                 ProgressBar.Value = 0;
                 _readSerialDataTimer.Stop();
+                RichTextBox.Document.Blocks.Clear();
+
             }
 
             catch (Exception)
