@@ -57,6 +57,10 @@ namespace TimeCheckerWPF_Arduino
                 InsertCheckOut();
                 readSerial = "";
             }
+            if (ProgressBar.Value == 100)
+            {
+                Status_text.Text = "Connected";
+            }
         }
 
         private void InsertCheckIn()
@@ -106,8 +110,10 @@ namespace TimeCheckerWPF_Arduino
                 for (int i = 0; i < 101; i++)
                 {
                     ProgressBar.Value = i;
+
                 }
 
+                
                 _readSerialDataTimer.Start();
 
             }
