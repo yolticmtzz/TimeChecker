@@ -5,19 +5,26 @@ namespace TimeCheckerWPF5._0.Stores
 {
     public class ElapsedTimeSpanListStore
     {
-        private readonly ObservableCollection<TimeSpanRecord> _elapsedTimeSpanList;
-        public ObservableCollection<TimeSpanRecord> ElapsedTimeSpanList => _elapsedTimeSpanList;
+        public ObservableCollection<TimeSpanRecord> ElapsedBreakTimeSpanList;
+
+        public ObservableCollection<TimeSpanRecord> ElapsedMainTimeSpanList;
 
         public ElapsedTimeSpanListStore()
         {
-            _elapsedTimeSpanList = new ObservableCollection<TimeSpanRecord>();
+            ElapsedMainTimeSpanList = new ObservableCollection<TimeSpanRecord>();
+            ElapsedBreakTimeSpanList = new ObservableCollection<TimeSpanRecord>();
 
         }
 
 
         public void AddTimeSpanRecord(TimeSpanRecord timeSpanRecord)
         {
-            ElapsedTimeSpanList.Add(timeSpanRecord);
+            if (timeSpanRecord.TimeSpanType == TimeSpanType.MainTime)
+            {
+                ElapsedMainTimeSpanList.Add(timeSpanRecord);
+                return;
+            }
+            ElapsedBreakTimeSpanList.Add(timeSpanRecord);
         }
 
     }

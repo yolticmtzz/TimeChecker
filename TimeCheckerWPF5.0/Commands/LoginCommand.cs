@@ -29,11 +29,7 @@ namespace TimeCheckerWPF5._0.Commands
         public override void Execute(object parameter)
         {
 
-            Employee employee = new Employee("", "")
-            {
-                Prename = _viewModel.Firstname,
-                Lastname = _viewModel.Lastname,
-            };
+            Employee employee = new Employee(_viewModel.Firstname, _viewModel.Lastname);
 
             MessageBox.Show($"Logging in {_viewModel.Firstname} {_viewModel.Lastname}...");
 

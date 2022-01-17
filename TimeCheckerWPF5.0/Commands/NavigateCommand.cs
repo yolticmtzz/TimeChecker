@@ -18,6 +18,7 @@ namespace TimeCheckerWPF5._0.Stores
         public override void Execute(object parameter)
         {
             _navigationService.Navigate();
+
         }
 
     }
