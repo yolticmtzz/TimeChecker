@@ -15,21 +15,11 @@ namespace TimeCheckerWPF5._0.ViewModels
         TimeSpanRecord MainTimeSpanRecord { get; set; }
         TimeSpanRecord BreakTimeSpanRecord { get; set; }
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
+        
         private readonly UserStore _userStore;
         private DateTime TimeCatch { get; set; }
         
-        public string _comment;
-        public string Comment
-        {
-            get => _comment;
-
-            set
-            {
-                    _comment = value;
-                    RaisePropertyChanged();
-            }
-
-        }
+        public string Comment { get; set; }
 
         private Status _status;
         public Status Status
