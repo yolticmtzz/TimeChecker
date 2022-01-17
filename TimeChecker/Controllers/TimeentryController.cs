@@ -138,7 +138,14 @@ namespace TimeChecker.Controllers
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             using (TextWriter writer = new StreamWriter(fs))
             {
-            
+                // Header für Excel
+                writer.Write("ID;");
+                writer.Write("Type;");
+                writer.Write("DateTime;");
+                writer.Write("Comment;");
+                writer.Write("User");
+                writer.WriteLine();
+
                 foreach (var timeentry in timeentryinDB)
                 {
 
@@ -189,6 +196,8 @@ namespace TimeChecker.Controllers
                     }
 
                     // Struktur passend für Excel
+                    writer.Write(timeentry.ID);
+                    writer.Write(";");
                     writer.Write(convertString);
                     writer.Write(";");
                     writer.Write(timeentry.DateTime);
