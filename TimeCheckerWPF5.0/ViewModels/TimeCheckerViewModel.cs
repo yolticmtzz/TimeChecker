@@ -176,7 +176,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                          Status = Status.CheckedIn;
                          MainTimeWatch.StopwatchStart();
                          MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
-                     _ = new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
+                        new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
                  }
                  else
                  {
@@ -190,7 +190,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                              MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                              MainTimeSpanRecord.EndDateTime = TimeCatch;
                              _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
-                         _ = new TimeEntryAddDBOperation(2, TimeCatch, Comment, _userStore.CurrentUser.Fullname);
+                         new TimeEntryAddDBOperation(2, TimeCatch, Comment, _userStore.CurrentUser.Fullname);
                          }
                           else
                          {

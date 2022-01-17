@@ -8,9 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--<UserControl.DataContext>
-        <viewmodels:ElapsedTimesViewModel/>
-    </UserControl.DataContext>-->
 
     <ScrollViewer>
     <StackPanel Background="Gray">
@@ -54,10 +51,10 @@
                     </GridView>
             </ListView.View>
         </ListView>
-        
-        
 
-        <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreaktimesListView}"/>
+
+            <Label x:Name="Totals2" Background="Orange" Height="25" Width="{Binding Path=ActualWidth, ElementName=ElaspedMaintimesListView}" HorizontalAlignment="Left" Margin="20,20,0,0" Content="{Binding TotalBreakTimeSpans}" VerticalAlignment="Top" />
+            <Label x:Name="ElapsedBreaktimesTitle" Background="Orange" HorizontalAlignment="Left" Margin="20,20,0,0" Content="Elapsed Breaktimes" VerticalAlignment="Top" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreaktimesListView}"/>
             <ListView x:Name="ElapsedBreaktimesListView" Margin="20,0,20,20" ItemsSource="{Binding ElapsedBreakTimeSpanList}">
             <ListView.View>
                 <GridView>
