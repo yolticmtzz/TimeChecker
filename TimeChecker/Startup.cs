@@ -90,8 +90,13 @@ namespace TimeChecker
             CreateRole(serviceProvider).Wait();
             CreateDefaultUser(serviceProvider).Wait();
         }
-
-        // Admin Role erstellen, falls Role nicht existiert neu erstellen.
+     
+        /// <summary>
+        /// Admin Role erstellen, falls Role nicht existiert neu erstellen.
+        /// </summary>
+        /// <param name="serviceProvider">
+        /// Übergabe des Service Providers
+        /// </param>
         public async Task CreateRole(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
@@ -100,12 +105,17 @@ namespace TimeChecker
 
             if (adminRoleExisting == false)
             {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));    
-            
+                await roleManager.CreateAsync(new IdentityRole("Admin"));             
             }
         }
 
-        // Einen Admin Account erstellen mit Email-Adresse und Passwort.
+        /// <summary>
+        /// Einen Admin Account erstellen mit Email-Adresse und Passwort.
+        /// </summary>
+        /// 
+        /// <param name="serviceProvider">
+        /// Übergabe des Service Providers
+        /// </param>
         public async Task CreateDefaultUser(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetService<UserManager<IdentityUser>>();
@@ -122,10 +132,8 @@ namespace TimeChecker
                 };
 
                 await userManager.CreateAsync(user, "Test1.");
-
                 adminUser = await userManager.FindByNameAsync("admin@bluewin.ch");
             }
-
             await userManager.AddToRoleAsync(adminUser, "Admin");
         }
     }

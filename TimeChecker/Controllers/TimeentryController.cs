@@ -43,27 +43,40 @@ namespace TimeChecker.Controllers
 
         const string pathtxt = @"C:\temp\Timeentry_Data.txt";
 
-
         // Dependency injection Übergabe des Datenbankinhalts
         public TimeentryController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Datenbank Inhalt Timeentry in Variable timeentry speichern
+        /// Variable timeentry in ViewBag übergeben
+        /// </summary>
+        /// 
+        /// <returns>
+        /// ViewBag wird übergeben
+        /// </returns>
         public IActionResult Index()
         {
-
-            // Datenbankinhalt Timeentry in Variable employees speichern
             var timeentry = _context.Timeentry.ToList();
         
-            // Variable timeentry in ViewBag übergeben
              ViewBag.Timeentry = timeentry;
             
-             // ViewBag wird übergeben
              return View();            
         }
 
-        // Bestehender Timeentry aus Datenbank bearbeiten
+        /// <summary>
+        /// Bestehender Timeentry aus Datenbank bearbeiten
+        /// </summary>
+        /// 
+        /// <param name="id"> 
+        /// Timeentry mit entsprechender id suchen
+        /// </param>
+        /// 
+        /// <returns>
+        /// View CreateEditTimeentry
+        /// </returns>
         public IActionResult CreateEdit(int id)
         {
             if (id == 0)
@@ -79,10 +92,19 @@ namespace TimeChecker.Controllers
             }
 
             return View("CreateEditTimeentry", timeentryInDb);
-
         }
 
-        // Timeentry hinzufügen oder updaten wenn ID nicht 0 
+        /// <summary>
+        /// Timeentry hinzufügen oder updaten wenn ID nicht 0 
+        /// </summary>
+        /// 
+        /// <param name="timeentry"> 
+        /// Model Timeentry übergeben 
+        /// </param>
+        /// 
+        /// <returns>
+        /// View Index Seite
+        /// </returns>
         [HttpPost]
         public IActionResult CreateEditTimeentry(Timeentry timeentry)
         {
@@ -100,7 +122,17 @@ namespace TimeChecker.Controllers
             return RedirectToAction("Index");
         }
 
-        // Timeentry löschen
+        /// <summary>
+        /// Timeentry löschen
+        /// </summary>
+        /// 
+        /// <param name="id"> 
+        /// Timeentry mit entsprechender id suchen
+        /// </param>
+        /// 
+        /// <returns>
+        /// View Index Seite
+        /// </returns>
         public IActionResult DeleteTimeentry(int id)
         {
             var timeentryInDb = _context.Timeentry.Find(id);
@@ -114,12 +146,16 @@ namespace TimeChecker.Controllers
             _context.Timeentry.Remove(timeentryInDb);
             _context.SaveChanges();
 
-
             return RedirectToAction("Index");
-
         }
 
-        // Timeentry Daten in Textdatei exportieren
+        /// <summary>
+        /// Timeentry Daten in Textdatei exportieren
+        /// </summary>
+        /// 
+        /// <returns>
+        /// View Index Seite
+        /// </returns>
         public IActionResult Export()
         {
             var timeentryinDB = _context.Timeentry.ToList();
@@ -128,8 +164,18 @@ namespace TimeChecker.Controllers
 
             return RedirectToAction("Index");
         }
-
-        // Textdatei via stream speichern
+ 
+        /// <summary>
+        /// Textdatei via stream speichern
+        /// </summary>
+        /// 
+        /// <param name="path">
+        /// Zielpfad des textfiles 
+        /// </param>
+        /// 
+        /// <param name="timeentryinDB">
+        /// Liste von Timeentry übergeben
+        /// </param>
         private static void SaveWithStream(string path, List<Timeentry> timeentryinDB)
         {
             var convertString = "";
@@ -148,7 +194,6 @@ namespace TimeChecker.Controllers
 
                 foreach (var timeentry in timeentryinDB)
                 {
-
                         switch (timeentry.Type)
                         {
                             case 1:
@@ -169,31 +214,29 @@ namespace TimeChecker.Controllers
 
                             default: 
                             break;
-
                         }
 
                         switch (timeentry.Type)
-                    {
-                        case 1:
+                        {
+                            case 1:
                             commentString = "Leer";
                             break;
 
-                        case 2:
+                            case 2:
                             commentString = timeentry.Comment;
                             break;
 
-                        case 3:
+                            case 3:
                             commentString = "Leer";
                             break;
 
-                        case 4:
+                            case 4:
                             commentString = "Leer";
                             break;
 
-                        default:
+                            default:
                             break;
-
-                    }
+                        }
 
                     // Struktur passend für Excel
                     writer.Write(timeentry.ID);
@@ -206,10 +249,7 @@ namespace TimeChecker.Controllers
                     writer.Write(";");
                     writer.Write(timeentry.User);
                     writer.WriteLine();
-                }
-
-                 
-                
+                }                            
             }
         }
     }

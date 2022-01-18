@@ -30,7 +30,9 @@ namespace TimeChecker.DAL.Test
                .Options);
         }
 
-
+        /// <summary>
+        /// Hinzufügen Timeentry Datensatz
+        /// </summary>
         [Test]
         public void InsertTimeentry()
         {

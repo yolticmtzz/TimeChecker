@@ -33,6 +33,9 @@ namespace TimeChecker.DAL.Test
                .Options);
         }
 
+        /// <summary>
+        /// Rückgabe aller Timeentries
+        /// </summary>
         [Test]
         public void GetAllTimeentries()
         {

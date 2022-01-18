@@ -35,16 +35,37 @@ namespace TimeChecker.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Aufruf Index Seite
+        /// </summary>
+        /// 
+        /// <returns>
+        /// View Index
+        /// </returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Aufruf Privacy Seite
+        /// </summary>
+        /// 
+        /// <returns>
+        /// View Index
+        /// </returns>
         public IActionResult Privacy()
         {
             return View();
         }
 
+        /// <summary>
+        /// Aufruf von Error View falls keine Request ID gefunden wurde.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// View mit ErrorViewModel
+        /// </returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
