@@ -4,6 +4,7 @@ using TimeCheckerWPF5._0.Views;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.DBOperations;
 using TimeCheckerWPF5._0.Utilities;
+using TimeCheckerWPF5._0.Services;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -20,7 +21,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         TimeSpanRecord MainTimeSpanRecord { get; set; }
         TimeSpanRecord BreakTimeSpanRecord { get; set; }
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
-        
+        private readonly DataBaseService _dataBaseService;
         private readonly UserStore _userStore;
         private DateTime TimeCatch { get; set; }
         
@@ -144,10 +145,11 @@ namespace TimeCheckerWPF5._0.ViewModels
         }
 
 
-        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStore elapsedTimeSpanListService)
+        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStore elapsedTimeSpanListService, DataBaseService dataBaseService)
         {
             _userStore = userStore;
             _elapsedTimeSpanListService = elapsedTimeSpanListService;
+            _dataBaseService = dataBaseService;
 
             InitiateCheckInCommand();
             InitiateBreakCommand();
@@ -191,7 +193,8 @@ namespace TimeCheckerWPF5._0.ViewModels
                          Status = Status.CheckedIn;
                          MainTimeWatch.StopwatchStart();
                          MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
-                         new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
+                         _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
+                         //new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
                  }
                  else
                  {

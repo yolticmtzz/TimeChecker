@@ -11,25 +11,27 @@ namespace TimeCheckerWPF5._0.Services
 {
     public class DataBaseService
     {
+        private readonly ApplicationDbContext _dbContext;
 
+        public DataBaseService(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
-        public bool AddTimeEntry(short type, DateTime timeCatch, string user, string? comment)
+        public bool AddTimeEntry(short type, DateTime timeCatch, string user, string? comment = "")
         {
 
-            using (var db = new ApplicationDbContext())
+            var record = new Timeentry()
             {
-                var record = new Timeentry()
-                {
-                    Type = type,
-                    DateTime = timeCatch,
-                    User = user,
-                    Comment = comment,
-                };
+                Type = type,
+                DateTime = timeCatch,
+                User = user,
+                Comment = comment,
+            };
 
-                db.Timeentry.Add(record);
-                int result = db.SaveChanges();
-                if (result > 0) return true;
-            }
+            _dbContext.Timeentry.Add(record);
+            int result = _dbContext.SaveChanges();
+            if (result > 0) return true;
 
             return false;
         }
