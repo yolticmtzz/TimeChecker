@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using TimeCheckerWPF5._0.Models;
+using TimeCheckerWPF5._0.Commands;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {

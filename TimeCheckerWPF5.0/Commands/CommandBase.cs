@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TimeCheckerWPF5._0.Models
+namespace TimeCheckerWPF5._0.Commands
 {
     public abstract class CommandBase : ICommand
     {

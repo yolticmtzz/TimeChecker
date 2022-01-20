@@ -24,7 +24,7 @@
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Text="Firstname" FontSize="12"
                        HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="firstNameTxtBox" Text="{Binding Firstname}"
+            <TextBox x:Name="firstNameTxtBox" Text="{Binding Prename}"
                      Width="120" FontSize="12"
                      HorizontalAlignment="Left" VerticalAlignment="Top" />
         </StackPanel>

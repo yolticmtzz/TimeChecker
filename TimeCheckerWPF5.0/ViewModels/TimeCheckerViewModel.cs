@@ -1,14 +1,19 @@
 ﻿using System;
-using TimeChecker.DAL.Data;
-using TimeChecker.DAL.Models;
-using TimeCheckerWPF5._0.Models;
+using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Views;
-using Microsoft.EntityFrameworkCore;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.DBOperations;
+using TimeCheckerWPF5._0.Utilities;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
+
+    public enum Status
+    {
+        CheckedIn,
+        CheckedOut,
+        BreakMode,
+    }
 
     public class TimeCheckerViewModel : ViewModelBase
     {    
@@ -200,7 +205,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                              MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                              MainTimeSpanRecord.EndDateTime = TimeCatch;
                              _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
-                         new TimeEntryAddDBOperation(2, TimeCatch, Comment, _userStore.CurrentUser.Fullname);
+                             new TimeEntryAddDBOperation(2, TimeCatch, Comment, _userStore.CurrentUser.Fullname);
                          }
                           else
                          {

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
-using TimeCheckerWPF5._0.Models;
 using TimeCheckerWPF5._0.Stores;
+using TimeCheckerWPF5._0.Utilities;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {

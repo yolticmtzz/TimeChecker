@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Threading;
 
-namespace TimeCheckerWPF5._0.Models
+namespace TimeCheckerWPF5._0.Utilities
 {
     public class TimeWatch
     {

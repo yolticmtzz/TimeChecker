@@ -1,9 +1,9 @@
 ﻿using System;
-using TimeCheckerWPF5._0.Models;
+using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.ViewModels;
 
-namespace TimeCheckerWPF5._0.Stores
+namespace TimeCheckerWPF5._0.Commands
 {
     public class NavigateCommand : CommandBase
         

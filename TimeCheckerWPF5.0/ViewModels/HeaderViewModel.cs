@@ -6,11 +6,8 @@ namespace TimeCheckerWPF5._0.ViewModels
     public class HeaderViewModel : ViewModelBase
     {
         private readonly UserStore _userStore;
-        public string UserFullName => _userStore.CurrentUser?.Fullname; //$"{_userStore.CurrentUser?.Prename}, {_userStore.CurrentUser?.Lastname}";
+        public string UserFullName => _userStore.CurrentUser?.Fullname;
         public string Date { get; set; }
-
-
-
 
         public HeaderViewModel(UserStore userStore)
         {

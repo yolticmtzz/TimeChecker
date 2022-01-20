@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
+using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Services;
-using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -18,7 +18,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             INavigationService elapsedTimesNavigationService
            )
         {
-
             NavigateLoginCommand = new NavigateCommand(loginNavigationService);
             NavigateTimeCheckerCommand = new NavigateCommand(timeCheckerNavigationService);
             NavigateElapsedTimeSpansCommand = new NavigateCommand(elapsedTimesNavigationService);

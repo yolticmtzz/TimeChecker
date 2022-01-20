@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TimeCheckerWPF5._0.Models
+namespace TimeCheckerWPF5._0.Utilities
 {
     public class TickEventArgs : EventArgs
     {
