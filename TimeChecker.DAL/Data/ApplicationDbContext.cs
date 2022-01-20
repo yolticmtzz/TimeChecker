@@ -22,5 +22,9 @@ namespace TimeChecker.DAL.Data
 
 
         }
+
+        public ApplicationDbContext()
+        {
+        }
     }
 }

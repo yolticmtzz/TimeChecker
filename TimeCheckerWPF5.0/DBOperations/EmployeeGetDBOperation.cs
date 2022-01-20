@@ -9,7 +9,7 @@ using TimeChecker.DAL.Models;
 
 namespace TimeCheckerWPF5._0.DBOperations
 {
-    public class EmployeeGetDBOperation : DBOperationsBase
+    public class EmployeeGetDBOperation
     {
 
         readonly ApplicationDbContext _context = new(new DbContextOptionsBuilder<ApplicationDbContext>()
