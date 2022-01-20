@@ -67,10 +67,20 @@ namespace TimeCheckerWPF5._0.ViewModels
                     RaisePropertyChanged();
             }
         }
+        private string _mainTimeButtonBorderColor;
+        public string MainTimeButtonBorderColor
+        {
+            get => _mainTimeButtonBorderColor;
+            set
+            {
+                _mainTimeButtonBorderColor = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public TimeWatch MainTimeWatch { get; set; }
 
-        private string _mainTimeWatchScreen = "00:00:00";
+        private string _mainTimeWatchScreen;
         public string MainTimeWatchScreen
         {
             get => _mainTimeWatchScreen;
@@ -83,31 +93,40 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         }
 
-        private string _breakButtonText;
-        public string BreakButtonText
+        private string _breakTimeButtonText;
+        public string BreakTimeButtonText
         {
-            get => _breakButtonText;
+            get => _breakTimeButtonText;
             set
             {
-                    _breakButtonText = value;
+                    _breakTimeButtonText = value;
                     RaisePropertyChanged();
             }
         }
-        private string _breakButtonColor;
-        public string BreakButtonColor
+        private string _breakTimeButtonColor;
+        public string BreakTimeButtonColor
         {
-            get => _breakButtonColor;
+            get => _breakTimeButtonColor;
             set
             {
-                    _breakButtonColor = value;
+                    _breakTimeButtonColor = value;
                     RaisePropertyChanged();
+            }
+        }
+        private string _breakTimeButtonBorderColor;
+        public string BreakTimeButtonBorderColor
+        {
+            get => _breakTimeButtonBorderColor;
+            set
+            {
+                _breakTimeButtonBorderColor = value;
+                RaisePropertyChanged();
             }
         }
 
         public TimeWatch BreakTimeWatch { get; set; }
 
-        private string _breakTimeWatchScreen = "00:00:00";
-        
+        private string _breakTimeWatchScreen;
         public string BreakTimeWatchScreen
         {
             get => _breakTimeWatchScreen;
@@ -118,6 +137,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                     RaisePropertyChanged();
             }
         }
+
 
         public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStore elapsedTimeSpanListService)
         {
@@ -166,7 +186,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                          Status = Status.CheckedIn;
                          MainTimeWatch.StopwatchStart();
                          MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
-                        new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
+                         new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
                  }
                  else
                  {
@@ -237,22 +257,28 @@ namespace TimeCheckerWPF5._0.ViewModels
                 case Status.CheckedIn:
                     StatusScreenText = "Checked In!";
                     MainTimeButtonText = "Check Out";
-                    BreakButtonText = "Start Break";
-                    BreakButtonColor = "Blue";
+                    BreakTimeButtonText = "Start Break";
+                    BreakTimeButtonColor = "Blue";
+                    BreakTimeButtonBorderColor = "Navy";
                     MainTimeButtonColor = "Red";
+                    MainTimeButtonBorderColor = "Firebrick";
                     break;
                 case Status.CheckedOut:
                     StatusScreenText = "Ready To Check In!";
                     MainTimeButtonText = "Check In";
-                    MainTimeButtonColor = "Green";
-                    BreakButtonColor = "LightGray";
-                    BreakButtonText = "Breakmode";
+                    MainTimeButtonColor = "LightGreen";
+                    MainTimeButtonBorderColor = "Green";
+                    BreakTimeButtonColor = "LightGray";
+                    BreakTimeButtonBorderColor = "DarkGray";
+                    BreakTimeButtonText = "Breakmode";
                     break;
                 case Status.BreakMode:
                     StatusScreenText = "Break Mode On!";
-                    BreakButtonColor = "DarkBlue";
-                    BreakButtonText = "Stop Break";
+                    BreakTimeButtonColor = "DarkBlue";
+                    BreakTimeButtonBorderColor = "Midnightblue";
+                    BreakTimeButtonText = "Stop Break";
                     MainTimeButtonColor = "LightGray";
+                    MainTimeButtonBorderColor = "DarkGray";
                     break;
             }
         }

@@ -8,36 +8,38 @@
         FocusManager.FocusedElement="{Binding ElementName=firstNameTxtBox}"
         Height="180"
         Width="300">
-
-    <!--<UserControl.DataContext>
-        <viewmodels:TimeCheckerViewModel/>
-    </UserControl.DataContext>-->
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock  HorizontalAlignment="Left" Text="Sign In" FontSize="25" VerticalAlignment="Top"/>
+            <TextBlock Text="Sign In" FontSize="25" 
+                       HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock  HorizontalAlignment="Left" Text="Firstname" FontSize="8" VerticalAlignment="Top"/>
-            <TextBox x:Name="firstNameTxtBox"  HorizontalAlignment="Left"  Text="{Binding Firstname}" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBlock Text="Firstname" FontSize="12"
+                       HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="firstNameTxtBox" Text="{Binding Firstname}"
+                     Width="120" FontSize="12"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" />
         </StackPanel>
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock HorizontalAlignment="Left" Text="Lastname" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="8"/>
-            <TextBox HorizontalAlignment="Left" Text="{Binding Lastname}" VerticalAlignment="Center" Width="120"/>
+            <TextBlock Text="Lastname" FontSize="12"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Lastname}" Width="120" FontSize="12"
+                     HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin=" 0 0 0 10">
-            <Button  Content="Start" IsDefault="True" Height="30" Width="50" Command="{Binding LoginCommand}"/>
+        <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button  Content="Start" IsDefault="True" 
+                     Height="30" Width="50" 
+                     Command="{Binding LoginCommand}"/>
         </StackPanel>
 
     </Grid>

@@ -11,13 +11,17 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+        
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
+        
             <local:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding NavigationViewModel}"/>
             <local:HeaderView Grid.Column="1" Grid.Row="0" DataContext="{Binding HeaderViewModel}" />
+        
         <ContentControl Grid.Row ="1" Grid.Column="1"  Content="{Binding ContentViewModel}"/>
+    
     </Grid>
 </UserControl>

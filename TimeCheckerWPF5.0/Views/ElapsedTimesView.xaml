@@ -25,23 +25,28 @@
         </Grid.ColumnDefinitions>
 
 
-            <StackPanel Background="Gray" Orientation="Vertical" >
+        <StackPanel Background="Gray" Orientation="Vertical" >
 
             <StackPanel Orientation="Horizontal" Margin="20,20,20,0">
-                <TextBox x:Name= "MainTimesTotalsTitle" Text="Totally checked-in:" FontSize="16" />
-                <TextBox x:Name="MainTimesTotals" Text="{Binding TotalMainTimeSpans, StringFormat={}{0:hh}:{0:mm}:{0:ss}}" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                <TextBox Text=" Total checked-in: " FontSize="16" />
+                <TextBox Text="{Binding TotalMainTimeSpans, StringFormat={}{0:hh}:{0:mm}:{0:ss}}"
+                         HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="20,10,20,20" Width="{Binding Path=ActualWidth, ElementName=ElaspedMainTimesListView}">
-                <TextBox x:Name="ElapsedMainTimesTitle" Background="Green" Width="{Binding Path=ActualWidth, ElementName=ElaspedMainTimesListView}" Text="Checked-in times" FontWeight="Bold" FontSize="14"/>
+            <StackPanel Orientation="Vertical" Margin="20,10,20,20" 
+                        Width="{Binding Path=ActualWidth, ElementName=ElaspedMainTimesListView}">
+                <TextBox Background="Green" 
+                         Width="{Binding Path=ActualWidth, ElementName=ElaspedMainTimesListView}" 
+                         Text=" Your checked-in times" FontWeight="Bold" FontSize="14"/>
                 <ListView x:Name="ElaspedMainTimesListView" ItemsSource="{Binding ElapsedMainTimeSpanList}">
                     <ListView.View>
                         <GridView>
-                            
+
                             <GridViewColumn Header="Start Time">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Padding="0 0 20 0" Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
+                                        <TextBlock Padding="0 0 20 0" 
+                                                   Text="{Binding Path=StartDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -49,7 +54,8 @@
                             <GridViewColumn Header="End Time">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Padding="0 0 20 0" Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
+                                        <TextBlock Padding="0 0 20 0" 
+                                                   Text="{Binding Path=EndDateTime, StringFormat='{}{0: HH:mm:ss}'}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -57,18 +63,20 @@
                             <GridViewColumn Header="Duration">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Padding="0 0 20 0" Text="{Binding Path=Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
+                                        <TextBlock Padding="0 0 20 0" 
+                                                   Text="{Binding Path=Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            
+
                             <GridViewColumn Header="User">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Padding="0 0 20 0" Text="{Binding Path=User}"/>
+                                        <TextBlock Padding="0 0 20 0" 
+                                                   Text="{Binding Path=User}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
-                                
+
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
@@ -76,16 +84,18 @@
             </StackPanel>
         </StackPanel>
 
-
         <StackPanel Background="Gray" Grid.Column="1" Orientation="Vertical">
 
             <StackPanel Orientation="Horizontal" Margin="20,20,20,0">
-                <TextBox x:Name="BreakTimeTotalsTitle" Text="Total breaks: " FontSize="16"/>
-                <TextBox x:Name="BreakTimeTotals" Text="{Binding TotalBreakTimeSpans, StringFormat={}{0:hh}:{0:mm}:{0:ss}}" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
+                <TextBox Text=" Total breaks: " FontSize="16"/>
+                <TextBox Text="{Binding TotalBreakTimeSpans, StringFormat={}{0:hh}:{0:mm}:{0:ss}}"
+                         HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="20,10,20,20" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreakTimesListView}">
-                <TextBox x:Name="ElapsedBreakTimesTitle"  Background="Orange" Text="Break times" FontWeight="Bold" FontSize="14" Width="{Binding Path=ActualWidth, ElementName=ElapsedBreakTimesListView}"/>
+            <StackPanel Orientation="Vertical" Margin="20,10,20,20" 
+                        Width="{Binding Path=ActualWidth, ElementName=ElapsedBreakTimesListView}">
+                <TextBox Text="Your break times" Background="Orange" FontWeight="Bold" FontSize="14" 
+                         Width="{Binding Path=ActualWidth, ElementName=ElapsedBreakTimesListView}"/>
                 <ListView x:Name="ElapsedBreakTimesListView" ItemsSource="{Binding ElapsedBreakTimeSpanList}">
                     <ListView.View>
                         <GridView>
@@ -121,6 +131,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
+                            
                         </GridView>
                     </ListView.View>
                 </ListView>

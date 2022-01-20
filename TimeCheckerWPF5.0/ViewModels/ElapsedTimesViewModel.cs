@@ -28,7 +28,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             TotalBreakTimeSpans = CalculateTotalTimeSpans(ElapsedBreakTimeSpanList);
         }
 
-        public TimeSpan CalculateTotalTimeSpans(ObservableCollection<TimeSpanRecord> elapsedTimeSpanList)
+        public static TimeSpan CalculateTotalTimeSpans(ObservableCollection<TimeSpanRecord> elapsedTimeSpanList)
         {
             TimeSpan Total = TimeSpan.Zero;
             foreach (TimeSpanRecord item in elapsedTimeSpanList)

@@ -10,18 +10,45 @@
         WindowStartupLocation="CenterScreen"
         FocusManager.FocusedElement="{Binding ElementName=txtBox}"
         mc:Ignorable="d"
-        Title="Checking Out..." Height="200" Width="300">
+        Title="Checking Out..." Height="250" Width="300">
 
     <Window.DataContext>
         <viewmodels:CheckOutDialogViewModel/>
     </Window.DataContext>
 
 
+
     <Grid>
-        <TextBlock Text="Before definitely checking out, you have the possibility to leave a comment or check out without. Your Timewatch will be reset after checking out." HorizontalAlignment="Center" Margin="10,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
-        <TextBox Name="txtBox" Text="{Binding DialogComment}" HorizontalAlignment="Center" Height="61" Margin="10,60,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="280"/>
-        <Button Name ="CheckOutButton" IsDefault="True" Content="Check Out" HorizontalAlignment="Left" Margin="27,127,20,10" VerticalAlignment="Top" Width="70" Height="47" Command="{Binding CheckOutCommand}" />
-        <Button Name="CancelButton" IsCancel="True" Content="Cancel" HorizontalAlignment="Left" Margin="204,127,20,10" VerticalAlignment="Top" Width="70" Height="47" Command="{Binding CancelCommand}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.ColumnSpan="2">
+        <TextBlock Text="{Binding DialogText}" 
+                   Width="280" TextWrapping="Wrap" Margin="10"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+        <TextBox x:Name="txtBox"
+                 Text="{Binding DialogComment}" 
+                 Height="50" Width="280" TextWrapping="Wrap" Margin="10,0,10,10" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </StackPanel>
+        
+        
+            <Button Name ="CheckOutButton" IsDefault="True" Grid.Row="1" Grid.Column="0"
+                Content="Check Out" Command="{Binding CheckOutCommand}"
+                Width="70" Height="47" Margin="40,10"
+                HorizontalAlignment="Left"  VerticalAlignment="Top"/>
+
+            <Button Name="CancelButton" IsCancel="True" Grid.Row="1" Grid.Column="1"
+                Content="Cancel" Command="{Binding CancelCommand}"
+                Width="70" Height="47" Margin="40,10"
+                HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

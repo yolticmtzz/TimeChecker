@@ -8,36 +8,49 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--<UserControl.DataContext>
-        <viewmodels:TimeCheckerViewModel/>
-    </UserControl.DataContext>-->
-
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="0" Background="Green" Content="TimeChecker" FontWeight="Bold" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontSize="30" VerticalContentAlignment="Center" Height="50"/>
 
-        <Grid Grid.Column="1" Grid.Row="1" Background="LightGreen">
+        <Label Content="TimeChecker" Grid.Column="1" Grid.Row="0" 
+               Background="Green" FontSize="30" FontWeight="Bold" FontFamily="Trebuchet MS"
+               VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="50"/>
+
+        <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" 
+              Background="LightGreen">
+            
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row ="1"  x:Name="UserTitle" Margin="480,5,0,10" Text = "User:" FontWeight="Bold" FontSize="14" Foreground="Black" HorizontalAlignment ="Left" Grid.Column="1"/>
-            <TextBlock Grid.Row ="1"  x:Name="DateTitle" Margin="480,25,5,10" Text = "Date:" FontWeight="Bold" FontSize="14" Foreground="Black" HorizontalAlignment="Left" Grid.Column="1" Width="34" RenderTransformOrigin="0.791,-1.244"/>
-            <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="UserData" Margin="530,5,10,28" Text = "{Binding UserFullName}" FontSize="14" Foreground="Black" />
-            <TextBlock Grid.Row ="1" Grid.Column="1" x:Name="DateData" Margin="530,25,10,10" Text = "{Binding Date}" FontSize="14" Foreground="Black"  />
+            <TextBlock Text = "User:" Grid.Column="1"
+                       Margin ="0,5,0,0" FontWeight="Bold"/>
+            <TextBlock Text = "Date:" Grid.Row ="1" Grid.Column="1" 
+                       Margin ="0,5,0,5" FontWeight="Bold" />
+            <TextBlock Text = "{Binding UserFullName}" Grid.Column="2"
+                       Margin ="0,5,10,0"/>
+            <TextBlock Text = "{Binding Date}" Grid.Row ="1" Grid.Column="2"
+                       Margin ="0,5,10,5" />
+        
         </Grid>
     </Grid>
-
 </UserControl>
