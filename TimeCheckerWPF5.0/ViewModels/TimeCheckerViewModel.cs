@@ -8,7 +8,8 @@ using System.Windows.Input;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-
+    /// Summary:
+    ///   3 enums to distinguish between the 3 possible status the TimeChecker ever can be
     public enum Status
     {
         CheckedIn,
@@ -16,18 +17,43 @@ namespace TimeCheckerWPF5._0.ViewModels
         BreakMode,
     }
 
+    /// Summary:
+    ///     This ViewModel is the core of the application.
+    ///     It represents a check-in system that can assume three different states.
+    ///     Either one is checked in, checked out or in break mode.
+    ///     While checked in, the main time is running and stored, which can, for example, represent the working time.
+    ///     While checked out, no time is measured
+    ///     While in break mode, only the BreakTime is running and measured, which represents the break time.
+    ///     
+    ///     Based on the state, the design changes the entire UI of the TimeChecker. For this reason it has many properties
+    ///     Furthermore the whole TimeChecker is controlled with ButtonClickCommands
+    ///     
+    ///     This ViewModel inherits from ViewModelBase to implement the RaisePropertyChanged.
+    ///        
+    ///     The ViewModel relies on:
+    ///         - ElapsedTimeSpanListService: 
+    ///             because it manages the add of TimeSpanRecord to the lists thru interactions on the ui
+    ///         - DataBaseService:
+    ///             because it uses DataBaseServices to interact with the database thru interactions on the ui
+    ///         - UserStore:
+    ///             because it has to know which user is currently interacting on the ui
     public class TimeCheckerViewModel : ViewModelBase
     {
-        TimeSpanRecord MainTimeSpanRecord { get; set; }
-        TimeSpanRecord BreakTimeSpanRecord { get; set; }
-
+        ///Injections as services to use
         private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
-
         private readonly DataBaseService _dataBaseService;
         private readonly UserStore _userStore;
-        private DateTime TimeCatch { get; set; }
 
+        ///The TimeSpanRecords used and 
+        ///send to the ElapsedTimeView for the presentation to the UI
+        ///as an Overview of "elapsed times" during runtime
+        TimeSpanRecord MainTimeSpanRecord { get; set; }
+        TimeSpanRecord BreakTimeSpanRecord { get; set; }         
+        
+        DateTime TimeCatch { get; set; }
+        
         public string Comment { get; set; }
+
         private Status _status;
         public Status Status
         {
@@ -42,6 +68,10 @@ namespace TimeCheckerWPF5._0.ViewModels
                 UpdateGUIProperties();
             }
         }
+
+        ///UI Properties
+        ///The all have to use RaisePropertyChanged()
+        ///in their set to notify the UI about the change
         private string _statusScreenText;
         public string StatusScreenText
         {
@@ -52,6 +82,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 RaisePropertyChanged();
             }
         }
+
         private string _mainTimeButtonText;
         public string MainTimeButtonText
         {
@@ -62,6 +93,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 RaisePropertyChanged();
             }
         }
+
         private string _mainTimeButtonColor;
         public string MainTimeButtonColor
         {
@@ -72,6 +104,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 RaisePropertyChanged();
             }
         }
+
         private string _mainTimeButtonBorderColor;
         public string MainTimeButtonBorderColor
         {
@@ -82,7 +115,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 RaisePropertyChanged();
             }
         }
-        public TimeWatch MainTimeWatch { get; set; }
+
         private string _mainTimeWatchScreen;
         public string MainTimeWatchScreen
         {
@@ -95,6 +128,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
 
         }
+
         private string _breakTimeButtonText;
         public string BreakTimeButtonText
         {
@@ -105,6 +139,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 RaisePropertyChanged();
             }
         }
+
         private string _breakTimeButtonColor;
         public string BreakTimeButtonColor
         {
@@ -115,6 +150,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 RaisePropertyChanged();
             }
         }
+
         private string _breakTimeButtonBorderColor;
         public string BreakTimeButtonBorderColor
         {
@@ -125,7 +161,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                 RaisePropertyChanged();
             }
         }
-        public TimeWatch BreakTimeWatch { get; set; }
+        
         private string _breakTimeWatchScreen;
         public string BreakTimeWatchScreen
         {
@@ -141,25 +177,49 @@ namespace TimeCheckerWPF5._0.ViewModels
         public DelegateCommand CheckInCommand { get; set; }
         public DelegateCommand BreakCommand { get; set; }
 
-
-        public TimeCheckerViewModel(UserStore userStore, ElapsedTimeSpanListStore elapsedTimeSpanListService, DataBaseService dataBaseService)
+        /// Summary:
+        ///     Initializes a new instance of a TimeCheckerViewModel and initializes 
+        ///     the UserStore, the ElapsedTimeSpanListStore and the DataBaseService
+        ///     
+        ///     Initializes the CheckInCommand and the BreakCommand
+        ///     
+        ///     Initliazses two TimeWatches (MainTIme and BreakTime) and 
+        ///     registers the TickEvents to the TimeWatchTriggers
+        /// 
+        /// Parameters:
+        ///   userStore:
+        ///     injects the UserStore
+        ///   elapsedTimeSpanListStore:
+        ///     injects the ElapsedTimeSpanListSTore
+        ///   dataBaseService:
+        ///     injects the DataBaseService
+        public TimeCheckerViewModel(UserStore userStore, 
+                                    ElapsedTimeSpanListStore elapsedTimeSpanListStore,
+                                    DataBaseService dataBaseService)
         {
             _userStore = userStore;
-            _elapsedTimeSpanListService = elapsedTimeSpanListService;
+            _elapsedTimeSpanListService = elapsedTimeSpanListStore;
             _dataBaseService = dataBaseService;
+            
             Status = Status.CheckedOut;
 
             CheckInCommand = new DelegateCommand(CanExecuteCheckinCommand, ExecuteCheckinCommand);
             BreakCommand = new DelegateCommand(CanExecuteBreakCommand, ExecuteBreakCommand);
 
             MainTimeWatch = new TimeWatch();
-            BreakTimeWatch = new TimeWatch();
-
-            //Subscribing the MainTimeWatch and the BreakTimeWatch to the TickEvent delegate
             MainTimeWatch.TickEvent += MainTimewatchTriggered;
+
+            BreakTimeWatch = new TimeWatch();
             BreakTimeWatch.TickEvent += BreakTimewatchTriggered;
         }
 
+
+        /// Summary:
+        ///     Delivers the CanExecute criterias for the ICommand Predicate
+        ///
+        /// Parameters:
+        ///     obj:
+        ///       the "CheckInCommand" button clicked to run the command
         private bool CanExecuteCheckinCommand(object obj)
         {
             return Status != Status.BreakMode;
@@ -223,8 +283,14 @@ namespace TimeCheckerWPF5._0.ViewModels
                 _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
                 _dataBaseService.AddTimeEntry(2, TimeCatch, _userStore.CurrentUser.Fullname, Comment);
                 Comment = string.Empty;
-        }   
+        }
 
+        /// Summary:
+        ///     Delivers the CanExecute criterias for the ICommand Predicate
+        ///
+        /// Parameters:
+        ///     obj:
+        ///       the "BreakCommand" button clicked to run the command
         private bool CanExecuteBreakCommand(object obj)
         {
             return Status != Status.CheckedOut;
@@ -297,6 +363,9 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
+
+        //The thicking timewatch
+        public TimeWatch MainTimeWatch { get; set; }
         //Access the Timewatch Events to trigger, since its subscribed to the delegate
         // -> The MainTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
         private void MainTimewatchTriggered(object? sender, TickEventArgs tickEvent)
@@ -305,6 +374,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             MainTimeWatchScreen = CurrentTime;
         }
 
+        public TimeWatch BreakTimeWatch { get; set; }
         //Access the Timewatch Events to trigger, since its subscribed to the delegate
         // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
         private void BreakTimewatchTriggered(object? sender, TickEventArgs tickEvent)

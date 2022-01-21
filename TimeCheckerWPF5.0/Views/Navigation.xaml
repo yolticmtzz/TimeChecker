@@ -21,7 +21,7 @@
         <StackPanel Background="DeepSkyBlue" Width="100" HorizontalAlignment="Left">
             <Label Content="Menu" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="18" VerticalContentAlignment="Center" Height="50" Background="Orange"/>
             <Button Content="TimeChecker" FontSize="16" Height="50" Command="{Binding NavigateTimeCheckerCommand}"/>
-            <Button Content="Elapsed Times" Command="{Binding NavigateElapsedTimeSpansCommand}"/>
+            <Button Content="Overview" Command="{Binding NavigateElapsedTimeSpansCommand}"/>
             <Button Content="Change User" Command="{Binding NavigateLoginCommand}"/>
             <Button Content="Exit" Background="Red" Foreground="White" Command="{Binding NavigateExitApplicationCommand}"/>
         </StackPanel>
