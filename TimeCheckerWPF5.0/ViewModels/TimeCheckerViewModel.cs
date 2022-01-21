@@ -2,7 +2,6 @@
 using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Views;
 using TimeCheckerWPF5._0.Stores;
-using TimeCheckerWPF5._0.DBOperations;
 using TimeCheckerWPF5._0.Utilities;
 using TimeCheckerWPF5._0.Services;
 
@@ -194,7 +193,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                          MainTimeWatch.StopwatchStart();
                          MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
                          _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
-                         //new TimeEntryAddDBOperation(1, TimeCatch, _userStore.CurrentUser.Fullname);
+                         
                  }
                  else
                  {
@@ -208,7 +207,9 @@ namespace TimeCheckerWPF5._0.ViewModels
                              MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                              MainTimeSpanRecord.EndDateTime = TimeCatch;
                              _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
-                             new TimeEntryAddDBOperation(2, TimeCatch, Comment, _userStore.CurrentUser.Fullname);
+                            _dataBaseService.AddTimeEntry(2, TimeCatch, _userStore.CurrentUser.Fullname, Comment);
+                            Comment = string.Empty;
+                         
                          }
                           else
                          {
@@ -236,7 +237,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                  MainTimeWatch.StopwatchStop();
                  MainTimeSpanRecord.EndDateTime = TimeCatch;
                  _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
-                 _ = new TimeEntryAddDBOperation(3, TimeCatch, _userStore.CurrentUser.Fullname);
+                 _dataBaseService.AddTimeEntry(3, TimeCatch, _userStore.CurrentUser.Fullname);
 
                  BreakTimeWatch.StopwatchStart();
                  BreakTimeSpanRecord = new TimeSpanRecord(TimeSpanType.BreakTime, TimeCatch, _userStore.CurrentUser.Fullname);
@@ -250,7 +251,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                  
                  MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
                  MainTimeWatch.StopwatchStart();
-                 _ = new TimeEntryAddDBOperation(4, TimeCatch, _userStore.CurrentUser.Fullname);
+                 _dataBaseService.AddTimeEntry(4, TimeCatch, _userStore.CurrentUser.Fullname);
              }
          }
 

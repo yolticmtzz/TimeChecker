@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using TimeChecker.DAL.Models;
-using TimeCheckerWPF5._0.DBOperations;
 using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.ViewModels;
@@ -12,33 +11,32 @@ namespace TimeCheckerWPF5._0.Commands
 
         private readonly LoginViewModel _viewModel;
         private readonly INavigationService _navigationService;
+        private readonly DataBaseService _dataBaseService;
         private readonly UserStore _userStore;
 
-        public LoginCommand(LoginViewModel viewModel, UserStore userStore, INavigationService navigationService)
+        public LoginCommand(LoginViewModel viewModel, UserStore userStore, INavigationService navigationService, DataBaseService dataBaseService)
         {
             _viewModel = viewModel;
             _userStore = userStore;
             _navigationService = navigationService;
+            _dataBaseService = dataBaseService;
         }
 
         public override void Execute(object parameter)
         {
 
-            //Employee employee = new Employee(_viewModel.Firstname, _viewModel.Lastname);
-
-            var EmployeeDB = new EmployeeGetDBOperation();
+            var EmployeeDBList = _dataBaseService.GetEmployees();
             bool isUserExist = false;
             var LogginPrename = _viewModel.Prename.Trim();
             var LoginLastname = _viewModel.Lastname.Trim();
 
-            foreach (Employee employee in EmployeeDB.EmployeesDBList)
+            foreach (Employee employee in EmployeeDBList)
             {
                 if (employee.Prename.Equals(LogginPrename) && employee.Lastname.Equals(LoginLastname))
                 {
                     _userStore.CurrentUser = employee;
                     isUserExist = true;
                     break;
- 
                 }
             }
 

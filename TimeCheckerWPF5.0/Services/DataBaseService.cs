@@ -36,6 +36,13 @@ namespace TimeCheckerWPF5._0.Services
             return false;
         }
 
+        public List<Employee> GetEmployees()
+        { 
+            List<Employee> EmployeesDB = new List<Employee>();
+            EmployeesDB = _dbContext.Employees.ToList();
+            return EmployeesDB;
+        }
+
 
 
     }
