@@ -3,32 +3,37 @@ using System.Windows.Input;
 
 namespace TimeCheckerWPF5._0.Commands
 {
-    public class DelegateCommand : ICommand
+    public class DelegateCommand : CommandBase
     {
-        //DelegateCommand oder RelayCommand
+        private readonly Action<object> execute;
+        private readonly Predicate<object> canExecute;
 
-        //Die konkrete Methodenimplemeniterung ist für jeden Aufrufer anders, deswegen wird das in delegates ausgelagert:
-        readonly Action<object> execute;
-        readonly Predicate<object> canExecute;
+        public DelegateCommand(Predicate<object> canExecute, Action<object> execute)
+        {
+            this.canExecute = canExecute;
+            this.execute = execute;
+        }
 
-        public DelegateCommand(Predicate<object> canExecute, Action<object> execute) =>
-            (this.canExecute, this.execute) = (canExecute, execute);
+        public DelegateCommand(Action<object> execute)
+        {
+            this.execute = execute;
+        }
 
-        public DelegateCommand(Action<object> execute) : this(null, execute) { }
+        public override bool CanExecute(object parameter)
+        { 
+            if (canExecute == null)
+            {
+                canExecute?.Invoke(parameter);
 
+            }
+            return true;
+        }
 
-        //Wenn dieses Event aufgerufen wird, evaluiert der Aufrufer erneute die CanExecute Methode.
-        public event EventHandler CanExecuteChanged;
+        public override void Execute(object parameter)
+        {
+           execute?.Invoke(parameter);
+        }
 
-        //Um Funktion auszulösen:
-        public void RaiseCanExecuteChanged() => this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
-
-        //Liefert, ob das Command überhaupt ausgeführt werden kann (Liefert z.B. False wenn der Button nicht geklickt wird.
-        //Wenn true liefer = Button ist aktiviert).
-        public bool CanExecute(object parameter) => this.canExecute?.Invoke(parameter) ?? true;
-        
-    //Methode wird ausgeführt, wenn durch irgendwas aufgerufen wird
-    public void Execute(object parameter) => this.execute?.Invoke(parameter);
     }
-    
+
 }

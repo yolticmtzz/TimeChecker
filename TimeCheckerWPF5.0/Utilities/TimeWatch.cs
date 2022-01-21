@@ -51,7 +51,7 @@ namespace TimeCheckerWPF5._0.Utilities
         {
             if (stopwatch.IsRunning)
             {
-                TickEventArgs tickEvent = new()
+                TickEventArgs tickEvent = new TickEventArgs()
                 {
                     TimeSpan = stopwatch.Elapsed
                 };

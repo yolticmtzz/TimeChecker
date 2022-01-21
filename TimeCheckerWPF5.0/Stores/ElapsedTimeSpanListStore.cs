@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Utilities;
 
 namespace TimeCheckerWPF5._0.Stores
@@ -16,7 +15,6 @@ namespace TimeCheckerWPF5._0.Stores
             ElapsedBreakTimeSpanList = new ObservableCollection<TimeSpanRecord>();
 
         }
-
 
         public void AddTimeSpanRecord(TimeSpanRecord timeSpanRecord)
         {
