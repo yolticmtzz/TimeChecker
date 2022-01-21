@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using TimeCheckerWPF5._0.Commands;
-using TimeCheckerWPF5._0.DBOperations;
 using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 
@@ -10,6 +8,9 @@ namespace TimeCheckerWPF5._0.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+
+        private readonly DataBaseService _dataBaseService;
+
         private string _prename;
         public string Prename
         {
@@ -23,6 +24,8 @@ namespace TimeCheckerWPF5._0.ViewModels
         }
 
         private string _lastName;
+        
+
         public string Lastname
         {
             get => _lastName;
@@ -36,17 +39,18 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public ICommand LoginCommand { get; set; }
 
-        public LoginViewModel(UserStore userStore, INavigationService loginNavigationService)
+        public LoginViewModel(UserStore userStore, INavigationService loginNavigationService, DataBaseService dataBaseService)
         {
             CheckUserDBList();
-            LoginCommand = new LoginCommand(this, userStore, loginNavigationService);
+            LoginCommand = new LoginCommand(this, userStore, loginNavigationService, dataBaseService);
+            _dataBaseService = dataBaseService;
         }
 
         private void CheckUserDBList()
         {
-            var employeeDBList = new EmployeeGetDBOperation();
+            var EmployeeDBList = _dataBaseService.GetEmployees();
 
-            if (employeeDBList.EmployeesDBList.Count == 0)
+            if (EmployeeDBList.Count == 0)
             {
                 MessageBox.Show("There don't seem to be any users who could log in yet. \nPlease create at least one valid user to use the TimeChecker ");
                 Application.Current.Shutdown();
