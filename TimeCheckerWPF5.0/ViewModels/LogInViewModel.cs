@@ -41,9 +41,10 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         public LoginViewModel(UserStore userStore, INavigationService loginNavigationService, DataBaseService dataBaseService)
         {
-            CheckUserDBList();
+            
             LoginCommand = new LoginCommand(this, userStore, loginNavigationService, dataBaseService);
             _dataBaseService = dataBaseService;
+            CheckUserDBList();
         }
 
         private void CheckUserDBList()

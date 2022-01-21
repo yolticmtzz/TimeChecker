@@ -176,7 +176,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                     return;
                 }
 
-                if  (GetCheckOutComment())
+                if  (IsCheckOutCommentSet())
                 {
                     SetCheckedOutStatus();
                     return;
@@ -195,13 +195,13 @@ namespace TimeCheckerWPF5._0.ViewModels
             _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
         }
 
-        private bool GetCheckOutComment()
+        private bool IsCheckOutCommentSet()
         {
             MainTimeWatch.StopwatchStop();
-            return OpenCheckOutDialog();
+            return ShowCheckOutDialog();
         }
 
-        private bool OpenCheckOutDialog()
+        private bool ShowCheckOutDialog()
         {
             CheckOutDialogWindow dialog = new();
             if (dialog.ShowDialog() == true)
@@ -240,9 +240,18 @@ namespace TimeCheckerWPF5._0.ViewModels
                 return;
             }
 
-            SetEndBreakStatus();
-
+            EndBreakMode();
+            SetCheckedInStatus();
         }
+
+        private void EndBreakMode()
+        {
+            BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
+            BreakTimeSpanRecord.EndDateTime = TimeCatch;
+            _elapsedTimeSpanListService.AddTimeSpanRecord(BreakTimeSpanRecord);
+            _dataBaseService.AddTimeEntry(4, TimeCatch, _userStore.CurrentUser.Fullname);
+        }
+
         private void SetBreakModeStatus()
         {
             Status = Status.BreakMode;
@@ -253,18 +262,6 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             BreakTimeWatch.StopwatchStart();
             BreakTimeSpanRecord = new TimeSpanRecord(TimeSpanType.BreakTime, TimeCatch, _userStore.CurrentUser.Fullname);
-        }
-
-        private void SetEndBreakStatus()
-        {
-            Status = Status.CheckedIn;
-            BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
-            BreakTimeSpanRecord.EndDateTime = TimeCatch;
-            _elapsedTimeSpanListService.AddTimeSpanRecord(BreakTimeSpanRecord);
-
-            MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
-            MainTimeWatch.StopwatchStart();
-            _dataBaseService.AddTimeEntry(4, TimeCatch, _userStore.CurrentUser.Fullname);
         }
 
         private void UpdateGUIProperties()
@@ -310,10 +307,10 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         //Access the Timewatch Events to trigger, since its subscribed to the delegate
         // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
-        private void BreakTimewatchTriggered(object? sender, TickEventArgs e)
+        private void BreakTimewatchTriggered(object? sender, TickEventArgs tickEvent)
         {
             var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
-                e.TimeSpan.Hours, e.TimeSpan.Minutes, e.TimeSpan.Seconds);
+                tickEvent.TimeSpan.Hours, tickEvent.TimeSpan.Minutes, tickEvent.TimeSpan.Seconds);
             BreakTimeWatchScreen = CurrentTime;
         }
 
