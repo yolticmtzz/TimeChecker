@@ -27,7 +27,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly INavigationService _navigationService;
         private readonly DataBaseService _dataBaseService;
 
-        public ICommand LoginCommand { get; set; }
+        public DelegateCommand LoginCommand { get; set; }
 
         private string _prename;
         public string Prename
@@ -38,9 +38,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             {
                 _prename = value;
                 RaisePropertyChanged(nameof(Prename));
-                //LoginCommand.CanExecute(null);
-
-
+                LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -53,6 +51,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             {
                 _lastName = value;
                 RaisePropertyChanged(nameof(Lastname));
+                LoginCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -100,7 +99,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>     
         private bool CanExecuteLoginCommand(object obj)
         {
-            var check = !string.IsNullOrEmpty(Prename) && !string.IsNullOrEmpty(Prename);
+            var check = !string.IsNullOrEmpty(Prename) && !string.IsNullOrEmpty(Lastname);
             return check;
         }
 
