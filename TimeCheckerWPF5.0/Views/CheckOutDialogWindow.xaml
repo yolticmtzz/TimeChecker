@@ -16,8 +16,6 @@
         <viewmodels:CheckOutDialogViewModel/>
     </Window.DataContext>
 
-
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
