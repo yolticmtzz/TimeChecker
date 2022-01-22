@@ -8,8 +8,9 @@ using System.Windows.Input;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-    /// Summary:
+    /// <summary>
     ///   3 enums to distinguish between the 3 possible status the TimeChecker ever can be
+    ///  </summary>
     public enum Status
     {
         CheckedIn,
@@ -17,7 +18,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         BreakMode,
     }
 
-    /// Summary:
+    /// <summary>
     ///     This ViewModel is the core of the application.
     ///     It represents a check-in system that can assume three different states.
     ///     Either one is checked in, checked out or in break mode.
@@ -37,10 +38,11 @@ namespace TimeCheckerWPF5._0.ViewModels
     ///             because it uses DataBaseServices to interact with the database thru interactions on the ui
     ///         - UserStore:
     ///             because it has to know which user is currently interacting on the ui
+    /// </summary>
     public class TimeCheckerViewModel : ViewModelBase
     {
         ///Injections as services to use
-        private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListService;
+        private readonly ElapsedTimeSpanListStore _elapsedTimeSpanListStore;
         private readonly DataBaseService _dataBaseService;
         private readonly UserStore _userStore;
 
@@ -54,6 +56,13 @@ namespace TimeCheckerWPF5._0.ViewModels
         
         public string Comment { get; set; }
 
+        /// <summary>
+        /// The status is the most important property in this class. 
+        /// Depending on the status the whole implementation and the presentation in the UI reacts.
+        /// Therefore the following must be done after each set call:
+        ///       - call RaisPropertyChanged to inform the UI that the status has changed.
+        ///       - call UpdateGUIProperty to adjust the UI according to the status.
+        /// </summary>
         private Status _status;
         public Status Status
         {
@@ -177,7 +186,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         public DelegateCommand CheckInCommand { get; set; }
         public DelegateCommand BreakCommand { get; set; }
 
-        /// Summary:
+        /// <summary>
         ///     Initializes a new instance of a TimeCheckerViewModel and initializes 
         ///     the UserStore, the ElapsedTimeSpanListStore and the DataBaseService
         ///     
@@ -193,12 +202,13 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     injects the ElapsedTimeSpanListSTore
         ///   dataBaseService:
         ///     injects the DataBaseService
+        ///  </summary>
         public TimeCheckerViewModel(UserStore userStore, 
                                     ElapsedTimeSpanListStore elapsedTimeSpanListStore,
                                     DataBaseService dataBaseService)
         {
             _userStore = userStore;
-            _elapsedTimeSpanListService = elapsedTimeSpanListStore;
+            _elapsedTimeSpanListStore = elapsedTimeSpanListStore;
             _dataBaseService = dataBaseService;
             
             Status = Status.CheckedOut;
@@ -214,17 +224,28 @@ namespace TimeCheckerWPF5._0.ViewModels
         }
 
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the CanExecute criterias for the ICommand Predicate
         ///
         /// Parameters:
         ///     obj:
         ///       the "CheckInCommand" button clicked to run the command
+        /// </summary>
         private bool CanExecuteCheckinCommand(object obj)
         {
             return Status != Status.BreakMode;
         }
 
+        /// <summary>
+        ///     Delivers the Execute logic for the ICommand Action:
+        ///     Captures the DateTime.Now from System. 
+        ///     Based on the current Status it either checks in or out
+        ///     and performs the dependent tasks/methods
+        ///
+        /// Parameters:
+        ///     obj:
+        ///       the "CheckInCommand" button clicked to run the command
+        /// </summary>
         private void ExecuteCheckinCommand(object obj)
         {
             {
@@ -247,6 +268,12 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
+        /// <summary>
+        ///     Sets the CheckIn status and performs all dependent tasks:
+        ///         - Starts the MainTime stopwatch
+        ///         - Creates a new MainTimeSpanRecord 
+        ///         - Writes a "CheckIn" time entry into the database
+        /// </summary>
         private void SetCheckedInStatus()
         {
             Status = Status.CheckedIn;
@@ -255,12 +282,29 @@ namespace TimeCheckerWPF5._0.ViewModels
             _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
         }
 
+        /// <summary>
+        ///     Stops the MainTime stopwatch and opens and waits for the response of the
+        ///     "CheckOutComment Dialog".
+        ///     This asks if the user really wants to check out and if so,
+        ///     whether a comment should be added to the time entry.
+        ///     
+        /// Return:
+        ///     ShowCheckOutDialog():
+        ///         True or False for "CheckOut" 
+        /// </summary>
         private bool IsCheckOutCommentSet()
         {
             MainTimeWatch.StopwatchStop();
             return ShowCheckOutDialog();
         }
 
+        /// <summary>
+        ///     Shows the "CheckOutComment Dialog" as a pop-up window.
+        ///     
+        /// Returns:
+        ///     ShowCheckOutDialog():
+        ///         True If CheckOut nutton clicked, false if Cancel button clicked
+        /// </summary>
         private bool ShowCheckOutDialog()
         {
             CheckOutDialogWindow dialog = new();
@@ -272,36 +316,55 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
 
             return false;
-
         }
 
+        /// <summary>
+        ///     Sets the CheckOut status and performs all dependent tasks:
+        ///         - Resets the MainTimeWatch and the Screen
+        ///         - Closes the MainTimeSpanRecord with an EndDate
+        ///         - Adds the MainTimeSpanRecord to the ElapsedTimeSpanStore
+        ///         - Writes a "CheckOut" time entry into the database
+        ///         - Resets the Comment string to empty;
+        /// </summary>
         private void SetCheckedOutStatus()
         {
                 Status = Status.CheckedOut;
                 MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                 MainTimeSpanRecord.EndDateTime = TimeCatch;
-                _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
+                _elapsedTimeSpanListStore.AddTimeSpanRecord(MainTimeSpanRecord);
                 _dataBaseService.AddTimeEntry(2, TimeCatch, _userStore.CurrentUser.Fullname, Comment);
                 Comment = string.Empty;
         }
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the CanExecute criterias for the ICommand Predicate
         ///
         /// Parameters:
         ///     obj:
         ///       the "BreakCommand" button clicked to run the command
+        /// </summary>
         private bool CanExecuteBreakCommand(object obj)
         {
             return Status != Status.CheckedOut;
         }
 
+        /// <summary>
+        ///     Delivers the Execute logic for the ICommand Action:
+        ///     Captures the DateTime.Now from System. 
+        ///     Based on the current Status it either activates the BreakMode or checks back in
+        ///     and performs the dependent tasks/methods
+        ///
+        /// Parameters:
+        ///     obj:
+        ///       the "BreakCommand" button clicked to run the command
+        /// </summary>
         private void ExecuteBreakCommand(object obj)
         {
             TimeCatch = DateTime.Now;
 
             if (Status == Status.CheckedIn)
             {
+                EndCheckInMode();
                 SetBreakModeStatus();
                 return;
             }
@@ -310,26 +373,53 @@ namespace TimeCheckerWPF5._0.ViewModels
             SetCheckedInStatus();
         }
 
+        /// <summary>
+        ///     Ends the CheckIn activites and performs its dependent tasks:
+        ///         - Stops the MainTimeWatch and the Screen
+        ///         - Closes the MainTimeSpanRecord with an EndDate
+        ///         - Adds the MainTimeSpanRecord to the ElapsedTimeSpanStore
+        /// </summary>
+        private void EndCheckInMode()
+        {
+            MainTimeWatch.StopwatchStop();
+            MainTimeSpanRecord.EndDateTime = TimeCatch;
+            _elapsedTimeSpanListStore.AddTimeSpanRecord(MainTimeSpanRecord);
+        }
+
+        /// <summary>
+        ///     Ends the BreakMode activites and performs its dependent tasks:
+        ///         - Resets the BreakTimeWatch and the Screen
+        ///         - Closes the BreakTimeSpanRecord with an EndDate
+        ///         - Adds the BreakTimeSpanRecord to the ElapsedTimeSpanStore
+        ///         - Writes a "BreakEnd" time entry into the database
+        /// </summary>
         private void EndBreakMode()
         {
             BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
             BreakTimeSpanRecord.EndDateTime = TimeCatch;
-            _elapsedTimeSpanListService.AddTimeSpanRecord(BreakTimeSpanRecord);
+            _elapsedTimeSpanListStore.AddTimeSpanRecord(BreakTimeSpanRecord);
             _dataBaseService.AddTimeEntry(4, TimeCatch, _userStore.CurrentUser.Fullname);
         }
 
+
+        /// <summary>
+        /// Sets the BreakMode status and performs all dependent tasks:
+        ///         - Starts the BreakTime stopwatch
+        ///         - Creates a new BreakTimeSpanRecord 
+        ///         - Writes a "BreakStart" time entry into the database
+        /// </summary>
         private void SetBreakModeStatus()
         {
             Status = Status.BreakMode;
-            MainTimeWatch.StopwatchStop();
-            MainTimeSpanRecord.EndDateTime = TimeCatch;
-            _elapsedTimeSpanListService.AddTimeSpanRecord(MainTimeSpanRecord);
-            _dataBaseService.AddTimeEntry(3, TimeCatch, _userStore.CurrentUser.Fullname);
-
             BreakTimeWatch.StopwatchStart();
             BreakTimeSpanRecord = new TimeSpanRecord(TimeSpanType.BreakTime, TimeCatch, _userStore.CurrentUser.Fullname);
+            _dataBaseService.AddTimeEntry(3, TimeCatch, _userStore.CurrentUser.Fullname);
         }
 
+        /// <summary>
+        ///     Updates the GUI Properties based on the Status
+        ///     Executed whenever the status changes (in the property setter).
+        /// </summary>
         private void UpdateGUIProperties()
         {
             switch (Status)
@@ -363,11 +453,17 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-
-        //The thicking timewatch
+ 
         public TimeWatch MainTimeWatch { get; set; }
-        //Access the Timewatch Events to trigger, since its subscribed to the delegate
-        // -> The MainTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+        /// <summary>
+        ///     uses the argument "tickEvent" from the parameter to write
+        ///     the TimeSpan Arg value formatted to the MainTimeWatchSceen in the UI.
+        ///     thus a ticking digital clock is displayed
+        ///     
+        /// <paramref name="sender"> The registered TimeWatch </paramref>
+        /// <paramref name="tickEvent"> the stopwatch.elapsed TimeSpan Arg </paramref>
+           ///     
+        /// </summary>
         private void MainTimewatchTriggered(object? sender, TickEventArgs tickEvent)
         {
             var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}", tickEvent.TimeSpan.Hours, tickEvent.TimeSpan.Minutes, tickEvent.TimeSpan.Seconds);
@@ -375,8 +471,15 @@ namespace TimeCheckerWPF5._0.ViewModels
         }
 
         public TimeWatch BreakTimeWatch { get; set; }
-        //Access the Timewatch Events to trigger, since its subscribed to the delegate
-        // -> The BreakTimeWatch Textbox is to be updated with as a running timewatch in the defined DispatchTimers interval
+        /// <summary>
+        ///     uses the argument "tickEvent" from the parameter to write
+        ///     the TimeSpan Arg value formatted to the BreakTimeWatchSceen in the UI.
+        ///     thus a ticking digital clock is displayed
+        ///     
+        /// <paramref name="sender"> The registered TimeWatch </paramref>
+        /// <paramref name="tickEvent"> the stopwatch.elapsed TimeSpan Arg </paramref>
+        ///     
+        /// </summary>
         private void BreakTimewatchTriggered(object? sender, TickEventArgs tickEvent)
         {
             var CurrentTime = String.Format("{0:00}:{1:00}:{2:00}",
