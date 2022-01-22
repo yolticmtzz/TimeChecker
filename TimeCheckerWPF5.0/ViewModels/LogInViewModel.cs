@@ -9,7 +9,7 @@ using TimeCheckerWPF5._0.Stores;
 namespace TimeCheckerWPF5._0.ViewModels
 {
 
-    /// Summary:
+    /// <summary>
     ///     This ViewModel processes the LoginView, manipulates its data and implements the necessary functionalities
     ///     
     ///     This ViewModel inherits from ViewModelBase to implement the RaisePropertyChanged.
@@ -20,6 +20,7 @@ namespace TimeCheckerWPF5._0.ViewModels
     ///         - A navigation service to navigate after the login process
     ///         - A DataBaseService to check the possible users during login.
     ///         - A LoginCommand for the ButtonClick.
+    /// </summary>
     public class LoginViewModel : ViewModelBase
     {
         private readonly UserStore _userStore;
@@ -53,20 +54,27 @@ namespace TimeCheckerWPF5._0.ViewModels
         }
 
 
-        /// Summary:
-        ///     Initializes a new instance of a LoginViewModel and initializes 
-        ///     the LoginCommand, the userStore, the navigationService and the dataBaseService
+        /// <summary>
+        /// Initializes a new instance of a LoginViewModel and initializes 
+        /// the LoginCommand, the userStore, the navigationService and the dataBaseService
         ///     
-        ///     With CheckUserDBList, the ViewModel directly checks if there are any Emplyees stored in the database. 
-        ///     Because without any, the application can not be used (it doesn't run user-less) and therefore is shut down. 
+        /// With CheckUserDBList, the ViewModel directly checks if there are any Emplyees stored in the database. 
+        /// Because without any, the application can not be used (it doesn't run user-less) and therefore is shut down. 
         /// 
-        /// Parameters:
-        ///   userStore:
-        ///     injects the UserStore
-        ///   loginNavigationService:
-        ///     injects a INavigationService
-        ///   dataBaseService :
-        ///     injects the DataBaseService
+        /// <paramref name="userStore">
+        /// injects the UserStore
+        /// </paramref>
+        /// 
+        /// <paramref name="loginNavigationService">
+        /// injects a INavigationService
+        /// </paramref>
+        /// 
+        /// <paramref name="dataBaseService">
+        /// injects the DataBaseService
+        /// </paramref>
+        /// 
+        ///     
+        /// </summary>
         public LoginViewModel(UserStore userStore, 
                                 INavigationService loginNavigationService,
                                 DataBaseService dataBaseService)
@@ -79,18 +87,20 @@ namespace TimeCheckerWPF5._0.ViewModels
             CheckUserDBList();
         }
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the CanExecute criterias for the ICommand Predicate
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "Start" button clicked to run the command
+        /// <paramref name="obj">:
+        ///   the "Start" button clicked to run the command
+        ///   </paramref>
+        ///   
+        /// </summary>     
         private bool CanExecuteLoginCommand(object obj)
         {
             return Prename != null;
         }
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the Execute logic for the ICommand Action:
         ///     After the button is clicked, Firstname and Lastname are compared
         ///     to a equal Employees in the Database. If a Employee with the Same Pre- and Lastname exists,
@@ -98,9 +108,11 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     the application navigates to the TimeCheckerView. 
         ///     If no Employee was found, an error message is shown in a message box and the login-procedure stopped.
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "Start" button clicked to run the command
+        /// <paramref name="obj">
+        /// the "Start" button clicked to run the command
+        /// </paramref>
+        /// 
+        /// </summary>
         private void ExecuteLoginCommand(object obj)
         {
             var EmployeeDBList = _dataBaseService.GetEmployees();
@@ -131,10 +143,12 @@ namespace TimeCheckerWPF5._0.ViewModels
                 Lastname = "";
         }
 
-        /// Summary:
+        /// <summary>
         ///     Checks if there are any Employees stored in the database.
         ///     If not, the user is informed about it and the Application is shot down.
         ///     Otherwise it continues
+        ///     
+        ///     </summary>
         private void CheckUserDBList()
         {
             var EmployeeDBList = _dataBaseService.GetEmployees();
