@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-    /// Summary:
+    /// <summary>
     ///     This class abstracts 3 ViewModels into one, so that the ultimate UI can be shown and managed from here.
     ///         HeaderView - HeaderViewModel (always present)
     ///         NavigationView - NavigationViewModel (always present)
@@ -15,7 +15,8 @@ namespace TimeCheckerWPF5._0.ViewModels
     ///            - TimeCheckerView/ViewModel,
     ///            - ElapsedTimeViewModel/ElapsedTimeView
     ///            
-    ///          This ViewModel inherits from ViewModelBase to implement the RaisePropertyChanged.       
+    ///          This ViewModel inherits from ViewModelBase to implement the RaisePropertyChanged.      
+    ///  </summary>
 
     public class LayoutViewModel : ViewModelBase
     {
@@ -24,7 +25,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         public ViewModelBase ContentViewModel { get; }
 
 
-        /// Summary:
+        /// <summary>
         ///     Initializes a new instance of a LayoutViewModel and initializes 
         ///     NavigationViewModel, HeaderViewModel and the ContentViewModel.
         ///

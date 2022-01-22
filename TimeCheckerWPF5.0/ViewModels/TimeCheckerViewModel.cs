@@ -195,13 +195,18 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     Initliazses two TimeWatches (MainTIme and BreakTime) and 
         ///     registers the TickEvents to the TimeWatchTriggers
         /// 
-        /// Parameters:
-        ///   userStore:
-        ///     injects the UserStore
-        ///   elapsedTimeSpanListStore:
-        ///     injects the ElapsedTimeSpanListSTore
-        ///   dataBaseService:
-        ///     injects the DataBaseService
+        /// <paramref name="userStore">
+        /// injects the UserStore
+        /// </paramref>
+        /// 
+        /// <paramref name="elapsedTimeSpanListStore">
+        /// injects the ElapsedTimeSpanListSTore
+        /// </paramref>
+        /// 
+        /// <paramref name="dataBaseService">
+        /// injects the DataBaseService
+        /// </paramref>
+        ///     
         ///  </summary>
         public TimeCheckerViewModel(UserStore userStore, 
                                     ElapsedTimeSpanListStore elapsedTimeSpanListStore,
@@ -227,9 +232,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// <summary>
         ///     Delivers the CanExecute criterias for the ICommand Predicate
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "CheckInCommand" button clicked to run the command
+        /// <paramref name="obj">
+        /// the "CheckInCommand" button clicked to run the command
+        /// </paramref>
+        ///       
         /// </summary>
         private bool CanExecuteCheckinCommand(object obj)
         {
@@ -242,9 +248,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     Based on the current Status it either checks in or out
         ///     and performs the dependent tasks/methods
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "CheckInCommand" button clicked to run the command
+        /// <paramref name="obj">:
+        /// the "CheckInCommand" button clicked to run the command
+        /// </paramref>
+        /// 
         /// </summary>
         private void ExecuteCheckinCommand(object obj)
         {
@@ -288,9 +295,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     This asks if the user really wants to check out and if so,
         ///     whether a comment should be added to the time entry.
         ///     
-        /// Return:
-        ///     ShowCheckOutDialog():
-        ///         True or False for "CheckOut" 
+        /// <returns>
+        /// From ShowCheckOutDialog() a boolean True or False for "CheckOut"
+        /// </returns>
+        /// 
         /// </summary>
         private bool IsCheckOutCommentSet()
         {
@@ -301,9 +309,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// <summary>
         ///     Shows the "CheckOutComment Dialog" as a pop-up window.
         ///     
-        /// Returns:
-        ///     ShowCheckOutDialog():
-        ///         True If CheckOut nutton clicked, false if Cancel button clicked
+        /// <returns>
+        ///  True If CheckOut nutton clicked, false if Cancel button clicked
+        /// </returns>
+        /// 
         /// </summary>
         private bool ShowCheckOutDialog()
         {
@@ -339,9 +348,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// <summary>
         ///     Delivers the CanExecute criterias for the ICommand Predicate
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "BreakCommand" button clicked to run the command
+        /// <paramref name="obj">:
+        /// the "BreakCommand" button clicked to run the command
+        /// </paramref>
+        /// 
         /// </summary>
         private bool CanExecuteBreakCommand(object obj)
         {
@@ -354,9 +364,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     Based on the current Status it either activates the BreakMode or checks back in
         ///     and performs the dependent tasks/methods
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "BreakCommand" button clicked to run the command
+        /// <paramref name="obj">
+        /// the "BreakCommand" button clicked to run the command
+        /// </paramref>
+        ///       
         /// </summary>
         private void ExecuteBreakCommand(object obj)
         {

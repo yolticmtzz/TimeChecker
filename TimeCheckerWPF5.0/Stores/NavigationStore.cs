@@ -3,13 +3,14 @@ using TimeCheckerWPF5._0.ViewModels;
 
 namespace TimeCheckerWPF5._0.Stores
 {
-    /// Summary:
+    /// <summary>
     ///    A service that stores the current ViewModel assigned to the content in the presented view
     ///    since this application uses UserControls as presenter.
     ///    
     ///    Because current ViewModel can change, it has an event "CurrentViewModelChanged"
     ///    that implements and invokes the OnCurrentViewModelChanged.
     ///    This method updates the view shown according to the current viewmodel change.
+    /// </summary>
     public class NavigationStore
     {
 
@@ -26,8 +27,9 @@ namespace TimeCheckerWPF5._0.Stores
             }
         }
 
-        /// Summary:
+        /// <summary>
         ///    This method updates the view shown according to the current viewmodel change.
+        /// </summary>
         private void OnCurrentViewModelChanged()
         {
             CurrentViewModelChanged?.Invoke();

@@ -6,7 +6,7 @@ namespace TimeCheckerWPF5._0.Services
 {
 
 
-    /// Summary:
+    /// <summary>
     ///     A navigations service specifically for the LayoutViewModel that pulls the data of 3 different views
     ///     in a viewmodel:
     ///         HeaderView - HeaderViewModel (always present)
@@ -15,6 +15,7 @@ namespace TimeCheckerWPF5._0.Services
     ///            - LoginViewModel/LoginView,
     ///            - TimeCheckerView/ViewModel,
     ///            - ElapsedTimeViewModel/ElapsedTimeView
+    /// </summary>
     public class LayoutNavigationService<TViewModel> : INavigationService 
         where TViewModel : ViewModelBase
     {

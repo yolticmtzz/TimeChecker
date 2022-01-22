@@ -5,7 +5,7 @@ using TimeCheckerWPF5._0.Services;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
-    /// Summary:
+    /// <summary>
     ///     This ViewModel reprents the NavigationView. It manages everything related to navigate around the application
     ///     
     ///     This ViewModel inherits from ViewModelBase to implement the RaisePropertyChanged.
@@ -18,6 +18,8 @@ namespace TimeCheckerWPF5._0.ViewModels
     ///         - loginNavigationService
     ///         - timeCheckerNavigationService
     ///         - elapsedTimesNavigationService
+    ///         
+    /// </summary>
     public class NavigationViewModel: ViewModelBase
     {
         private readonly INavigationService _loginNavigationService;
@@ -29,17 +31,21 @@ namespace TimeCheckerWPF5._0.ViewModels
         public ICommand NavigateElapsedTimeSpansCommand { get; }
         public ICommand NavigateExitApplicationCommand { get; }
 
-        /// Summary:
+        /// <summary>
         ///     Initializes a new instance of a NavigationViewModel and initializes 
         ///     the INavigationServices and the ICommands
         /// 
-        /// Parameters:
-        ///   loginNavigationService:
-        ///     injects the INavigationService to the LoginView/ViewModel
-        ///   timeCheckerNavigationService:
-        ///     injects the INavigationService to the TimeCheckerView/TimeCheckerViewModel
-        ///   elapsedTimesNavigationService:
-        ///     injects the INavigationService to the ElapsedTimesView/ElapsedTimesViewModel
+        /// <paramref name="loginNavigationService">
+        /// injects the INavigationService to the LoginView/ViewModel
+        /// </paramref>
+        /// <paramref name="timeCheckerNavigationService">
+        /// injects the INavigationService to the TimeCheckerView/TimeCheckerViewModel
+        /// </paramref>
+        /// <paramref name="elapsedTimesNavigationService">
+        /// injects the INavigationService to the ElapsedTimesView/ElapsedTimesViewModel
+        /// </paramref>
+        ///     
+        ///</summary>
         public NavigationViewModel(
             INavigationService loginNavigationService,
             INavigationService timeCheckerNavigationService,
@@ -56,49 +62,57 @@ namespace TimeCheckerWPF5._0.ViewModels
             
         }
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the Execute logic for the ICommand Action:
         ///     Shutdown the Application.
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "Exit" button clicked to run the command
+        /// <paramref name="obj">
+        /// the "Exit" button clicked to run the command
+        /// </paramref>
+        /// 
+        /// </summary>
         private void ExecuteExitApplication(object obj)
         {
             System.Windows.Application.Current.Shutdown();
         }
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the Execute logic for the ICommand Action:
         ///     Navigate to LoginViewModel
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "Change User" button clicked to run the command
+        /// <paramref name="obj">
+        /// the "Change User" button clicked to run the command
+        /// </paramref>
+        /// 
+        /// </summary>
         public void ExecuteNavigateToLoginCommand(object obj)
         {
             _loginNavigationService.Navigate();
         }
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the Execute logic for the ICommand Action:
         ///     Navigate to TimeCheckerViewModel
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "TimeChecker" button clicked to run the command
+        /// <paramref name="obj">
+        /// the "TimeChecker" button clicked to run the command
+        /// </paramref>
+        /// 
+        /// </summary>
         public void ExecuteNavigateToTimeCheckerCommand(object obj)
         {
             _timeCheckerNavigationService.Navigate();
         }
 
-        /// Summary:
+        /// <summary>
         ///     Delivers the Execute logic for the ICommand Action:
         ///     Navigate to ElapsedTimeViewModel
         ///
-        /// Parameters:
-        ///     obj:
-        ///       the "Overview" button clicked to run the command
+        /// <paramref name="obj">
+        /// the "Overview" button clicked to run the command
+        /// </paramref>
+        /// 
+        /// </summary>
         public void ExecuteNavigateToElapsedTimesCommand(object obj)
         {
             _elapsedTimesNavigationService.Navigate();
