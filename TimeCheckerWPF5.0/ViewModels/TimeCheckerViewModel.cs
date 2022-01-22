@@ -72,8 +72,8 @@ namespace TimeCheckerWPF5._0.ViewModels
             {
                 _status = value;
                 RaisePropertyChanged();
-                //CheckInCommand.RaiseCanExecuteChanged();
-                //BreakCommand.RaiseCanExecuteChanged();
+                CheckInCommand.RaiseCanExecuteChanged();
+                BreakCommand.RaiseCanExecuteChanged();
                 UpdateGUIProperties();
             }
         }
@@ -216,8 +216,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             _elapsedTimeSpanListStore = elapsedTimeSpanListStore;
             _dataBaseService = dataBaseService;
             
-            Status = Status.CheckedOut;
-
             CheckInCommand = new DelegateCommand(CanExecuteCheckinCommand, ExecuteCheckinCommand);
             BreakCommand = new DelegateCommand(CanExecuteBreakCommand, ExecuteBreakCommand);
 
@@ -226,6 +224,8 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             BreakTimeWatch = new TimeWatch();
             BreakTimeWatch.TickEvent += BreakTimewatchTriggered;
+
+            Status = Status.CheckedOut;
         }
 
 

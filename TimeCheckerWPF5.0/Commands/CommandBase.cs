@@ -15,8 +15,8 @@ namespace TimeCheckerWPF5._0.Commands
         /// <summary>
         ///     Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
-        public event EventHandler CanExecuteChanged;
-
+        public virtual event EventHandler CanExecuteChanged;
+            
 
         /// <summary>
         ///     Defines the method that determines whether the command can execute in its current
