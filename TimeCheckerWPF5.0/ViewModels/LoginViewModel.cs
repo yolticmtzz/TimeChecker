@@ -32,12 +32,15 @@ namespace TimeCheckerWPF5._0.ViewModels
         private string _prename;
         public string Prename
         {
-            get => _prename;
+            get => _prename;    
 
             set
             {
                 _prename = value;
                 RaisePropertyChanged(nameof(Prename));
+                //LoginCommand.CanExecute(null);
+
+
             }
         }
 
@@ -97,7 +100,8 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>     
         private bool CanExecuteLoginCommand(object obj)
         {
-            return Prename != null;
+            var check = !string.IsNullOrEmpty(Prename) && !string.IsNullOrEmpty(Prename);
+            return check;
         }
 
         /// <summary>

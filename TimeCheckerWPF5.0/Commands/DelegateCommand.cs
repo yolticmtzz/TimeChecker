@@ -12,7 +12,7 @@ namespace TimeCheckerWPF5._0.Commands
     public class DelegateCommand : CommandBase
     {
 
-        private readonly Action<object> execute;
+        private readonly Action<object> execute;ge
         private readonly Predicate<object> canExecute;
 
         /// <summary>
@@ -59,11 +59,12 @@ namespace TimeCheckerWPF5._0.Commands
         /// 
         /// </summary>
         public override bool CanExecute(object parameter)
-        { 
+        {
             if (canExecute != null)
             {
-                canExecute?.Invoke(parameter);
+                return canExecute.Invoke(parameter);
             }
+
             return true;
         }
 
@@ -77,7 +78,7 @@ namespace TimeCheckerWPF5._0.Commands
         /// </summary>
         public override void Execute(object parameter)
         {
-           execute?.Invoke(parameter);
+            execute?.Invoke(parameter);
         }
 
     }
