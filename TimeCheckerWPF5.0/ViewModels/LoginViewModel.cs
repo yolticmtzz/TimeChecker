@@ -55,7 +55,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-
         /// <summary>
         /// Initializes a new instance of a LoginViewModel and initializes 
         /// the LoginCommand, the userStore, the navigationService and the dataBaseService
