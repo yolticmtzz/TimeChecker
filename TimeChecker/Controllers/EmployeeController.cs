@@ -42,19 +42,35 @@ namespace TimeChecker.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// Datenbank Inhalt Employees in Variable employees speichern
+        /// Variable employees in ViewBag übergeben
+        /// </summary>
+        /// 
+        /// <returns>
+        /// ViewBag wird übergeben
+        /// </returns>
         public IActionResult Index()
-        {
-            // Datenbank Inhalt Employees in Variable employees speichern
+        {           
             var employees = _context.Employees.ToList();
-
-            // Variable employees in ViewBag übergeben
+        
             ViewBag.Employees = employees;
-
-            // ViewBag wird übergeben
+         
             return View();
         }
 
-        // Bestehender Employee aus Datenbank bearbeiten
+
+        /// <summary>
+        /// Bestehender Employee aus Datenbank bearbeiten
+        /// </summary>
+        /// 
+        /// <param name="id"> 
+        /// Employee mit entsprechender id suchen
+        /// </param>
+        /// 
+        /// <returns>
+        /// View CreateEditEmployee
+        /// </returns>
         public IActionResult CreateEdit(int id)
         {
             if (id == 0)
@@ -70,10 +86,19 @@ namespace TimeChecker.Controllers
             }
 
             return View("CreateEditEmployee",employeeInDb);
-
         }
 
-        // Employee hinzufügen oder updaten wenn ID nicht 0 
+        /// <summary>
+        /// Employee hinzufügen oder updaten wenn ID nicht 0 
+        /// </summary>
+        /// 
+        /// <param name="employee"> 
+        /// Model Employee übergeben 
+        /// </param>
+        /// 
+        /// <returns>
+        /// View Index Seite
+        /// </returns>
         [HttpPost]
         public IActionResult CreateEditEmployee(Employee employee)
         {
@@ -88,11 +113,20 @@ namespace TimeChecker.Controllers
 
             _context.SaveChanges();
 
-            // Weiterleitung zur Indexseite
             return RedirectToAction("Index");     
         }
 
-        // Employee löschen
+        /// <summary>
+        /// Employee löschen
+        /// </summary>
+        /// 
+        /// <param name="id"> 
+        /// Employee mit entsprechender id suchen
+        /// </param>
+        /// 
+        /// <returns>
+        /// View Index Seite
+        /// </returns>
         public IActionResult DeleteEmployee(int id)
         {
             var employeeInDb = _context.Employees.Find(id);
@@ -105,12 +139,7 @@ namespace TimeChecker.Controllers
             _context.Employees.Remove(employeeInDb);
             _context.SaveChanges();
 
-            // Weiterleitung zur Indexseite
             return RedirectToAction("Index");
-
         }
-
-
-
     }
 }

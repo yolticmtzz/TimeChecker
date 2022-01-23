@@ -46,7 +46,9 @@ namespace TimeChecker.DAL.Test
         }
 
 
-
+        /// <summary>
+        /// Löschen Timeentry Datensatz
+        /// </summary>
         [Test]
         public void DeleteTodoItem()
         {

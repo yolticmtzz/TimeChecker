@@ -50,6 +50,9 @@ namespace TimeChecker.DAL.Test
 
         }
 
+        /// <summary>
+        /// Updaten eines Timeentry Datensatz.
+        /// </summary>
         [Test]
         public void UpdateTodoItem()
         {
