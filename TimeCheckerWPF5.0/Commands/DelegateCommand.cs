@@ -3,32 +3,97 @@ using System.Windows.Input;
 
 namespace TimeCheckerWPF5._0.Commands
 {
-    public class DelegateCommand : ICommand
+
+
+    /// <summary>
+    ///     A general Delegation Command that implements the CommandBase implementation
+    ///     This way each command can implement its own Execute and CanExecute logic   
+    /// </summary>
+    public class DelegateCommand : CommandBase
     {
-        //DelegateCommand oder RelayCommand
 
-        //Die konkrete Methodenimplemeniterung ist für jeden Aufrufer anders, deswegen wird das in delegates ausgelagert:
-        readonly Action<object> execute;
-        readonly Predicate<object> canExecute;
+        private readonly Action<object> execute;
+        private readonly Predicate<object> canExecute;
 
-        public DelegateCommand(Predicate<object> canExecute, Action<object> execute) =>
-            (this.canExecute, this.execute) = (canExecute, execute);
+        /// <summary>
+        /// Initializes a new instance of a Delegate Command asking for the canExecute logic and the
+        /// execute logic of the command plans to execute
+        ///         
+        /// <paramref name="canExecute">
+        /// The criteria the canExecute must match to execute
+        /// </paramref>
+        /// <paramref name="execute">
+        /// The implementation of the execute logic
+        /// </paramref>
+        ///
+        /// </summary>
+        public DelegateCommand(Predicate<object> canExecute, Action<object> execute)
+        {
+            this.canExecute = canExecute;
+            this.execute = execute;
+        }
 
-        public DelegateCommand(Action<object> execute) : this(null, execute) { }
+        /// <summary>
+        /// Initializes a new instance of a Delegate Command asking just for the execute logic
+        /// of the command plans to execute. An instance without checking, if its executable
+        ///         
+        /// <paramref name="execute">:
+        ///    The implementation of the execute logic
+        ///    </paramref>
+        ///    
+        /// </summary>
+        public DelegateCommand(Action<object> execute)
+        {
+            this.execute = execute;
+        }
+
+        /// <summary>
+        ///     Overrides the CanExecute method. Check if the command is executable
+        ///     based on its predicated result given by the calling command. If there 
+        ///     wasn't any, it executes anyways.
+        ///         
+        /// <paramref name="parameter">:
+        ///     The predicate that will return its result based on the criterias implemented in the calling command
+        ///     and thus determine if its executable or not
+        /// </paramref>
+        /// 
+        /// </summary>
+        public override bool CanExecute(object parameter)
+        {
+            if (canExecute != null)
+            {
+                return canExecute.Invoke(parameter);
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Overrides the Execute method with the implemented logic from the calling command.
+        ///         
+        /// <paramref name="parameter">
+        ///    The exectution logic implemented by the calling command.
+        /// </paramref>
+        ///    
+        /// </summary>
+        public override void Execute(object parameter)
+        {
+            execute?.Invoke(parameter);
+        }
 
 
-        //Wenn dieses Event aufgerufen wird, evaluiert der Aufrufer erneute die CanExecute Methode.
-        public event EventHandler CanExecuteChanged;
+        public override event EventHandler CanExecuteChanged;
 
         //Um Funktion auszulösen:
-        public void RaiseCanExecuteChanged() => this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        public void RaiseCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+            {
+                CanExecuteChanged.Invoke(this, EventArgs.Empty);
+            }
 
-        //Liefert, ob das Command überhaupt ausgeführt werden kann (Liefert z.B. False wenn der Button nicht geklickt wird.
-        //Wenn true liefer = Button ist aktiviert).
-        public bool CanExecute(object parameter) => this.canExecute?.Invoke(parameter) ?? true;
-        
-    //Methode wird ausgeführt, wenn durch irgendwas aufgerufen wird
-    public void Execute(object parameter) => this.execute?.Invoke(parameter);
+        }
+
     }
-    
+
 }

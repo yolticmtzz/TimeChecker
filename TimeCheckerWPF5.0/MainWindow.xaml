@@ -12,10 +12,6 @@
         Title="TimeChecker"
         mc:Ignorable="d" 
         >
-    <!--<Window.DataContext>
-        <stores:NavigationStore/>
-    </Window.DataContext>-->
-
     <Grid>
         <Grid.Resources>
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">

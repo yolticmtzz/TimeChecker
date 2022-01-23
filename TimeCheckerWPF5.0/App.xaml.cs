@@ -126,7 +126,8 @@ namespace TimeCheckerWPF5._0
 
             return new LoginViewModel(
                 serviceProvider.GetRequiredService<UserStore>(),
-                navigationService, serviceProvider.GetRequiredService<DataBaseService>());
+                navigationService, 
+                serviceProvider.GetRequiredService<DataBaseService>());
         }
     }
 }
