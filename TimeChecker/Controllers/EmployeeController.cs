@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
+
 
 
 /**
@@ -31,6 +33,7 @@ using TimeChecker.DAL.Models;
 
 namespace TimeChecker.Controllers
 {
+    [Authorize (Roles = "Admin")]
     public class EmployeeController : Controller
     {
         // Variable für Datenbankinhalt
