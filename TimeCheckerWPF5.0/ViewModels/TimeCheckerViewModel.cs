@@ -4,7 +4,6 @@ using TimeCheckerWPF5._0.Views;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.Utilities;
 using TimeCheckerWPF5._0.Services;
-using System.Windows.Input;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
