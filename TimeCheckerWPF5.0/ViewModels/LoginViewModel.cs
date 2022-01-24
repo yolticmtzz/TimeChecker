@@ -85,7 +85,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             _userStore = userStore;
             _navigationService = loginNavigationService;
             _dataBaseService = dataBaseService;
-            CheckUserDBList();
+            //CheckUserDBList();
         }
 
         /// <summary>
@@ -109,6 +109,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     login is success, the employee is set as the current user and then 
         ///     the application navigates to the TimeCheckerView. 
         ///     If no Employee was found, an error message is shown in a message box and the login-procedure stopped.
+        ///     
+        ///     Exception:
+        ///     Checks if there are any Employees stored in the database.
+        ///     If not, the user is informed to create users first.
         ///
         /// <paramref name="obj">
         /// the "Start" button clicked to run the command
@@ -117,53 +121,63 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void ExecuteLoginCommand(object obj)
         {
-            var EmployeeDBList = _dataBaseService.GetEmployees();
-            bool isUserExist = false;
-            Employee userMatch = new Employee();
-            var LogginPrename = Prename.Trim().ToLower();
-            var LoginLastname = Lastname.Trim().ToLower();
-
-            foreach (Employee employee in EmployeeDBList)
+            try
             {
-                if (employee.Prename.ToLower().Equals(LogginPrename) && employee.Lastname.ToLower().Equals(LoginLastname))
+                var EmployeeDBList = _dataBaseService.GetEmployees();
+                bool isUserExist = false;
+                Employee userMatch = new Employee();
+                var LogginPrename = Prename.Trim().ToLower();
+                var LoginLastname = Lastname.Trim().ToLower();
+
+                foreach (Employee employee in EmployeeDBList)
                 {
-                    _userStore.CurrentUser = employee;
-                    userMatch = employee;
-                    isUserExist = true;
-                    break;
+                    if (employee.Prename.ToLower().Equals(LogginPrename) && employee.Lastname.ToLower().Equals(LoginLastname))
+                    {
+                        _userStore.CurrentUser = employee;
+                        userMatch = employee;
+                        isUserExist = true;
+                        break;
+                    }
                 }
-            }
 
-            if (isUserExist)
-            {
-                MessageBox.Show($"Logging in {userMatch.Fullname}...");
-                
-               _navigationService.NavigateToType(typeof(TimeCheckerViewModel));
-                return;
-            }
-  
+                if (isUserExist)
+                {
+                    MessageBox.Show($"Logging in {userMatch.Fullname}...");
+
+                    _navigationService.NavigateToType(typeof(TimeCheckerViewModel));
+                    return;
+                }
+
                 MessageBox.Show($"The user \"{Prename} {Lastname}\" does not exist." +
                 $"\nPlease try again or create a new user online.");
                 Prename = "";
                 Lastname = "";
-        }
-
-        /// <summary>
-        ///     Checks if there are any Employees stored in the database.
-        ///     If not, the user is informed about it and the Application is shot down.
-        ///     Otherwise it continues
-        ///     
-        ///     </summary>
-        private void CheckUserDBList()
-        {
-            var EmployeeDBList = _dataBaseService.GetEmployees();
-
-            if (EmployeeDBList.Count == 0)
-            {
-                MessageBox.Show("There don't seem to be any users who could log in yet. \nPlease create at least one valid user to use the TimeChecker ");
-                Application.Current.Shutdown();
             }
+            catch (Exception ex)
+            {
+
+                throw new LoginException($"There don't seem to be any users who could log in yet. \nPlease create at least one valid user to use the TimeChecker {ex.Message}", ex);
+            }
+            
+            
         }
+
+        ///// <summary>
+        /////     Checks if there are any Employees stored in the database.
+        /////     If not, the user is informed about it and the Application is shot down.
+        /////     Otherwise it continues
+        /////     
+        /////     </summary>
+        //private void CheckUserDBList()
+        //{
+        //    var EmployeeDBList = _dataBaseService.GetEmployees();
+
+        //    if (EmployeeDBList.Count == 0)
+        //    {
+        //        MessageBox.Show("");
+        //        Application.Current.Shutdown();
+        //    }
+        //}
 
     }
 }

@@ -14,9 +14,21 @@ namespace TimeCheckerWPF5._0.ViewModels
     ///     </summary>
     public class HeaderViewModel : ViewModelBase
     {
-        
-     
-        public string UserFullName { get; set; }
+
+
+        private string userFullName;
+
+        public string UserFullName
+        {
+            get => userFullName;
+
+            set
+            {
+                userFullName = value;
+                RaisePropertyChanged();
+
+            }
+        }
     
         public string Date { get; set; }
 
