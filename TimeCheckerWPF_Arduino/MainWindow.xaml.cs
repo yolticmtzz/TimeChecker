@@ -174,10 +174,13 @@ namespace TimeCheckerWPF_Arduino
                 serialport.BaudRate = 9600;
                 serialport.Open();
 
-                for (int i = 0; i < 101; i++)
+                if (serialport.IsOpen)
                 {
-                    ProgressBar.Value = i;
+                    for (int i = 0; i < 101; i++)
+                    {
+                        ProgressBar.Value = i;
 
+                    }
                 }
                 
                 _readSerialDataTimer.Start();
