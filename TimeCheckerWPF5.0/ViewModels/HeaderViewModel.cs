@@ -14,8 +14,10 @@ namespace TimeCheckerWPF5._0.ViewModels
     ///     </summary>
     public class HeaderViewModel : ViewModelBase
     {
-        private readonly UserStore _userStore;
-        public string UserFullName => _userStore.CurrentUser?.Fullname;
+        
+     
+        public string UserFullName { get; set; }
+    
         public string Date { get; set; }
 
 
@@ -32,8 +34,14 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///     </summary>
         public HeaderViewModel(UserStore userStore)
         {
-            _userStore = userStore;
             Date = DateTime.Now.ToLongDateString();
+            if (UserFullName != null)
+            {
+                UserFullName = userStore.CurrentUser.Fullname;
+                return;
+            }
+
+            UserFullName = "About to log in...";
 
         }
     }

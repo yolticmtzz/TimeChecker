@@ -119,14 +119,16 @@ namespace TimeCheckerWPF5._0.ViewModels
         {
             var EmployeeDBList = _dataBaseService.GetEmployees();
             bool isUserExist = false;
-            var LogginPrename = Prename.Trim();
-            var LoginLastname = Lastname.Trim();
+            Employee userMatch = new Employee();
+            var LogginPrename = Prename.Trim().ToLower();
+            var LoginLastname = Lastname.Trim().ToLower();
 
             foreach (Employee employee in EmployeeDBList)
             {
-                if (employee.Prename.Equals(LogginPrename) && employee.Lastname.Equals(LoginLastname))
+                if (employee.Prename.ToLower().Equals(LogginPrename) && employee.Lastname.ToLower().Equals(LoginLastname))
                 {
                     _userStore.CurrentUser = employee;
+                    userMatch = employee;
                     isUserExist = true;
                     break;
                 }
@@ -134,12 +136,12 @@ namespace TimeCheckerWPF5._0.ViewModels
 
             if (isUserExist)
             {
-                MessageBox.Show($"Logging in {LogginPrename} {LoginLastname}...");
-                _navigationService.NavigateToType(typeof(TimeCheckerViewModel));
+                MessageBox.Show($"Logging in {userMatch.Fullname}...");
+               _navigationService.NavigateToType(typeof(TimeCheckerViewModel));
                 return;
             }
   
-                MessageBox.Show($"The user \"{LogginPrename} {LoginLastname}\" does not exist." +
+                MessageBox.Show($"The user \"{Prename} {Lastname}\" does not exist." +
                 $"\nPlease try again or create a new user online.");
                 Prename = "";
                 Lastname = "";

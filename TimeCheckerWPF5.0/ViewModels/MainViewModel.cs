@@ -17,10 +17,9 @@ namespace TimeCheckerWPF5._0.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private readonly NavigationStore _navigationStore;
-        
 
-        public HeaderViewModel HeaderViewModel { get; }
-        public NavigationViewModel NavigationViewModel { get; }
+        public HeaderViewModel HeaderViewModel { get; set; }
+        public NavigationViewModel NavigationViewModel { get; set; }
 
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
 
@@ -34,7 +33,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </paramref>
         /// 
         /// </summary>
-        public MainViewModel(NavigationStore navigationStore, HeaderViewModel headerViewModel, TimeCheckerViewModel timeCheckerViewModel, NavigationViewModel navigationViewModel)
+        public MainViewModel(NavigationStore navigationStore, HeaderViewModel headerViewModel, NavigationViewModel navigationViewModel)
         {
             _navigationStore = navigationStore;
             HeaderViewModel = headerViewModel;
