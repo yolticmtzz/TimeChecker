@@ -260,7 +260,7 @@ namespace TimeCheckerWPF5._0.ViewModels
 
                 if (Status == Status.CheckedOut)
                 {
-                    SetCheckedInStatus();
+                    SetCheckedInStatus(false);
                     return;
                 }
 
@@ -280,13 +280,19 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///         - Starts the MainTime stopwatch
         ///         - Creates a new MainTimeSpanRecord 
         ///         - Writes a "CheckIn" time entry into the database
+        ///         
+        /// <paramref name="isEndingBreak">
+        ///     - defines whether a initial checkin or an after-break-checkin (re-checkin) is conducted
+        /// </paramref>
         /// </summary>
-        private void SetCheckedInStatus()
+        private void SetCheckedInStatus(bool isEndingBreak)
         {
             Status = Status.CheckedIn;
             MainTimeWatch.StopwatchStart();
             MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
-            _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
+
+            if (isEndingBreak == false) _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
+            
         }
 
         /// <summary>
@@ -381,7 +387,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
 
             EndBreakMode();
-            SetCheckedInStatus();
+            SetCheckedInStatus(true);
         }
 
         /// <summary>
