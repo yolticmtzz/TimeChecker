@@ -26,10 +26,12 @@ namespace TimeCheckerWPF5._0
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly NavigationStore _navigationStore;
 
-        public MainWindow()
+        public MainWindow(MainViewModel viewModel, NavigationStore navigationStore)
         {
-
+            _navigationStore = navigationStore;
+            DataContext = viewModel;
             InitializeComponent();
 
             Application.Current.Exit += new ExitEventHandler(ExitApp);

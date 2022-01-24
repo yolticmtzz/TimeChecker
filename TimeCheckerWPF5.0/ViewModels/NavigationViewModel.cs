@@ -87,7 +87,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         public void ExecuteNavigateToLoginCommand(object obj)
         {
-            _loginNavigationService.Navigate();
+            _loginNavigationService.NavigateToType(typeof(LoginViewModel));
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         public void ExecuteNavigateToTimeCheckerCommand(object obj)
         {
-            _timeCheckerNavigationService.Navigate();
+            _timeCheckerNavigationService.NavigateToType(typeof(TimeCheckerViewModel));
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         public void ExecuteNavigateToElapsedTimesCommand(object obj)
         {
-            _elapsedTimesNavigationService.Navigate();
+            _elapsedTimesNavigationService.NavigateToType(typeof(ElapsedTimesViewModel));
         }
 
     }

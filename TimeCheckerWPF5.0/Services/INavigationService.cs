@@ -1,4 +1,6 @@
-﻿namespace TimeCheckerWPF5._0.Services
+﻿using System;
+
+namespace TimeCheckerWPF5._0.Services
 {
 
     /// <summary>
@@ -12,7 +14,7 @@
         ///     forces the implementation of a method called "Navigate" that should implement
         ///     a navigation logic
         /// </summary>
-        void Navigate();
+        void NavigateToType(Type type);
 
     }
 }

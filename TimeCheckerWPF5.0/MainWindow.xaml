@@ -10,25 +10,42 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
         Title="TimeChecker"
-        mc:Ignorable="d" 
-        >
-    <Grid>
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                <views:LoginView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel}">
-                <views:TimeCheckerView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel}">
-                <views:ElapsedTimesView />
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:LayoutViewModel}">
-                <views:Layout />
-            </DataTemplate>
-        </Grid.Resources>
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        mc:Ignorable="d">
 
+    <Grid MaxWidth="1000" Margin="20 10">
+        
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <views:Navigation Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" DataContext="{Binding NavigationViewModel}"/>
+        <views:HeaderView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" DataContext="{Binding HeaderViewModel}"/>
+
+        <ContentControl Grid.Row ="2" Grid.Column="1"  Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:TimeCheckerViewModel}">
+                    <views:TimeCheckerView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ElapsedTimesViewModel}">
+                    <views:ElapsedTimesView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
+                    <views:LoginView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:HeaderViewModel}">
+                    <views:HeaderView />
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+
+    </Grid>
     </Grid>
 </Window>
 
