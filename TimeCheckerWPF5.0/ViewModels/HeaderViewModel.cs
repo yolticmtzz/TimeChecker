@@ -35,13 +35,14 @@ namespace TimeCheckerWPF5._0.ViewModels
         public HeaderViewModel(UserStore userStore)
         {
             Date = DateTime.Now.ToLongDateString();
-            if (UserFullName != null)
+            
+            if (userStore.CurrentUser != null)
             {
                 UserFullName = userStore.CurrentUser.Fullname;
                 return;
             }
 
-            UserFullName = "About to log in...";
+            UserFullName = "Login required";
 
         }
     }

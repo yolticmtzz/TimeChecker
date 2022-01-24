@@ -137,6 +137,7 @@ namespace TimeCheckerWPF5._0.ViewModels
             if (isUserExist)
             {
                 MessageBox.Show($"Logging in {userMatch.Fullname}...");
+                
                _navigationService.NavigateToType(typeof(TimeCheckerViewModel));
                 return;
             }
