@@ -64,17 +64,20 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// Because without any, the application can not be used (it doesn't run user-less) and therefore is shut down. 
         /// 
         /// <paramref name="userStore">
-        /// injects the UserStore
+        /// injects the UserStore, to use the user info
         /// </paramref>
         /// 
         /// <paramref name="loginNavigationService">
-        /// injects a INavigationService
+        /// injects a INavigationService to navigate after the login
         /// </paramref>
         /// 
         /// <paramref name="dataBaseService">
-        /// injects the DataBaseService
+        /// injects the DataBaseService to interact with database data
         /// </paramref>
         /// 
+        /// <paramref name="headerViewModel">
+        ///  injects the headerViewModel to update the user
+        ///  </paramref>
         ///     
         /// </summary>
         public LoginViewModel(UserStore userStore, 
@@ -124,6 +127,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void ExecuteLoginCommand(object obj)
         {
+            
             try
             {
                 var EmployeeDBList = _dataBaseService.GetEmployees();
