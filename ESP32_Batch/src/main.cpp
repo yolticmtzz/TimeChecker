@@ -52,6 +52,7 @@ void loop()
         // Überprüfung ob Batch-ID-CheckIN ungleich Batch-ID-CheckOUT ist.
         if (Batch.uid.uidByte[j] != batch_uid_checkOUT[j])
         {
+          Serial.println();
           Serial.print("Gelesene UID: ");
           // Batch-ID-CheckIN ausgeben
           for (byte i = 0; i < Batch.uid.size; i++)
@@ -60,7 +61,6 @@ void loop()
             Serial.print(Batch.uid.uidByte[i], HEX);
           }
           Serial.print(" -> CheckIN");
-          Serial.println();
           check = true;
         }
       }
@@ -69,17 +69,16 @@ void loop()
     // Überprüfung ob Batch-ID-CheckIN gleich Batch-ID-CheckOUT ist.
     else 
     {
+      Serial.println();
       Serial.print("Gelesene UID: ");
       // Batch-ID-CheckOUT beschreiben und ausgeben
       for (int x = 0; x < 4; x++)
       {
-        Batch.uid.uidByte[x] = batch_uid_checkOUT[x];
+        //Batch.uid.uidByte[x] = batch_uid_checkOUT[x];
         Serial.print(Batch.uid.uidByte[x] < 0x10 ? "0" : " ");
         Serial.print(Batch.uid.uidByte[x], HEX);
       }
       Serial.print(" -> CheckOUT");
-
-      Serial.println();
       check = false;
     }
 

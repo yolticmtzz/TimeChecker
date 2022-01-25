@@ -112,7 +112,7 @@ namespace TimeCheckerWPF_Arduino
                 Type = 1,
                 DateTime = DateTime.Now,
                 Comment = "Batch-IN",
-                User = "Dummy User 77",
+                User = "Dummy User",
             };
 
             _context.Timeentry.Add(record);
@@ -129,7 +129,7 @@ namespace TimeCheckerWPF_Arduino
                 Type = 2,
                 DateTime = DateTime.Now,
                 Comment = "Batch-OUT",
-                User = "Dummy User 77",
+                User = "Dummy User",
             };
 
             _context.Timeentry.Add(record);
