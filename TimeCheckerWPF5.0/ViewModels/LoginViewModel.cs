@@ -26,6 +26,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly UserStore _userStore;
         private readonly INavigationService _navigationService;
         private readonly DataBaseService _dataBaseService;
+        private readonly HeaderViewModel headerViewModel;
 
         public DelegateCommand LoginCommand { get; set; }
 
@@ -78,13 +79,15 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         public LoginViewModel(UserStore userStore, 
                                 INavigationService loginNavigationService,
-                                DataBaseService dataBaseService)
+                                DataBaseService dataBaseService, HeaderViewModel headerViewModel)
         {
             
             LoginCommand = new DelegateCommand(CanExecuteLoginCommand, ExecuteLoginCommand);
             _userStore = userStore;
             _navigationService = loginNavigationService;
             _dataBaseService = dataBaseService;
+            this.headerViewModel = headerViewModel;
+            
             //CheckUserDBList();
         }
 
@@ -134,6 +137,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                     if (employee.Prename.ToLower().Equals(LogginPrename) && employee.Lastname.ToLower().Equals(LoginLastname))
                     {
                         _userStore.CurrentUser = employee;
+                        headerViewModel.UserFullName = employee.Fullname;
                         userMatch = employee;
                         isUserExist = true;
                         break;

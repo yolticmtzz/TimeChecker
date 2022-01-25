@@ -37,7 +37,7 @@ namespace TimeCheckerWPF5._0
             services.AddSingleton<TimeCheckerViewModel>();
             services.AddTransient<ElapsedTimesViewModel>();
             services.AddTransient<NavigationViewModel>();
-            services.AddTransient<HeaderViewModel>();
+            services.AddSingleton<HeaderViewModel>();
 
             services.AddTransient<MainViewModel>();
             services.AddSingleton<MainWindow>();

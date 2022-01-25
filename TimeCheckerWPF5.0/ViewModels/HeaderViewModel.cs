@@ -26,7 +26,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             {
                 userFullName = value;
                 RaisePropertyChanged();
-
             }
         }
     
@@ -35,7 +34,8 @@ namespace TimeCheckerWPF5._0.ViewModels
 
         /// <summary>
         ///     Initializes a new instance of the HeaderViewModel
-        ///     and uses the userstore's CurrentUser to present it in the view.
+        ///     and uses the userstore's CurrentUser to present it in the view. 
+        ///     If no user has been set yet, 
         ///     Also sets the date based on actual system time and presents it in 
         ///     a certain format to the UI.
         ///
@@ -48,13 +48,14 @@ namespace TimeCheckerWPF5._0.ViewModels
         {
             Date = DateTime.Now.ToLongDateString();
             
+            
             if (userStore.CurrentUser != null)
             {
                 UserFullName = userStore.CurrentUser.Fullname;
                 return;
             }
 
-            UserFullName = "Login required";
+           UserFullName = "Login required";
 
         }
     }
