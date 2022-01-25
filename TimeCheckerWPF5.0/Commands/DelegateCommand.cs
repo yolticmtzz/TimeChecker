@@ -84,7 +84,9 @@ namespace TimeCheckerWPF5._0.Commands
 
         public override event EventHandler CanExecuteChanged;
 
-        //Um Funktion auszulösen:
+        /// <summary>
+        /// Invokes the CanExeCuteChanged Event to reevluate of a certain command can executed or not
+        /// </summary>
         public void RaiseCanExecuteChanged()
         {
             if (CanExecuteChanged != null)

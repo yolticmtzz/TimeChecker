@@ -28,7 +28,8 @@ namespace TimeCheckerWPF5._0.Stores
         }
 
         /// <summary>
-        ///    This method updates the view shown according to the current viewmodel change.
+        ///    This method updates the view shown according to the current viewmodel change 
+        ///    by Invoking the CurrentViewModelChanged Event.
         /// </summary>
         private void OnCurrentViewModelChanged()
         {

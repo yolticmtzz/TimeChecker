@@ -77,9 +77,11 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
-        ///UI Properties
-        ///The all have to use RaisePropertyChanged()
-        ///in their set to notify the UI about the change
+        ///<summary>
+        ///UI Properties:
+        ///All properties bound to the UI (View) have to use RaisePropertyChanged()
+        ///in their "set" to notify the UI about the change of their values
+        ///</summary>
         private string _statusScreenText;
         public string StatusScreenText
         {

@@ -7,13 +7,14 @@ namespace TimeCheckerWPF5._0.Commands
 
     /// <summary>
     ///     A base class for all commands to implement ICommand's Execute, CanExecute and OnCanExcuteChanged
-    ///      which are the basic methods, generally a command should be able to "do"
+    ///     which are the basic methods, generally a command should be able to "do"
     /// </summary>
     public abstract class CommandBase : ICommand
     {
 
         /// <summary>
         ///     Occurs when changes occur that affect whether or not the command should execute.
+        ///     A event to be registered to
         /// </summary>
         public virtual event EventHandler CanExecuteChanged;
             
@@ -40,10 +41,12 @@ namespace TimeCheckerWPF5._0.Commands
         /// <summary>
         ///     Defines the method to be called when the command is invoked.
         ///
-        /// Parameters:
-        ///   parameter:
+        /// <paramref name="parameter">
         ///     Data used by the command. If the command does not require data to be passed,
         ///     this object can be set to null.
+        ///  </paramref>
+        ///  
+        ///     </summary>
         public abstract void Execute(object parameter);
 
 

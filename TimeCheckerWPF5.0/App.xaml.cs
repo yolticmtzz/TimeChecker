@@ -11,12 +11,23 @@ using TimeCheckerWPF5._0.ViewModels;
 namespace TimeCheckerWPF5._0
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App xaml:
+    ///     Setting Up Dependency Injection with the
+    ///     required services as a IServiceCollection
+
+    ///     Overriting the StartUp Method, 
+    ///     to create our own Start Up scenario
+    ///     
     /// </summary>
     public partial class App : Application
     {
         private readonly IServiceProvider _serviceProvider;
 
+        /// <summary>
+        ///       Initializing and building up the IServiceCollection
+        ///       of the DI with the relevant service within their
+        ///       required scope (singleton, transient or scoped)
+        /// </summary>
         public App()
         {
             IServiceCollection services = new ServiceCollection();
@@ -46,6 +57,17 @@ namespace TimeCheckerWPF5._0
 
         }
 
+        /// <summary>
+        ///       This overrides the OnStartup Event of the WPF application
+        ///       to start up with the DI services as well as
+        ///       using the MainWindow as a service. Furthermore the "LoginViewModel"
+        ///       is bound to the shown CurrentViewModel DataContext in the MainView
+        ///       after startup, by injecting a NavigationService of type "LoginViewModel".
+        ///       (Review the Navigation logic for more details)
+        /// 
+        /// <paramref name="e"/>
+        ///     the StartupEventArgs
+        /// </summary>
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
