@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Services;
+using TimeCheckerWPF5._0.Stores;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -101,7 +102,8 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         public void ExecuteNavigateToTimeCheckerCommand(object obj)
         {
-            _timeCheckerNavigationService.NavigateToType(typeof(TimeCheckerViewModel));
+         _timeCheckerNavigationService.NavigateToType(typeof(TimeCheckerViewModel));
+            
         }
 
         /// <summary>

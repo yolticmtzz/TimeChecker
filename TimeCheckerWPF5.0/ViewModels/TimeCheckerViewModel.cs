@@ -4,6 +4,7 @@ using TimeCheckerWPF5._0.Views;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.Utilities;
 using TimeCheckerWPF5._0.Services;
+using System.Windows;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -255,26 +256,32 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// 
         /// </summary>
         private void ExecuteCheckinCommand(object obj)
-        {
-            {
-                TimeCatch = DateTime.Now;
-
-                if (Status == Status.CheckedOut)
+        {             
+                try
                 {
-                    SetCheckedInStatus(false);
-                    return;
-                }
+                    TimeCatch = DateTime.Now;
+                    if (Status == Status.CheckedOut)
+                    {
+                        SetCheckedInStatus(false);
+                        return;
+                    }
 
-                if  (IsCheckOutCommentSet())
+
+                    if (IsCheckOutCommentSet())
+                    {
+                        SetCheckedOutStatus();
+                        return;
+                    }
+
+                    MainTimeWatch.StopwatchStart();
+
+                }
+                catch (Exception ex)
                 {
-                    SetCheckedOutStatus();
-                    return;
+                    MessageBox.Show(ex.Message);
+                    throw;
                 }
-
-                MainTimeWatch.StopwatchStart();
-
-            }
-        }
+         }
 
         /// <summary>
         ///     Sets the CheckIn status and performs all dependent tasks:
@@ -288,12 +295,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void SetCheckedInStatus(bool isEndingBreak)
         {
-            Status = Status.CheckedIn;
-            MainTimeWatch.StopwatchStart();
-            MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
-
-            if (isEndingBreak == false) _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
-            
+                Status = Status.CheckedIn;
+                MainTimeWatch.StopwatchStart();
+                MainTimeSpanRecord = new TimeSpanRecord(TimeSpanType.MainTime, TimeCatch, _userStore.CurrentUser.Fullname);
+                if (isEndingBreak == false) _dataBaseService.AddTimeEntry(1, TimeCatch, _userStore.CurrentUser.Fullname);
         }
 
         /// <summary>
@@ -344,6 +349,8 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void SetCheckedOutStatus()
         {
+
+           
                 Status = Status.CheckedOut;
                 MainTimeWatchScreen = MainTimeWatch.StopwatchReset();
                 MainTimeSpanRecord.EndDateTime = TimeCatch;
@@ -378,17 +385,25 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void ExecuteBreakCommand(object obj)
         {
-            TimeCatch = DateTime.Now;
-
-            if (Status == Status.CheckedIn)
+            try
             {
-                EndCheckInMode();
-                SetBreakModeStatus();
-                return;
-            }
+                TimeCatch = DateTime.Now;
+                if (Status == Status.CheckedIn)
+                {
+                    EndCheckInMode();
+                    SetBreakModeStatus();
+                    return;
+                }
 
-            EndBreakMode();
-            SetCheckedInStatus(true);
+                EndBreakMode();
+                SetCheckedInStatus(true);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
         }
 
         /// <summary>
@@ -504,7 +519,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                 tickEvent.TimeSpan.Hours, tickEvent.TimeSpan.Minutes, tickEvent.TimeSpan.Seconds);
             BreakTimeWatchScreen = CurrentTime;
         }
-
     }
 
 }

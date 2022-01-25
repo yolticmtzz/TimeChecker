@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeChecker.DAL.Data;
 using TimeChecker.DAL.Models;
+using TimeCheckerWPF5._0.Exceptions;
 
 namespace TimeCheckerWPF5._0.Services
 {
@@ -62,6 +63,8 @@ namespace TimeCheckerWPF5._0.Services
         /// </summary>
         public bool AddTimeEntry(short type, DateTime timeCatch, string user, string? comment = "")
         {
+           
+            
             var record = new Timeentry()
             {
                 Type = type,
@@ -70,11 +73,16 @@ namespace TimeCheckerWPF5._0.Services
                 Comment = comment,
             };
 
-            _dbContext.Timeentry.Add(record);
-            int result = _dbContext.SaveChanges();
-            if (result > 0) return true;
-
-            return false;
+            try
+            {
+                _dbContext.Timeentry.Add(record);
+                int result = _dbContext.SaveChanges();
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new DBAccessException("Changes could not be saved to the database." + ex.Message, ex);
+            }
         }
 
         /// <summary>
@@ -88,8 +96,16 @@ namespace TimeCheckerWPF5._0.Services
         public List<Employee> GetEmployees()
         { 
             List<Employee> EmployeesDB = new List<Employee>();
-            EmployeesDB = _dbContext.Employees.ToList();
-            return EmployeesDB;
+
+            try
+            {
+                EmployeesDB = _dbContext.Employees.ToList();
+                return EmployeesDB;
+            }
+            catch (Exception ex)
+            {
+                throw new DBAccessException("Employees could not be retreived from database." + ex.Message, ex);
+            }
         }
 
     }

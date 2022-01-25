@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace TimeCheckerWPF5._0.ViewModels
+namespace TimeCheckerWPF5._0.Exceptions
 {
     [Serializable]
     internal class LoginException : Exception

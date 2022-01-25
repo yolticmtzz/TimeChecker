@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Input;
 using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Commands;
+using TimeCheckerWPF5._0.Exceptions;
 using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
 
@@ -127,7 +127,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void ExecuteLoginCommand(object obj)
         {
-            
+
             try
             {
                 var EmployeeDBList = _dataBaseService.GetEmployees();
@@ -151,7 +151,6 @@ namespace TimeCheckerWPF5._0.ViewModels
                 if (isUserExist)
                 {
                     MessageBox.Show($"Logging in {userMatch.Fullname}...");
-
                     _navigationService.NavigateToType(typeof(TimeCheckerViewModel));
                     return;
                 }
@@ -161,31 +160,13 @@ namespace TimeCheckerWPF5._0.ViewModels
                 Prename = "";
                 Lastname = "";
             }
+
             catch (Exception ex)
             {
-
-                throw new LoginException($"There don't seem to be any users who could log in yet. \nPlease create at least one valid user to use the TimeChecker {ex.Message}", ex);
+                MessageBox.Show(ex.Message);
+                throw;
             }
-            
-            
-        }
 
-        ///// <summary>
-        /////     Checks if there are any Employees stored in the database.
-        /////     If not, the user is informed about it and the Application is shot down.
-        /////     Otherwise it continues
-        /////     
-        /////     </summary>
-        //private void CheckUserDBList()
-        //{
-        //    var EmployeeDBList = _dataBaseService.GetEmployees();
-
-        //    if (EmployeeDBList.Count == 0)
-        //    {
-        //        MessageBox.Show("");
-        //        Application.Current.Shutdown();
-        //    }
-        //}
-
+         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using TimeCheckerWPF5._0.Exceptions;
 using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.ViewModels;
 
@@ -69,8 +70,6 @@ namespace TimeCheckerWPF5._0.Services
             }
 
         }
-
-
     }
 
 }
