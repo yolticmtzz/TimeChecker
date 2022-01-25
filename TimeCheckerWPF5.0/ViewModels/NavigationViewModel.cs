@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Commands;
 using TimeCheckerWPF5._0.Services;
 using TimeCheckerWPF5._0.Stores;
@@ -26,9 +27,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly INavigationService _loginNavigationService;
         private readonly INavigationService _timeCheckerNavigationService;
         private readonly INavigationService _elapsedTimesNavigationService;
+        private readonly UserStore _userStore;
 
         public ICommand NavigateLoginCommand { get; }
-        public ICommand NavigateTimeCheckerCommand { get; }
+        public DelegateCommand NavigateTimeCheckerCommand { get; }
         public ICommand NavigateElapsedTimeSpansCommand { get; }
         public ICommand NavigateExitApplicationCommand { get; }
 
@@ -50,17 +52,25 @@ namespace TimeCheckerWPF5._0.ViewModels
         public NavigationViewModel(
             INavigationService loginNavigationService,
             INavigationService timeCheckerNavigationService,
-            INavigationService elapsedTimesNavigationService
+            INavigationService elapsedTimesNavigationService,
+            UserStore userStore
            )
         {
             _loginNavigationService = loginNavigationService;
             _timeCheckerNavigationService = timeCheckerNavigationService;
             _elapsedTimesNavigationService = elapsedTimesNavigationService;
-            NavigateLoginCommand = new DelegateCommand(ExecuteNavigateToLoginCommand);
-            NavigateTimeCheckerCommand = new DelegateCommand(ExecuteNavigateToTimeCheckerCommand);
-            NavigateElapsedTimeSpansCommand = new DelegateCommand(ExecuteNavigateToElapsedTimesCommand);
+            _userStore = userStore;
+            NavigateLoginCommand = new DelegateCommand(CanExecuteNavigateToCommand, ExecuteNavigateToLoginCommand);
+            NavigateTimeCheckerCommand = new DelegateCommand(CanExecuteNavigateToCommand, ExecuteNavigateToTimeCheckerCommand);
+            NavigateElapsedTimeSpansCommand = new DelegateCommand(CanExecuteNavigateToCommand, ExecuteNavigateToElapsedTimesCommand);
             NavigateExitApplicationCommand = new DelegateCommand(ExecuteExitApplication);
-            
+
+        }
+
+        private bool CanExecuteNavigateToCommand(object obj)
+        {
+            return true;
+            //return _userStore.CurrentUser != null; 
         }
 
         /// <summary>
@@ -103,8 +113,9 @@ namespace TimeCheckerWPF5._0.ViewModels
         public void ExecuteNavigateToTimeCheckerCommand(object obj)
         {
          _timeCheckerNavigationService.NavigateToType(typeof(TimeCheckerViewModel));
-            
+
         }
+
 
         /// <summary>
         ///     Delivers the Execute logic for the ICommand Action:
@@ -121,5 +132,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         }
 
     }
+
+
 
 }

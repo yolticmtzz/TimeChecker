@@ -1,4 +1,5 @@
-﻿using TimeChecker.DAL.Models;
+﻿using System;
+using TimeChecker.DAL.Models;
 
 namespace TimeCheckerWPF5._0.Stores
 {
@@ -8,6 +9,9 @@ namespace TimeCheckerWPF5._0.Stores
     /// </summary>
     public class UserStore
     {
+
+        public event Action CurrentUserChanged;
+
         private Employee _currentUser;
         public Employee CurrentUser
         {
@@ -16,6 +20,11 @@ namespace TimeCheckerWPF5._0.Stores
             {
                 _currentUser = value;
             }
+        }
+
+        private void OnCurrentUserChanged()
+        {
+            CurrentUserChanged?.Invoke();
         }
     }
 
