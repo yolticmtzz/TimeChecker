@@ -434,7 +434,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             _dataBaseService.AddTimeEntry(4, TimeCatch, _userStore.CurrentUser.Fullname);
         }
 
-
         /// <summary>
         /// Sets the BreakMode status and performs all dependent tasks:
         ///         - Starts the BreakTime stopwatch
@@ -486,7 +485,6 @@ namespace TimeCheckerWPF5._0.ViewModels
             }
         }
 
- 
         public TimeWatch MainTimeWatch { get; set; }
         /// <summary>
         ///     uses the argument "tickEvent" from the parameter to write

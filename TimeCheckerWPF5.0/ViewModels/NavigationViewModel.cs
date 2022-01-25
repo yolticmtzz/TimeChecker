@@ -30,7 +30,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly UserStore _userStore;
 
         public ICommand NavigateLoginCommand { get; }
-        public DelegateCommand NavigateTimeCheckerCommand { get; }
+        public ICommand NavigateTimeCheckerCommand { get; }
         public ICommand NavigateElapsedTimeSpansCommand { get; }
         public ICommand NavigateExitApplicationCommand { get; }
 
