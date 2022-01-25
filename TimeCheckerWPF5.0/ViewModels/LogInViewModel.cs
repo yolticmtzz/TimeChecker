@@ -26,6 +26,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly UserStore _userStore;
         private readonly INavigationService _navigationService;
         private readonly DataBaseService _dataBaseService;
+        private readonly HeaderViewModel headerViewModel;
 
         public DelegateCommand LoginCommand { get; set; }
 
@@ -63,28 +64,33 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// Because without any, the application can not be used (it doesn't run user-less) and therefore is shut down. 
         /// 
         /// <paramref name="userStore">
-        /// injects the UserStore
+        /// injects the UserStore, to use the user info
         /// </paramref>
         /// 
         /// <paramref name="loginNavigationService">
-        /// injects a INavigationService
+        /// injects a INavigationService to navigate after the login
         /// </paramref>
         /// 
         /// <paramref name="dataBaseService">
-        /// injects the DataBaseService
+        /// injects the DataBaseService to interact with database data
         /// </paramref>
         /// 
+        /// <paramref name="headerViewModel">
+        ///  injects the headerViewModel to update the user
+        ///  </paramref>
         ///     
         /// </summary>
         public LoginViewModel(UserStore userStore, 
                                 INavigationService loginNavigationService,
-                                DataBaseService dataBaseService)
+                                DataBaseService dataBaseService, HeaderViewModel headerViewModel)
         {
             
             LoginCommand = new DelegateCommand(CanExecuteLoginCommand, ExecuteLoginCommand);
             _userStore = userStore;
             _navigationService = loginNavigationService;
             _dataBaseService = dataBaseService;
+            this.headerViewModel = headerViewModel;
+            
             //CheckUserDBList();
         }
 
@@ -121,6 +127,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void ExecuteLoginCommand(object obj)
         {
+            
             try
             {
                 var EmployeeDBList = _dataBaseService.GetEmployees();
@@ -134,6 +141,7 @@ namespace TimeCheckerWPF5._0.ViewModels
                     if (employee.Prename.ToLower().Equals(LogginPrename) && employee.Lastname.ToLower().Equals(LoginLastname))
                     {
                         _userStore.CurrentUser = employee;
+                        headerViewModel.UserFullName = employee.Fullname;
                         userMatch = employee;
                         isUserExist = true;
                         break;
