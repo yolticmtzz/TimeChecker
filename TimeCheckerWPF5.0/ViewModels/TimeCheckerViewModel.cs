@@ -5,6 +5,7 @@ using TimeCheckerWPF5._0.Stores;
 using TimeCheckerWPF5._0.Utilities;
 using TimeCheckerWPF5._0.Services;
 using System.Windows;
+using TimeCheckerWPF5._0.Exceptions;
 
 namespace TimeCheckerWPF5._0.ViewModels
 {
@@ -256,8 +257,14 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// 
         /// </summary>
         private void ExecuteCheckinCommand(object obj)
-        {             
-                try
+        {
+            if (_userStore.CurrentUser == null)
+            {
+                MessageBox.Show("Please login first...");
+                return;
+            }
+
+            try
                 {
                     TimeCatch = DateTime.Now;
                     if (Status == Status.CheckedOut)
@@ -276,11 +283,16 @@ namespace TimeCheckerWPF5._0.ViewModels
                     MainTimeWatch.StopwatchStart();
 
                 }
-                catch (Exception ex)
+                catch (DBAccessException ex)
                 {
                     MessageBox.Show(ex.Message);
-                    throw;
                 }
+                catch (Exception)
+                {
+                    MessageBox.Show("Something went wrong");
+                    Status = Status.CheckedIn;
+                    MainTimeWatch.StopwatchStart();
+            }
          }
 
         /// <summary>
@@ -385,6 +397,13 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void ExecuteBreakCommand(object obj)
         {
+
+            if (_userStore.CurrentUser == null)
+            {
+                MessageBox.Show("Please login first...");
+                return;
+            }
+
             try
             {
                 TimeCatch = DateTime.Now;
@@ -399,12 +418,18 @@ namespace TimeCheckerWPF5._0.ViewModels
                 SetCheckedInStatus(true);
 
             }
-            catch (Exception ex)
+            catch (DBAccessException ex)
             {
                 MessageBox.Show(ex.Message);
-                throw;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong");
+                Status = Status.CheckedIn;
+                MainTimeWatch.StopwatchStart();
             }
         }
+
 
         /// <summary>
         ///     Ends the CheckIn activites and performs its dependent tasks:
@@ -428,6 +453,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private void EndBreakMode()
         {
+
             BreakTimeWatchScreen = BreakTimeWatch.StopwatchReset();
             BreakTimeSpanRecord.EndDateTime = TimeCatch;
             _elapsedTimeSpanListStore.AddTimeSpanRecord(BreakTimeSpanRecord);
@@ -441,7 +467,7 @@ namespace TimeCheckerWPF5._0.ViewModels
         ///         - Writes a "BreakStart" time entry into the database
         /// </summary>
         private void SetBreakModeStatus()
-        {
+        { 
             Status = Status.BreakMode;
             BreakTimeWatch.StopwatchStart();
             BreakTimeSpanRecord = new TimeSpanRecord(TimeSpanType.BreakTime, TimeCatch, _userStore.CurrentUser.Fullname);

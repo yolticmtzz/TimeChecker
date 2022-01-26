@@ -79,9 +79,13 @@ namespace TimeCheckerWPF5._0.Services
                 int result = _dbContext.SaveChanges();
                 return result > 0;
             }
+            catch (DbUpdateException ex)
+            {
+                throw new DBAccessException("The entry could not be saved to the database, please try again." + ex.Message, ex);
+            }
             catch (Exception ex)
             {
-                throw new DBAccessException("Changes could not be saved to the database." + ex.Message, ex);
+                throw new DBAccessException("Something went wrong with the database. Changes could not be saved to the database," + ex.Message, ex);
             }
         }
 
@@ -99,12 +103,11 @@ namespace TimeCheckerWPF5._0.Services
 
             try
             {
-                EmployeesDB = _dbContext.Employees.ToList();
-                return EmployeesDB;
+               return _dbContext.Employees.ToList();
             }
             catch (Exception ex)
             {
-                throw new DBAccessException("Employees could not be retreived from database." + ex.Message, ex);
+                throw new DBAccessException("Something went wrong with the database. Employees could not be retreived." + ex.Message, ex);
             }
         }
 

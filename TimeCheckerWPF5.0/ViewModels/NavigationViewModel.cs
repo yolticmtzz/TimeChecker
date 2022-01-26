@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using TimeChecker.DAL.Models;
 using TimeCheckerWPF5._0.Commands;
@@ -29,10 +30,10 @@ namespace TimeCheckerWPF5._0.ViewModels
         private readonly INavigationService _elapsedTimesNavigationService;
         private readonly UserStore _userStore;
 
-        public ICommand NavigateLoginCommand { get; }
-        public ICommand NavigateTimeCheckerCommand { get; }
-        public ICommand NavigateElapsedTimeSpansCommand { get; }
-        public ICommand NavigateExitApplicationCommand { get; }
+        public DelegateCommand NavigateLoginCommand { get; }
+        public DelegateCommand NavigateTimeCheckerCommand { get; }
+        public DelegateCommand NavigateElapsedTimeSpansCommand { get; }
+        public DelegateCommand NavigateExitApplicationCommand { get; }
 
         /// <summary>
         ///     Initializes a new instance of a NavigationViewModel and initializes 
@@ -64,13 +65,34 @@ namespace TimeCheckerWPF5._0.ViewModels
             NavigateTimeCheckerCommand = new DelegateCommand(CanExecuteNavigateToCommand, ExecuteNavigateToTimeCheckerCommand);
             NavigateElapsedTimeSpansCommand = new DelegateCommand(CanExecuteNavigateToCommand, ExecuteNavigateToElapsedTimesCommand);
             NavigateExitApplicationCommand = new DelegateCommand(ExecuteExitApplication);
+            _userStore.CurrentUserChanged = CurrentUserChanged;
 
         }
 
+        /// <summary>
+        ///     Delivers the CanExecute criterias for the ICommand Predicate
+        ///
+        /// <paramref name="obj">
+        /// the "NavigateTo" buttons clicked to run the command
+        /// </paramref>
+        ///       
+        /// </summary>
         private bool CanExecuteNavigateToCommand(object obj)
         {
-            return true;
-            //return _userStore.CurrentUser != null; 
+            return _userStore.CurrentUser != null; 
+        }
+
+        /// <summary>
+        ///     A help method to run RaiseCanExecuteChanged on the NavigateToCommands
+        ///     so they get accessible after the CurrentUser isn't null anymore
+        ///     (ICommand predicate changed)
+        ///       
+        /// </summary>
+        private void CurrentUserChanged()
+        {
+            NavigateTimeCheckerCommand.RaiseCanExecuteChanged();
+            NavigateElapsedTimeSpansCommand.RaiseCanExecuteChanged();
+            NavigateLoginCommand.RaiseCanExecuteChanged();
         }
 
         /// <summary>
