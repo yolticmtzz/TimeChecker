@@ -326,8 +326,17 @@ namespace TimeCheckerWPF5._0.ViewModels
         /// </summary>
         private bool IsCheckOutCommentSet()
         {
-            MainTimeWatch.StopwatchStop();
-            return ShowCheckOutDialog();
+            try
+            {
+                MainTimeWatch.StopwatchStop();
+                return ShowCheckOutDialog();
+            }
+            catch (Exception)
+            {
+            MessageBox.Show("Something went wrong during the Check-Out Process");
+                return false;
+            }          
+
         }
 
         /// <summary>
